@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\OU\\C#\\tesst1\\WebApplication1\\WebApplication1\\WebApplication1.csproj": {}
+    "C:\\WeddingRestaurantAspDotNetCore\\WebApplication1\\WebApplication1\\WebApplication1.csproj": {}
   },
   "projects": {
-    "D:\\OU\\C#\\tesst1\\WebApplication1\\WebApplication1\\WebApplication1.csproj": {
+    "C:\\WeddingRestaurantAspDotNetCore\\WebApplication1\\WebApplication1\\WebApplication1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\OU\\C#\\tesst1\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+        "projectUniqueName": "C:\\WeddingRestaurantAspDotNetCore\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
         "projectName": "WebApplication1",
-        "projectPath": "D:\\OU\\C#\\tesst1\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
-        "packagesPath": "C:\\Users\\wolf1\\.nuget\\packages\\",
-        "outputPath": "D:\\OU\\C#\\tesst1\\WebApplication1\\WebApplication1\\obj\\",
+        "projectPath": "C:\\WeddingRestaurantAspDotNetCore\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "C:\\WeddingRestaurantAspDotNetCore\\WebApplication1\\WebApplication1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\wolf1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -91,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
