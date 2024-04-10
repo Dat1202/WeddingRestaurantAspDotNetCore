@@ -1,0 +1,60 @@
+﻿@model WeddingRestaurant.ViewModels.UserVM
+
+@{
+    ViewData["Title"] = "Đăng ký";
+}
+
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <h1 class="mb-4">Billing details</h1>
+        <form asp-controller="User" asp-action="Register" method="post" enctype="multipart/form-data">
+            <div class="row g-5">
+                <div class="col-md-12 col-lg-6 col-xl-7">
+                    <div class="form-item">
+                        <label asp-for="Name" class="form-label my-3"></label><sup>*</sup>
+                        <input asp-for="Name" class="form-control">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-item">
+                        <label asp-for="Email" class="form-label my-3"></label><sup>*</sup>
+                        <input asp-for="Email" class="form-control">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-item">
+                        <label asp-for="UserName" class="form-label my-3"></label><sup>*</sup>
+                        <input asp-for="UserName" class="form-control">
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-item">
+                        <label asp-for="Password" class="form-label my-3"></label><sup>*</sup>
+                        <input asp-for="Password" class="form-control">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-item">
+                        <label asp-for="ConfirmPassword" class="form-label my-3"></label><sup>*</sup>
+                        <input asp-for="ConfirmPassword" class="form-control">
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-item">
+                        <label asp-for="Address" class="form-label my-3"></label><sup>*</sup>
+                        <input asp-for="Address" class="form-control">
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div class="form-item">
+                        <label asp-for="Phone" class="form-label my-3"></label><sup>*</sup>
+                        <input asp-for="Phone" class="form-control">
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+                    <div class="form-item">
+                        <label class="form-label my-3" for="Avatar">Avatar<sup>*</sup></label>
+                        <input type="file" name="Avatar" class="form-control" />
+                        <span asp-validation-for="@Model.Avatar" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row g-4 text-center align-items-center justify-content-center pt-4">
+                    <button type="submit" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Đăng ký</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
