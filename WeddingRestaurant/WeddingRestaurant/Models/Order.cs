@@ -10,6 +10,6 @@ namespace WeddingRestaurant.Models
         public DateTime OrderDate { get; set; } = DateTime.Now;
         [ForeignKey("User")]
         public int UserID { get; set; }
-        public virtual User? user { get; set; }
+        public virtual User? User { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace WeddingRestaurant.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Mật khẩu")]
         [MaxLength(50, ErrorMessage = "{0} Tối đa {1} kí tự")]
-        [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*?])(?=.*[0-9]).{6,}$", ErrorMessage = "Password must be at least 6 characters long and contain at least one uppercase letter, one special character, and one digit.")]
+        //[RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*?])(?=.*[0-9]).{6,}$", ErrorMessage = "Password must be at least 6 characters long and contain at least one uppercase letter, one special character, and one digit.")]
         public string Password { get; set; }
     }
 }
