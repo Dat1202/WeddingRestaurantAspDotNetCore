@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using WeddingRestaurant.Models;
 
 namespace WeddingRestaurant.Controllers
 {
+    [Authorize(Roles = "Admin1")]
     public class ProductsController : Controller
     {
         private readonly ModelContext _context;

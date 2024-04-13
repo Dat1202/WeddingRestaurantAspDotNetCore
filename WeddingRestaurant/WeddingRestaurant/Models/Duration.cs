@@ -6,7 +6,9 @@ namespace WeddingRestaurant.Models
     {
         [Key]
         public int Id{ get; set; }
-        public bool IsWeekend{ get; set; }
+        [Required]
+        public bool IsWeekend { get; set; } = false;
+        [Required]
         public DateTime Time { get; set; }
     }
 }
