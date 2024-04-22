@@ -1,7 +1,8 @@
 ﻿namespace WeddingRestaurant.Heplers
 {
-    public class Configuration
+    public static class Configuration
     {
         public static string CART_KEY = "mycart";
+        public static string Claim_User_Id = "UserId";
     }
 }

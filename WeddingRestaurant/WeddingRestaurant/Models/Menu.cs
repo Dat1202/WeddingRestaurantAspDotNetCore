@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WeddingRestaurant.Models
 {
@@ -9,5 +10,8 @@ namespace WeddingRestaurant.Models
         [Required]
         [StringLength(50)]
         public string Name{ get; set; }
+        [ForeignKey("TypeMenu")]
+        public int TypeID { get; set; }
+        public virtual TypeMenu? TypeMenu { get; set; }
     }
 }

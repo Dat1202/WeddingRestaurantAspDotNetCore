@@ -1,0 +1,87 @@
+﻿@model IEnumerable<WeddingRestaurant.ViewModels.TypeMenuVM>
+
+<div class="container">
+    <div class="large-12 col">
+        <div class="col-inner">
+            <div class="row namlbn-menu">
+                @foreach (var item in Model)
+                {
+                    <div class="thuc-don col-6">
+                        <div class="before-menu">
+                            <p class="menu-title">@item.Name</p>
+                            <p class="total-price"><span></span></p>
+                            <a class="open-menu" href="#" style="display: none;">Xem</a>
+                            <a class="close-menu" href="#" style="display: inline;">Đóng</a>
+                        </div>
+                        <div class="menu-content" style="display: block;">
+                            <img data-lazyloaded="1" src="https://thefood.vn/wp-content/uploads/TIEC-TEA-BREAK.jpg.webp"
+                                 fetchpriority="high" decoding="async" width="375" height="500"
+                                 data-src="https://thefood.vn/wp-content/uploads/TIEC-TEA-BREAK.jpg.webp"
+                                 class="attachment-full size-full wp-post-image entered litespeed-loaded"
+                                 alt="Tiệc teabreak khai trương công ty bảo long"
+                                 data-srcset="https://thefood.vn/wp-content/uploads/TIEC-TEA-BREAK.jpg.webp 375w, https://thefood.vn/wp-content/uploads/TIEC-TEA-BREAK-600x800.jpg.webp 600w"
+                                 data-sizes="(max-width: 375px) 100vw, 375px" data-ll-status="loaded"
+                                 sizes="(max-width: 375px) 100vw, 375px"
+                                 srcset="https://thefood.vn/wp-content/uploads/TIEC-TEA-BREAK.jpg.webp 375w, https://thefood.vn/wp-content/uploads/TIEC-TEA-BREAK-600x800.jpg.webp 600w">
+
+                            @await Component.InvokeAsync("MenuItem", new
+                                {
+                                    id = @item.Id
+                                })
+
+                            <div class="after-menu">
+                                <a class="check-all" href="#">Chọn tất cả</a><a class="uncheck-all" href="#">
+                                    Xóa tất
+                                    cả
+                                </a>
+                                <p class="text-note">
+                                    <span>Lưu ý:</span> Quý khách có thể kết hợp món với nhiều Menu
+                                    khác nhau.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('.check-dish').change(function () {
+                var isChecked = $(this).is(':checked'); // Kiểm tra xem checkbox có được chọn hay không
+
+                if (isChecked) {
+                    $.ajax({
+                        url: "/Cart/AddToCart",
+                        data: {
+                            id: $(this).data("id"),
+                            type: "ajax"
+                        },
+                        success: function (data) {
+                            console.log(data); 
+                            console.log("add");
+
+                        }
+                    })
+                } else {
+                    $.ajax({
+                        url: "/Cart/RemoveCart",
+                        data: {
+                            id: $(this).data("id"),
+                            type: "ajax"
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            console.log("remove");
+                        }
+                    })
+                }
+            });
+        });
+
+
+    </script>
+}

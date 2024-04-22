@@ -106,7 +106,12 @@ namespace WeddingRestaurant.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("TypeID")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TypeID");
 
                     b.ToTable("Menus");
                 });
@@ -144,6 +149,10 @@ namespace WeddingRestaurant.Migrations
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentMethods")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int");
@@ -265,6 +274,24 @@ namespace WeddingRestaurant.Migrations
                     b.ToTable("Rooms");
                 });
 
+            modelBuilder.Entity("WeddingRestaurant.Models.TypeMenu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TypeMenu");
+                });
+
             modelBuilder.Entity("WeddingRestaurant.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -329,6 +356,17 @@ namespace WeddingRestaurant.Migrations
                     b.Navigation("Room");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WeddingRestaurant.Models.Menu", b =>
+                {
+                    b.HasOne("WeddingRestaurant.Models.TypeMenu", "TypeMenu")
+                        .WithMany()
+                        .HasForeignKey("TypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TypeMenu");
                 });
 
             modelBuilder.Entity("WeddingRestaurant.Models.MenuProduct", b =>

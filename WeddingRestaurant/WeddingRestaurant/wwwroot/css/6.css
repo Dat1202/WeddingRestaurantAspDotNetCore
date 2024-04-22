@@ -1,9 +1,0 @@
-@font-face {
-    font-family: 'fl-icons';
-    src: url("/wp-content/themes/flatsome/assets/css/icons/fl-icons.eot");
-    src: url("/wp-content/themes/flatsome/assets/css/icons/fl-icons.eot#iefix") format("embedded-opentype"), url("/wp-content/themes/flatsome/assets/css/icons/fl-icons.woff2") format("woff2"), url("/wp-content/themes/flatsome/assets/css/icons/fl-icons.ttf") format("truetype"), url("/wp-content/themes/flatsome/assets/css/icons/fl-icons.woff") format("woff"), url("/wp-content/themes/flatsome/assets/css/icons/fl-icons.svg#fl-icons") format("svg")
-}
-
-.lazy-icons i[class^=icon-] {
-    visibility: visible !important
-}
