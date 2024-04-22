@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using WeddingRestaurant.Models;
 
 namespace WeddingRestaurant.Models;
 
@@ -26,6 +27,8 @@ public partial class ModelContext : DbContext
     public DbSet<RentCost> RentCosts { get; set; }
     public DbSet<Room> Rooms { get; set; }
     public DbSet<MenuProduct> MenuProducts { get; set; }
+
+public DbSet<WeddingRestaurant.Models.TypeMenu> TypeMenu { get; set; } = default!;
 
 
 }

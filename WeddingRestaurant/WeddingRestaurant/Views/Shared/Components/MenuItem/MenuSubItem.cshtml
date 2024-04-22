@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WeddingRestaurant.ViewModels.MenuVM>
+@using WeddingRestaurant.Heplers
+@{
+    int stt = 1;
+}
+
+@foreach (var item in Model)
+{
+    <ul class="list-food">
+        <li>
+            <p class="stt"><span>@stt</span></p>
+            <p class="name">@item.ProductName</p>
+            <p class="price">
+                @item.ProductPrice.ToVnd() VND
+            </p>
+            <p class="dish-input">
+                <input class="check-dish" type="checkbox"
+                       id="mon-com-mi_dish_@stt" value="@item.ProductPrice" name="mon-com-mi_dish_@stt"
+                       data-id="@item.ProductId"
+                       data-ten="@item.ProductName" data-gia="@item.ProductPrice"><span class="active-check"></span>
+            </p>
+        </li>
+        @* <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.ProductId">add</a> *@
+
+    </ul>
+
+    { stt++; }
+}
+
+    

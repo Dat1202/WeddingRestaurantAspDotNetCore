@@ -83,9 +83,11 @@ namespace WeddingRestaurant.Controllers
                     {
                         var claims = new List<Claim>
                         {
+                            
                             new Claim(ClaimTypes.Name, user.Name),
                             new Claim(ClaimTypes.Email, user.Email),
-                            new Claim(ClaimTypes.Role, "Customer"),
+                            new Claim(ClaimTypes.Role, user.UserRole),
+                            new Claim(Configuration.Claim_User_Id, user.Id.ToString()),
                         };
 
                         var claimsIdentity = new ClaimsIdentity(claims,

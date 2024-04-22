@@ -1,0 +1,27 @@
+﻿@model IEnumerable<WeddingRestaurant.ViewModels.TypeMenuVM>
+
+<li class="hover-menu">
+    <button style="border:none" class="nav-top-link btn btn-default " type="button" data-toggle="dropdown">
+        <div class="text-center text-danger">
+            <i class="fa-solid fa-champagne-glasses "
+                style="font-size: 30px;"></i>
+            <br>Thực đơn
+            <i class="fa-solid fa-caret-down"></i>
+        </div>
+    </button>
+    <ul class="dropdown-menu">
+        @foreach(var item in Model)
+        {
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3590 ">
+            <a class="" asp-controller="Menu" asp-action="Index" asp-route-id="@item.Id">
+                <img data-lazyloaded="1"
+                        src="https://thefood.vn/wp-content/uploads/dining.png.webp"
+                        class="img-menu-con entered litespeed-loaded "
+                        data-src="https://thefood.vn/wp-content/uploads/dining.png.webp" alt=""
+                        data-ll-status="loaded">Menu tiệc @item.Name
+            </a>
+        </li>
+        }
+        
+    </ul>
+</li>

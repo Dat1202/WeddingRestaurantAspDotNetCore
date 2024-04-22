@@ -1,52 +1,287 @@
-﻿      <!-- Spinner Start -->
-        <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
-            <div class="spinner-grow text-primary" role="status"></div>
-        </div>
-        <!-- Spinner End -->
-
-
-        <!-- Navbar start -->
-        <div class="container-fluid fixed-top">
-            <div class="container topbar bg-primary d-none d-lg-block">
-                <div class="d-flex justify-content-between">
-                    <div class="top-info ps-2">
-                        <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">123 Street, New York</a></small>
-                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Email@Example.com</a></small>
-                    </div>
-                    <div class="top-link pe-2">
-                        <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
-                        <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-                        <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
-                    </div>
+﻿<header id="header" class="header has-sticky sticky-jump">
+    <div class="header-wrapper">
+        <div id="masthead" class="header-main ">
+            <div class="header-inner flex-row container logo-left medium-logo-center" role="navigation">
+                <div id="logo" class="flex-col logo">
+                    <a asp-controller="Home" asp-action="Index"
+                       title="ĐẶT TIỆC TẠI NHÀ - DỊCH VỤ TỔ CHỨC TIỆC LƯU ĐỘNG CHUYÊN NGHIỆP #1" rel="home">
+                        <img width="50" height="100" src="https://thefood.vn/wp-content/uploads/logo.png.webp"
+                             class="header_logo header-logo" alt="ĐẶT TIỆC TẠI NHÀ">
+                        <img width="50" height="100"
+                             src="https://thefood.vn/wp-content/uploads/logo.png.webp" class="header-logo-dark"
+                             alt="ĐẶT TIỆC TẠI NHÀ">
+                    </a>
                 </div>
+                <div class="flex-col hide-for-medium flex-left flex-grow">
+                    <ul class="header-nav header-nav-main nav nav-left nav-size-small nav-uppercase mt-5">
+                        <li class="html custom html_topbar_right">
+                            <div class="hea-text-top">
+                                <p class="htt">THE FOOD.VN-<span> CATERING &amp; EVENT SERVICE</span></p>
+                                <p class="htb">
+                                    <a href="tel:0925727727">TEL :0925.727.727</a><span>
+                                        (Hỗ trợ
+                                        24/7)
+                                    </span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!--go -->
+                <div class="flex-col hide-for-medium flex-right">
+                    <ul class="dropdown header-nav header-nav-main nav nav-right  nav-size-small nav-uppercase">
+
+                         @await Component.InvokeAsync("MenuHeader")
+
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  menu-item-335 has-dropdown">
+                            <button style="border:none" class="nav-top-link btn btn-default " type="button" data-toggle="dropdown">
+                                <div class="text-center text-danger">
+                                    <i class="fa-solid fa-address-card" style="font-size: 30px;"></i>
+                                    <br>Giới thiệu
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </div>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-356">
+                                    <a href="https://thefood.vn/gioi-thieu/thefood-careting-event-service/">
+                                        <img data-lazyloaded="1"
+                                             src="https://thefood.vn/wp-content/uploads/human-resources.png.webp"
+                                             class="img-menu-con entered litespeed-loaded"
+                                             data-src="https://thefood.vn/wp-content/uploads/human-resources.png.webp"
+                                             alt="" data-ll-status="loaded">THEFOOD CARETING &amp; EVENT SERVICE
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-2413">
+                                    <a href="https://thefood.vn/huong-dan-dat-tiec-tai-nha-dat-tiec-buffet-tiec-finger-food-tiec-tea-break/">
+                                        <img data-lazyloaded="1"
+                                             src="https://thefood.vn/wp-content/uploads/reading.png.webp"
+                                             class="img-menu-con entered litespeed-loaded"
+                                             data-src="https://thefood.vn/wp-content/uploads/reading.png.webp" alt=""
+                                             data-ll-status="loaded">Hướng dẫn đặt tiệc
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-354">
+                                    <a href="https://thefood.vn/gioi-thieu/chung-nhan-dkkd/">
+                                        <img data-lazyloaded="1"
+                                             src="https://thefood.vn/wp-content/uploads/certificate.png.webp"
+                                             class="img-menu-con entered litespeed-loaded"
+                                             data-src="https://thefood.vn/wp-content/uploads/certificate.png.webp"
+                                             alt="" data-ll-status="loaded">Chứng nhận ĐKKD
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-3559">
+                                    <a href="https://thefood.vn/ho-so-nang-luc/">
+                                        <img data-lazyloaded="1"
+                                             src="https://thefood.vn/wp-content/uploads/reading.png.webp"
+                                             class="img-menu-con entered litespeed-loaded"
+                                             data-src="https://thefood.vn/wp-content/uploads/reading.png.webp" alt=""
+                                             data-ll-status="loaded">Hồ Sơ Năng Lực
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  menu-item-338 has-dropdown">
+                            <button style="border:none" class="nav-top-link btn btn-default " type="button" data-toggle="dropdown">
+                                <div class="text-center text-danger">
+                                    <i class="fa-solid fa-bell-concierge" style="font-size: 30px;"></i>
+                                    <br>Dịch vụ
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </div>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-395">
+                                    <a href="https://thefood.vn/dat-tiec-ban/">
+                                        <img data-lazyloaded="1"
+                                             src="https://thefood.vn/wp-content/uploads/dining.png.webp"
+                                             class="img-menu-con entered litespeed-loaded"
+                                             data-src="https://thefood.vn/wp-content/uploads/dining.png.webp" alt=""
+                                             data-ll-status="loaded">ĐẶT TIỆC BÀN
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-398">
+                                    <a href="https://thefood.vn/dat-tiec-bqq/">
+                                        <img data-lazyloaded="1"
+                                             src="https://thefood.vn/wp-content/uploads/dinner-1.png.webp"
+                                             class="img-menu-con entered litespeed-loaded"
+                                             data-src="https://thefood.vn/wp-content/uploads/dinner-1.png.webp"
+                                             alt="" data-ll-status="loaded">ĐẶT TIỆC BQQ
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-2283">
+                                    <a href="https://thefood.vn/dat-tiec-buffet/">
+                                        <img data-lazyloaded="1"
+                                             src="https://thefood.vn/wp-content/uploads/korean.png.webp"
+                                             class="img-menu-con entered litespeed-loaded"
+                                             data-src="https://thefood.vn/wp-content/uploads/korean.png.webp" alt=""
+                                             data-ll-status="loaded">ĐẶT TIỆC BUFFET
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-399">
+                                    <a href="https://thefood.vn/dat-tiec-teabreak/">
+                                        <img data-lazyloaded="1"
+                                             src="https://thefood.vn/wp-content/uploads/dinner.png.webp"
+                                             class="img-menu-con entered litespeed-loaded"
+                                             data-src="https://thefood.vn/wp-content/uploads/dinner.png.webp" alt=""
+                                             data-ll-status="loaded">ĐẶT TIỆC TEA-BREAK
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-2545">
+                                    <a href="https://thefood.vn/nau-tiec-tai-nha/">
+                                        <img data-lazyloaded="1"
+                                             src="https://thefood.vn/wp-content/uploads/house.png.webp"
+                                             class="img-menu-con entered litespeed-loaded"
+                                             data-src="https://thefood.vn/wp-content/uploads/house.png.webp" alt=""
+                                             data-ll-status="loaded">NẤU TIỆC TẠI NHÀ
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-401">
+                                    <a href="https://thefood.vn/tiec-cuoi-hoi-tron-goi/">
+                                        <img data-lazyloaded="1"
+                                             src="https://thefood.vn/wp-content/uploads/wedding.png.webp"
+                                             class="img-menu-con entered litespeed-loaded"
+                                             data-src="https://thefood.vn/wp-content/uploads/wedding.png.webp" alt=""
+                                             data-ll-status="loaded">TIỆC CƯỚI – HỎI TRỌN GÓI
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-402">
+                                    <a href="https://thefood.vn/tiec-sinh-nhat-tron-goi/">
+                                        <img data-lazyloaded="1"
+                                             src="https://thefood.vn/wp-content/uploads/confetti.png.webp"
+                                             class="img-menu-con entered litespeed-loaded"
+                                             data-src="https://thefood.vn/wp-content/uploads/confetti.png.webp"
+                                             alt="" data-ll-status="loaded">TIỆC SINH NHẬT TRỌN GÓI
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-403">
+                                    <a href="https://thefood.vn/tiec-thoi-noi-cho-be/">
+                                        <img data-lazyloaded="1"
+                                             src="https://thefood.vn/wp-content/uploads/wedding-1.png.webp"
+                                             class="img-menu-con entered litespeed-loaded"
+                                             data-src="https://thefood.vn/wp-content/uploads/wedding-1.png.webp"
+                                             alt="" data-ll-status="loaded">TIỆC THÔI NÔI
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-404">
+                                    <a href="https://thefood.vn/tiec-tan-gia/">
+                                        <img data-lazyloaded="1"
+                                             src="https://thefood.vn/wp-content/uploads/food-serving.png.webp"
+                                             class="img-menu-con entered litespeed-loaded"
+                                             data-src="https://thefood.vn/wp-content/uploads/food-serving.png.webp"
+                                             alt="" data-ll-status="loaded">TIỆC TÂN GIA
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-405">
+                                    <a href="https://thefood.vn/to-chuc-tiec-cong-ty-tron-goi/">
+                                        <img data-lazyloaded="1"
+                                             src="https://thefood.vn/wp-content/uploads/factory.png.webp"
+                                             class="img-menu-con entered litespeed-loaded"
+                                             data-src="https://thefood.vn/wp-content/uploads/factory.png.webp" alt=""
+                                             data-ll-status="loaded">TỔ CHỨC TIỆC CÔNG TY TRỌN GÓI
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-406">
+                                    <a href="https://thefood.vn/tiec-tat-nien-tron-goi/">
+                                        <img data-lazyloaded="1"
+                                             src="https://thefood.vn/wp-content/uploads/bowl.png.webp"
+                                             class="img-menu-con entered litespeed-loaded"
+                                             data-src="https://thefood.vn/wp-content/uploads/bowl.png.webp" alt=""
+                                             data-ll-status="loaded">TIỆC TẤT NIÊN TRỌN GÓI
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-408">
+                                    <a href="https://thefood.vn/bang-gia-cho-thue-thiet-bi/">
+                                        <img data-lazyloaded="1"
+                                             src="https://thefood.vn/wp-content/uploads/human-resources.png.webp"
+                                             class="img-menu-con entered litespeed-loaded"
+                                             data-src="https://thefood.vn/wp-content/uploads/human-resources.png.webp"
+                                             alt="" data-ll-status="loaded">BẢNG GIÁ CHO THUÊ THIẾT BỊ SỰ KIỆN
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-132">
+                            <button style="border:none" class="nav-top-link btn btn-default " type="button" data-toggle="dropdown">
+                                <div class="text-center text-danger">
+                                    <i class="fa-solid fa-id-card-clip" style="font-size: 30px;"></i>
+                                    <br>Liên hệ
+                                </div>
+                            </button>
+                        </li>
+
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  menu-item-341 has-dropdown">
+                            <button style="border:none" class="nav-top-link btn btn-default " type="button" data-toggle="dropdown">
+                                <div class="text-center text-danger">
+                                    <i class="fa-solid fa-user" style="font-size: 30px;"></i>
+                                    <br>Tài khoản
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </div>
+                            </button>
+
+                            <ul class="dropdown-menu">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("Admin"))
+                                    {
+                                        <li class="menu-item menu-item-type-taxonomy menu-item-object-category  menu-item-426">
+                                            <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+                                                <img data-lazyloaded="1"
+                                                     src="https://thefood.vn/wp-content/uploads/reading.png.webp"
+                                                     class="img-menu-con entered litespeed-loaded" alt="">Đến trang admin
+                                            </a>
+                                        </li>
+                                        
+                                    }
+                                    else if (User.IsInRole("User"))
+                                    {
+                                       
+                                    }
+                                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category  menu-item-426">
+                                        <a asp-controller="User" asp-action="logout">
+                                            <img data-lazyloaded="1"
+                                                 src="https://thefood.vn/wp-content/uploads/reading.png.webp"
+                                                 class="img-menu-con entered litespeed-loaded" alt="">Đăng xuất
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category  menu-item-426">
+                                        <a asp-controller="User" asp-action="Login">
+                                            <img data-lazyloaded="1"
+                                                 src="https://thefood.vn/wp-content/uploads/reading.png.webp"
+                                                 class="img-menu-con entered litespeed-loaded" alt="">Đăng nhập
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                        <a asp-controller="Cart" asp-action="Index">
+                            <div class="header__cart">
+                                    <div class="header__cart-hover">
+                                        <i class="header__cart-icon fa fa-shopping-cart" aria-hidden="true"></i>
+                                        <div class="header__cart-list header__cart-list-no-cart">
+                                            <div class="header__cart-text-center">
+                                                <span>Chưa có sản phẩm</span>
+                                            </div>
+                                        </div>
+                                        @await Component.InvokeAsync("Cart")
+                                    </div>
+                            </div>
+                        </a>
+                    </ul>
+                </div>
+
             </div>
-            <div class="container px-0">
-                <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="index.html" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
-                    <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                        <span class="fa fa-bars text-primary"></span>
-                    </button>
-                    <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-                        <div class="navbar-nav mx-auto">
-                            <a href="index.html" class="nav-item nav-link active">Home</a>
-                            <a href="shop.html" class="nav-item nav-link">Shop</a>
-                            <a asp-controller="User" asp-action="Register" class="nav-item nav-link">Đăng ký</a>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
-                        </div>
-                <h2>welcome @Context.User.Identity.Name</h2>
-                        <div class="d-flex m-3 me-0">
-                            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-                            
-                            @await Component.InvokeAsync("Cart")
-
-                            <a asp-controller="User" asp-action="Logout" class="my-auto">  Đăng xuất</a>
-
-                            <a asp-controller="User" asp-action="Login" class="my-auto">
-                                <i class="fas fa-user fa-2x"></i>
-                            </a>
-                        </div>
-                    </div>
-                </nav>
+            <div class="container">
+                <div class="top-divider full-width"></div>
             </div>
         </div>
-        <!-- Navbar End -->
+
+        <div class="header-bg-container fill">
+            <div class="header-bg-image fill"></div>
+            <div class="header-bg-color fill"></div>
+        </div>
+    </div>
+</header>
+

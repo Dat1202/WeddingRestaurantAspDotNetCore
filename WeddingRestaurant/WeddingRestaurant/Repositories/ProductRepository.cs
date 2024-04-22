@@ -1,4 +1,5 @@
-﻿using WeddingRestaurant.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using WeddingRestaurant.Models;
 
 namespace WeddingRestaurant.Repositories
 {
@@ -10,9 +11,10 @@ namespace WeddingRestaurant.Repositories
         {
             _model = model;
         }
-        public Task<List<Product>> GetAllAsync()
+        public async Task<List<Product>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var p = await _model.Products!.ToListAsync();
+            return p;
         }
     }
 }

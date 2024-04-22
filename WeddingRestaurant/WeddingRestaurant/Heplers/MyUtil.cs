@@ -1,6 +1,6 @@
 ﻿namespace WeddingRestaurant.Heplers
 {
-    public class MyUtil
+    public static class MyUtil
     {
         public static string UploadHinh(IFormFile Hinh, string folder)
         {
@@ -18,6 +18,11 @@
                 Console.WriteLine(ex);
                 return string.Empty;
             }
+        }
+
+        public static string ToVnd(this decimal giaTri)
+        {
+            return $"{giaTri:#,##0}đ";
         }
     }
 }

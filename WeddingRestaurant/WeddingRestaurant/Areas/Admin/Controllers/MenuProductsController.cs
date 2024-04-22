@@ -50,7 +50,7 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Name");
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Description");
+            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name");
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Name", menuProduct.MenuId);
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Description", menuProduct.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name", menuProduct.ProductId);
             return View(menuProduct);
         }
 
@@ -86,7 +86,7 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
                 return NotFound();
             }
             ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Name", menuProduct.MenuId);
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Description", menuProduct.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name", menuProduct.ProductId);
             return View(menuProduct);
         }
 
@@ -123,7 +123,7 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Name", menuProduct.MenuId);
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Description", menuProduct.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name", menuProduct.ProductId);
             return View(menuProduct);
         }
 
