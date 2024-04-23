@@ -11,7 +11,6 @@ namespace WeddingRestaurant.ViewComponents
             var countCartItem = HttpContext.Session.Get<List<CartItem>>(Configuration.CART_KEY) ?? new List<CartItem>();
             return View("CartPanel", new CartModel
             {
-                Quantity = countCartItem.Sum(x => x.Quantity),
                 TotalAmount = (double)countCartItem.Sum(x => x.TotalPrice),
             });
         }

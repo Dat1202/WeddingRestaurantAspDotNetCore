@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WeddingRestaurant.ViewModels.CartItem> 
+﻿@model IEnumerable<WeddingRestaurant.ViewModels.CartItem>
 @{
     ViewData["Title"] = "Cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,7 +6,7 @@
 
 <section class="h-100 gradient-custom">
     <div class="container py-5">
-        
+        @ViewBag.CustomerId
         <div class="row d-flex justify-content-center my-4">
             <div class="col-md-8">
                 <div class="card mb-4">
@@ -18,45 +18,25 @@
                         {
                             <div class="alert alert-danger">@TempData["UserID"]</div>
                         }
-                        <!-- Single item -->
-                        @foreach(var item in Model)
+                        @foreach (var item in Model)
                         {
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                                    <!-- Data -->
                                     <p><strong>@item.Name</strong></p>
-                                    <!-- Data -->
                                 </div>
                                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                                     <p class="text-start text-md-center">
                                         <strong>@item.Price</strong>
                                     </p>
-                                </div>      
+                                </div>
 
                                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                                    <!-- Quantity -->
-                                    <div class="d-flex mb-4" style="max-width: 300px">
-                                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-
-                                        <input id="form1" min="0" name="quantity" value="@item.Quantity" type="number"
-                                               class="form-control form-control-sm" />
-
-                                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
+                                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                        <a asp-action="RemoveCart" asp-route-id="@item.Id" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
                                     </div>
-                                    <!-- Quantity -->
-                                    <!-- Price -->
-                                    
-                                    <!-- Price -->
                                 </div>
 
                             </div>
-                            <!-- Single item -->
 
                             <hr class="my-4" />
                         }
@@ -75,11 +55,11 @@
                         <img class="me-2" width="45px"
                              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
                              alt="Mastercard" />
-                        <img class="me-2" width="45px"
-                             src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.webp"
-                             alt="PayPal acceptance mark" />
+
+
                     </div>
                 </div>
+                <div id="paypal-button-container" style="max-width:100px;"></div>
             </div>
             <div class="col-md-4">
                 <div class="card mb-4">
@@ -107,22 +87,52 @@
                             </li>
                         </ul>
                         <form asp-action="Index" asp-controller="Cart">
-                        <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block">
-                            Go to checkout
+                            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block">
+                                Go to checkout
                             </button>
+                            <input type="submit" name="payment" class="btn border-secondary text-uppercase text-primary w-100 mt-2" value="Thanh toán VNPay">
+
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        
+
     </div>
 </section>
 
 @section Scripts {
+    <script src="https://www.paypal.com/sdk/js?client-id=@ViewBag.PaypalClientId"></script>
     <script>
-        $(document).ready(function () {
-            
-        });
+
+        paypal.Buttons({
+            style: {
+                disableMaxWidth: true
+            },
+            createOrder: (data, actions) => {
+                return fetch("/Cart/create-paypal-order", {
+                    method: "post",
+                }).then((response) => {
+                    if (!response.ok) {
+                        return response.json().then(error => { throw error; });
+                    }
+
+                    return response.json();
+                }).then((order) => order.id)
+                    .catch(error => alert(error.message));
+            },
+            onApprove: (data, actions) => {
+                return fetch(`/Cart/capture-paypal-order?orderId=${data.orderID}`, {
+                    method: "post",
+                }).then((response) => {
+                    if (!response.ok) {
+                        return response.json().then(error => { throw error; });
+                    }
+
+                    //Đổi địa chỉ tới action thông báo thành công
+                    window.location.href = "/Cart/PaymentSuccess";
+                }).catch(error => alert(error.message));
+            }
+        }).render('#paypal-button-container');
     </script>
 }

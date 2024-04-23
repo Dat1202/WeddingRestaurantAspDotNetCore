@@ -2,10 +2,20 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using WeddingRestaurant.Heplers;
 using WeddingRestaurant.Models;
+using WeddingRestaurant.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSingleton(x =>
+	new PaypalClient(
+        builder.Configuration["PaypalOptions:ClientId"],
+		builder.Configuration["PaypalOptions:ClientSecret"],
+		builder.Configuration["PaypalOptions:Mode"]
+	)
+);
+
+builder.Services.AddSingleton<IVnPayService,VnPayService>();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ModelContext>(options => 
