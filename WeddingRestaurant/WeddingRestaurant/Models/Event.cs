@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,11 +18,11 @@ namespace WeddingRestaurant.Models
         
         [ForeignKey("Room")]
         public int RoomId { get; set; }
-        public virtual Room Room { get; set; }
+        public virtual Room? Room { get; set; }
 
         [ForeignKey("User")]
-        public int UserId { get; set; }
-        public virtual User User { get; set; }
+        public string? UserId { get; set; }
+        public virtual ApplicationUser? Users { get; set; }
     }
 }
 

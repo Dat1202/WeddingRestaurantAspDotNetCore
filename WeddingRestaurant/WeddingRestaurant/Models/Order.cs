@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Principal;
 
 namespace WeddingRestaurant.Models
 {
@@ -10,7 +12,7 @@ namespace WeddingRestaurant.Models
         public DateTime OrderDate { get; set; } = DateTime.Now;
         public string PaymentMethods {  get; set; }
         [ForeignKey("User")]
-        public int UserID { get; set; }
-        public virtual User? User { get; set; }
+        public string UserID { get; set; }
+        public virtual ApplicationUser? Users { get; set; }
     }
 }

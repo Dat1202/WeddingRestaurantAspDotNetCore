@@ -3,6 +3,12 @@
 @{
     ViewData["Title"] = "Đăng nhập";
 }
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["ErrorMessage"]
+    </div>
+}
 
 <div class="container-fluid py-5">
     <div class="container py-5">
@@ -25,6 +31,14 @@
                 <div class="row g-4 text-center align-items-center justify-content-center pt-4">
                     <button type="submit" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Đăng nhập</button>
                 </div>
+                <a href="/User/External/?provider=Facebook" target="_blank">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1920px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" style="width: 150px; height: auto;">
+                </a>
+
+                <!-- Button kết nối với Google -->
+                <a href="/User/External/?provider=Google" target="_blank">
+                  <img src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg" alt="Google" style="width: 150px; height: auto;">
+                </a>
             </div>
         </form>
     </div>

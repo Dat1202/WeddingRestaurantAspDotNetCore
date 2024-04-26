@@ -8,7 +8,7 @@ namespace WeddingRestaurant.Heplers
     {
         public AutoMapperProfile()
         {
-            CreateMap<UserVM, User>();
+            CreateMap<RegisterVM, ApplicationUser>();
         }
 
     }
