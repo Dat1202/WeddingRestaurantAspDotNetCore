@@ -15,7 +15,7 @@ namespace WeddingRestaurant.Controllers
         }
         public async Task<IActionResult> Index(int? id)
         {
-            var menu = await _context.TypeMenu
+            var menu = await _context.TypeMenus
                 .Where(tm => tm.Id == id)
                 .Join(
                     _context.Menus,

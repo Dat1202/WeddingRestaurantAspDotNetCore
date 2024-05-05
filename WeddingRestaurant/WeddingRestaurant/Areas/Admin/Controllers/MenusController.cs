@@ -48,7 +48,7 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
         // GET: Admin/Menus/Create
         public IActionResult Create()
         {
-            ViewData["TypeID"] = new SelectList(_context.TypeMenu, "Id", "Name");
+            ViewData["TypeID"] = new SelectList(_context.TypeMenus, "Id", "Name");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TypeID"] = new SelectList(_context.TypeMenu, "Id", "Name", menu.TypeID);
+            ViewData["TypeID"] = new SelectList(_context.TypeMenus, "Id", "Name", menu.TypeID);
             return View(menu);
         }
 
@@ -82,7 +82,7 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["TypeID"] = new SelectList(_context.TypeMenu, "Id", "Name", menu.TypeID);
+            ViewData["TypeID"] = new SelectList(_context.TypeMenus, "Id", "Name", menu.TypeID);
             return View(menu);
         }
 
@@ -118,7 +118,7 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TypeID"] = new SelectList(_context.TypeMenu, "Id", "Name", menu.TypeID);
+            ViewData["TypeID"] = new SelectList(_context.TypeMenus, "Id", "Name", menu.TypeID);
             return View(menu);
         }
 

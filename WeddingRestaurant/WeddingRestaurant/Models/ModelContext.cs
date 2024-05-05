@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WeddingRestaurant.Models;
 
 namespace WeddingRestaurant.Models;
 
-public partial class ModelContext : DbContext
+public partial class ModelContext : IdentityDbContext<ApplicationUser>
 {
     public ModelContext()
     {
@@ -15,8 +17,7 @@ public partial class ModelContext : DbContext
         : base(options)
     {
     }
-
-    public DbSet<User> Users { get; set; }
+    public DbSet<ApplicationUser> Users { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderDetail> OrderDetails { get; set; }
@@ -27,8 +28,6 @@ public partial class ModelContext : DbContext
     public DbSet<RentCost> RentCosts { get; set; }
     public DbSet<Room> Rooms { get; set; }
     public DbSet<MenuProduct> MenuProducts { get; set; }
-
-public DbSet<WeddingRestaurant.Models.TypeMenu> TypeMenu { get; set; } = default!;
-
+    public DbSet<TypeMenu> TypeMenus { get; set; }
 
 }

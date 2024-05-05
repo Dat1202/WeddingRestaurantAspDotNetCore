@@ -52,7 +52,7 @@ namespace WeddingRestaurant.Controllers
 
             var order = new Order
             {
-                UserID = 5,
+                UserID = "s",
                 PaymentMethods = ""
             };
 
@@ -184,7 +184,7 @@ namespace WeddingRestaurant.Controllers
 
                 var order = new Order
                 {
-                    UserID = 5,
+                    UserID = "5",
                     PaymentMethods = "Paypal"
                 };
 

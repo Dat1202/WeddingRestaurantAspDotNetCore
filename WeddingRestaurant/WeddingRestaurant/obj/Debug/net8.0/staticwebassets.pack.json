@@ -981,12 +981,28 @@
       "PackagePath": "staticwebassets\\Image\\User\\DSCF0246.JPG"
     },
     {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\IMG_20220428_214105.jpg",
+      "PackagePath": "staticwebassets\\Image\\User\\IMG_20220428_214105.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\IMG_20220531_172328.jpg",
+      "PackagePath": "staticwebassets\\Image\\User\\IMG_20220531_172328.jpg"
+    },
+    {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\IMG_20220531_181531.jpg",
       "PackagePath": "staticwebassets\\Image\\User\\IMG_20220531_181531.jpg"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\IMG_20220531_181555.jpg",
       "PackagePath": "staticwebassets\\Image\\User\\IMG_20220531_181555.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\Screenshot 2024-04-12 051138.png",
+      "PackagePath": "staticwebassets\\Image\\User\\Screenshot 2024-04-12 051138.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\Screenshot 2024-04-20 000531.png",
+      "PackagePath": "staticwebassets\\Image\\User\\Screenshot 2024-04-20 000531.png"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\12.css",

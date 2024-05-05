@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\WeddingRestaurant.csproj": {}
+    "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\WeddingRestaurant.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\WeddingRestaurant.csproj": {
+    "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\WeddingRestaurant.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\WeddingRestaurant.csproj",
+        "projectUniqueName": "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\WeddingRestaurant.csproj",
         "projectName": "WeddingRestaurant",
-        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\WeddingRestaurant.csproj",
+        "projectPath": "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\WeddingRestaurant.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\obj\\",
+        "outputPath": "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -49,6 +49,22 @@
               "target": "Package",
               "version": "[12.0.1, )"
             },
+            "Microsoft.AspNetCore.Authentication.Facebook": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Google": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.4, )"
@@ -60,6 +76,10 @@
               "version": "[8.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[8.0.4, )"
             },

@@ -22,7 +22,7 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
         // GET: Admin/TypeMenus
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TypeMenu.ToListAsync());
+            return View(await _context.TypeMenus.ToListAsync());
         }
 
         // GET: Admin/TypeMenus/Details/5
@@ -33,7 +33,7 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var typeMenu = await _context.TypeMenu
+            var typeMenu = await _context.TypeMenus
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (typeMenu == null)
             {
@@ -73,7 +73,7 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var typeMenu = await _context.TypeMenu.FindAsync(id);
+            var typeMenu = await _context.TypeMenus.FindAsync(id);
             if (typeMenu == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var typeMenu = await _context.TypeMenu
+            var typeMenu = await _context.TypeMenus
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (typeMenu == null)
             {
@@ -139,10 +139,10 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var typeMenu = await _context.TypeMenu.FindAsync(id);
+            var typeMenu = await _context.TypeMenus.FindAsync(id);
             if (typeMenu != null)
             {
-                _context.TypeMenu.Remove(typeMenu);
+                _context.TypeMenus.Remove(typeMenu);
             }
 
             await _context.SaveChangesAsync();
@@ -151,7 +151,7 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
 
         private bool TypeMenuExists(int id)
         {
-            return _context.TypeMenu.Any(e => e.Id == id);
+            return _context.TypeMenus.Any(e => e.Id == id);
         }
     }
 }

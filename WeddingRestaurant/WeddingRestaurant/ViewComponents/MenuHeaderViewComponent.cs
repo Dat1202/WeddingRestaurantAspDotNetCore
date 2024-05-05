@@ -15,7 +15,7 @@ namespace WeddingRestaurant.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var typeMenus = await _context.TypeMenu.ToListAsync();
+            var typeMenus = await _context.TypeMenus.ToListAsync();
 
             return View("MenuHeaderItem", typeMenus.Select(m => new TypeMenuVM
             {

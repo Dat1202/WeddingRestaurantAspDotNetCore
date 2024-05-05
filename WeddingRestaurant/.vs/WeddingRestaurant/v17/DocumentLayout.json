@@ -1,18 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\",
+  "WorkspaceRootPath": "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|c:\\users\\admin\\source\\repos\\weddingrestaurant\\weddingrestaurant\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|solutionrelative:weddingrestaurant\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|c:\\weddingrestaurantaspdotnetcore\\weddingrestaurant\\weddingrestaurant\\views\\shared\\_header.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|solutionrelative:weddingrestaurant\\views\\shared\\_header.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|c:\\users\\admin\\source\\repos\\weddingrestaurant\\weddingrestaurant\\heplers\\vnpaylibrary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|solutionrelative:weddingrestaurant\\heplers\\vnpaylibrary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|c:\\weddingrestaurantaspdotnetcore\\weddingrestaurant\\weddingrestaurant\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|solutionrelative:weddingrestaurant\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|c:\\users\\admin\\source\\repos\\weddingrestaurant\\weddingrestaurant\\views\\cart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|solutionrelative:weddingrestaurant\\views\\cart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|c:\\weddingrestaurantaspdotnetcore\\weddingrestaurant\\weddingrestaurant\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|solutionrelative:weddingrestaurant\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|c:\\weddingrestaurantaspdotnetcore\\weddingrestaurant\\weddingrestaurant\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|solutionrelative:weddingrestaurant\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|c:\\weddingrestaurantaspdotnetcore\\weddingrestaurant\\weddingrestaurant\\views\\user\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|solutionrelative:weddingrestaurant\\views\\user\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,42 +35,63 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CartController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\Controllers\\CartController.cs",
-              "RelativeDocumentMoniker": "WeddingRestaurant\\Controllers\\CartController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\Controllers\\CartController.cs",
-              "RelativeToolTip": "WeddingRestaurant\\Controllers\\CartController.cs",
-              "ViewState": "AQIAAM4AAAAAAAAAAAAowLsAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-22T22:09:16.672Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "VnPayLibrary.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\Heplers\\VnPayLibrary.cs",
-              "RelativeDocumentMoniker": "WeddingRestaurant\\Heplers\\VnPayLibrary.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\Heplers\\VnPayLibrary.cs",
-              "RelativeToolTip": "WeddingRestaurant\\Heplers\\VnPayLibrary.cs",
-              "ViewState": "AQIAACsAAAAAAAAAAAAkwDQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-22T23:20:33.666Z",
+              "Title": "_Header.cshtml",
+              "DocumentMoniker": "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\Views\\Shared\\_Header.cshtml",
+              "RelativeDocumentMoniker": "WeddingRestaurant\\Views\\Shared\\_Header.cshtml",
+              "ToolTip": "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\Views\\Shared\\_Header.cshtml",
+              "RelativeToolTip": "WeddingRestaurant\\Views\\Shared\\_Header.cshtml",
+              "ViewState": "AQIAANMAAAAAAAAAAAAAAOIAAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-27T06:08:20.334Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\Views\\Cart\\Index.cshtml",
-              "RelativeDocumentMoniker": "WeddingRestaurant\\Views\\Cart\\Index.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\Views\\Cart\\Index.cshtml",
-              "RelativeToolTip": "WeddingRestaurant\\Views\\Cart\\Index.cshtml",
-              "ViewState": "AQIAAE4AAAAAAAAAAAAAAF8AAAAaAAAA",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\appsettings.json",
+              "RelativeDocumentMoniker": "WeddingRestaurant\\appsettings.json",
+              "ToolTip": "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\appsettings.json",
+              "RelativeToolTip": "WeddingRestaurant\\appsettings.json",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAAB8AAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-04-26T13:33:03.26Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\Program.cs",
+              "RelativeDocumentMoniker": "WeddingRestaurant\\Program.cs",
+              "ToolTip": "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\Program.cs",
+              "RelativeToolTip": "WeddingRestaurant\\Program.cs",
+              "ViewState": "AQIAACAAAAAAAAAAAAApwCsAAAA8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-25T21:46:05.066Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\Views\\User\\Login.cshtml",
+              "RelativeDocumentMoniker": "WeddingRestaurant\\Views\\User\\Login.cshtml",
+              "ToolTip": "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\Views\\User\\Login.cshtml",
+              "RelativeToolTip": "WeddingRestaurant\\Views\\User\\Login.cshtml",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAACkAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-22T23:14:51.432Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-25T21:06:47.998Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "WeddingRestaurant\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\Controllers\\UserController.cs",
+              "RelativeToolTip": "WeddingRestaurant\\Controllers\\UserController.cs",
+              "ViewState": "AQIAANgAAAAAAAAAAAAhwOkAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-25T18:26:43.087Z"
             }
           ]
         }
