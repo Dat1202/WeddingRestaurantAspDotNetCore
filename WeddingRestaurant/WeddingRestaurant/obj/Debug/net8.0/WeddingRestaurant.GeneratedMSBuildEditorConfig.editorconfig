@@ -17,251 +17,251 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WeddingRestaurant
 build_property.RootNamespace = WeddingRestaurant
-build_property.ProjectDir = C:\Users\ADMIN\source\repos\WeddingRestaurant\WeddingRestaurant\
+build_property.ProjectDir = C:\WeddingRestaurantAspDotNetCore\WeddingRestaurant\WeddingRestaurant\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\ADMIN\source\repos\WeddingRestaurant\WeddingRestaurant
+build_property.MSBuildProjectDirectory = C:\WeddingRestaurantAspDotNetCore\WeddingRestaurant\WeddingRestaurant
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Categories/Create.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Categories/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcmllc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Categories/Delete.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Categories/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcmllc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Categories/Details.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Categories/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcmllc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Categories/Edit.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Categories/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcmllc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Categories/Index.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Categories/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcmllc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Dashboard/Index.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Dashboard/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGFzaGJvYXJkXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/MenuProducts/Create.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/MenuProducts/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWVudVByb2R1Y3RzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/MenuProducts/Delete.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/MenuProducts/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWVudVByb2R1Y3RzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/MenuProducts/Details.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/MenuProducts/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWVudVByb2R1Y3RzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/MenuProducts/Edit.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/MenuProducts/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWVudVByb2R1Y3RzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/MenuProducts/Index.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/MenuProducts/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWVudVByb2R1Y3RzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Menus/Create.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Menus/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWVudXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Menus/Delete.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Menus/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWVudXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Menus/Details.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Menus/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWVudXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Menus/Edit.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Menus/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWVudXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Menus/Index.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Menus/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWVudXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Products/Create.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Products/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Products/Delete.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Products/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdHNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Products/Details.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Products/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdHNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Products/Edit.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Products/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdHNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Products/Index.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Products/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Shared/Error.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Shared/_Footer.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Shared/_Footer.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9Gb290ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Shared/_Header.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Shared/_Header.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9IZWFkZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Shared/_LoginPartial.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/TypeMenus/Create.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/TypeMenus/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVHlwZU1lbnVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/TypeMenus/Delete.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/TypeMenus/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVHlwZU1lbnVzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/TypeMenus/Details.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/TypeMenus/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVHlwZU1lbnVzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/TypeMenus/Edit.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/TypeMenus/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVHlwZU1lbnVzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/TypeMenus/Index.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/TypeMenus/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVHlwZU1lbnVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/_ViewImports.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/_ViewStart.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Cart/Index.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Cart/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Cart/Success.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Cart/Success.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxTdWNjZXNzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Error/Error404.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Error/Error404.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb3I0MDQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Home/Index.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Home/Privacy.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Menu/Index.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Menu/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVudVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Products/Create.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Products/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Products/Delete.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Products/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Products/Details.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Products/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Products/Edit.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Products/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Products/Index.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Products/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Shared/Components/Cart/CartPanel.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Shared/Components/Cart/CartPanel.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ2FydFxDYXJ0UGFuZWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Shared/Components/MenuHeader/MenuHeaderItem.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Shared/Components/MenuHeader/MenuHeaderItem.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTWVudUhlYWRlclxNZW51SGVhZGVySXRlbS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Shared/Components/MenuItem/MenuSubItem.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Shared/Components/MenuItem/MenuSubItem.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTWVudUl0ZW1cTWVudVN1Ykl0ZW0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Shared/Error.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Shared/_Footer.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Shared/_Footer.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Gb290ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Shared/_Header.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Shared/_Header.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9IZWFkZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Shared/_LoginPartial.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/User/CallbackExternal.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/User/CallbackExternal.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDYWxsYmFja0V4dGVybmFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/User/Login.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/User/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/User/Profile.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/User/Profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/User/Register.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/User/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/_ViewImports.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/_ViewStart.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Shared/_Layout.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Areas/Admin/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-m0z2mulga7
 
-[C:/Users/ADMIN/source/repos/WeddingRestaurant/WeddingRestaurant/Views/Shared/_Layout.cshtml]
+[C:/WeddingRestaurantAspDotNetCore/WeddingRestaurant/WeddingRestaurant/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-po4os39s2v
