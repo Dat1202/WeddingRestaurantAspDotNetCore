@@ -15,6 +15,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.DotNet.Scaffolding.Shared;
 
 namespace WeddingRestaurant.Controllers
 {
@@ -135,7 +136,7 @@ namespace WeddingRestaurant.Controllers
             ViewBag.ReturnUrl = ReturnUrl;
             if (ModelState.IsValid)
             {
-                var user = db.Users.SingleOrDefault(u => u.UserName == model.UserName);
+                var user = await _userManager.FindByNameAsync(model.UserName);
                 if (user == null)
                 {
                     ModelState.AddModelError("loi", "Không có khách hàng này");
@@ -149,55 +150,12 @@ namespace WeddingRestaurant.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                 }
-                
+
             }
             else
             {
 
             }
-
-            //if (ModelState.IsValid)
-            //{
-            //    var user = db.Users.SingleOrDefault(u => u.UserName == model.UserName);
-
-            //    if (user == null)
-            //    {
-            //        ModelState.AddModelError("loi", "Không có khách hàng này");
-            //    }
-            //    else
-            //    {
-            //        if (user.PasswordHash != model.Password.ToMd5Hash())
-            //        {
-            //            ModelState.AddModelError("loi", "Sai thông tin đăng nhập");
-            //        }
-            //        else
-            //        {
-            //            var claims = new List<Claim>
-            //            {
-
-            //                //new Claim(ClaimTypes.User, user.UserName),
-            //                new Claim(ClaimTypes.Email, user.Email),
-            //                //new Claim(ClaimTypes.Role, user.UserRole),
-            //                new Claim(Configuration.Claim_User_Id, user.Id.ToString()),
-            //            };
-
-            //            var claimsIdentity = new ClaimsIdentity(claims,
-            //            CookieAuthenticationDefaults.AuthenticationScheme);
-            //            var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-
-            //            await HttpContext.SignInAsync(claimsPrincipal);
-
-            //            if (Url.IsLocalUrl(ReturnUrl))
-            //            {
-            //                return Redirect(ReturnUrl);
-            //            }
-            //            else
-            //            {
-            //                return RedirectToAction("Index", "Home");
-            //            }
-            //        }
-            //    }
-            //}
 
             return View();
         }
@@ -263,38 +221,125 @@ namespace WeddingRestaurant.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ConfirmationExternal(ExternalLoginVM externalLoginModel)
+        public async Task<IActionResult> ConfirmationExternal(ExternalLoginVM externalLoginModel, string returnUrl = null)
         {
+            ViewBag.returnUrl = returnUrl;
+            //ViewBag.provider = externalLoginModel.Provider;
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                return RedirectToPage("./Login", new { ReturnUrl = externalLoginModel.ReturnUrl });
+                TempData["ErrorMessage"] = "Lỗi không liên kết được với dịch vụ ngoài";
+
+                return RedirectToPage("Login", new { ReturnUrl = externalLoginModel.ReturnUrl });
             }
 
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
-                //user.EmailConfirmed = true;
-                user.Avatar = "null";
-                await _userStore.SetUserNameAsync(user, externalLoginModel.Email, CancellationToken.None);
+                string externalEmail = null;
+                ApplicationUser externalEmailUser = null;
+                var registerUser = await _userManager.FindByEmailAsync(externalLoginModel.Email);
 
-                var result = await _userManager.CreateAsync(user);
-                if (result.Succeeded)
+                if (info.Principal.HasClaim(c => c.Type == ClaimTypes.Email))
                 {
-                    result = await _userManager.AddLoginAsync(user, info);
-                    if (result.Succeeded)
+                    externalEmail = info.Principal.FindFirstValue(ClaimTypes.Email);
+                }
+
+                if(externalEmail != null)
+                {
+                    externalEmailUser = await _userManager.FindByEmailAsync(externalEmail);
+                }
+
+                if(externalEmailUser != null && registerUser!= null)
+                {
+                    if(externalEmailUser.Id == registerUser.Id)
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false, info.LoginProvider);
-                        return RedirectToAction("Index", "Home");
+                        var resultLink = await _userManager.AddLoginAsync(registerUser, info);
+
+                        if (resultLink.Succeeded)
+                        {
+                            await _signInManager.SignInAsync(registerUser, isPersistent: false);
+                            if (Url.IsLocalUrl(returnUrl))
+                            {
+                                return Redirect(returnUrl);
+                            }
+                            else
+                            {
+                                return RedirectToAction("", "Home");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (Url.IsLocalUrl(returnUrl))
+                        {
+                            return Redirect(returnUrl);
+                        }
+                        else
+                        {
+                            TempData["ErrorMessage"] = "Không liên kết được tài khoản, hãy sử dụng email khác";
+                            return RedirectToAction("CallbackExternal");
+                        }
                     }
                 }
-                foreach (var error in result.Errors)
+
+                if (externalEmailUser != null && registerUser != null)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    if (Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        TempData["ErrorMessage"] = "Không liên kết được hỗ trợ tạo tài khoản mới - có email khác với email từ dịch vụ ngoài";
+                        return RedirectToAction("CallbackExternal");
+                    }
+                }
+
+                if (externalEmailUser == null && externalEmail == externalLoginModel.Email)
+                {
+                    //var avatarUrl = info.Principal.FindFirstValue("picture");
+
+                    var user = new ApplicationUser
+                    {
+                        Email = externalLoginModel.Email,
+                        UserName = externalLoginModel.Email,
+                    };
+                    user.Avatar = "";
+                    user.EmailConfirmed = true;
+                    await _userStore.SetUserNameAsync(user, externalLoginModel.Email, CancellationToken.None);
+
+                    var resultNewUser = await _userManager.CreateAsync(user);
+                    if (resultNewUser.Succeeded)
+                    {
+                        resultNewUser = await _userManager.AddLoginAsync(user, info);
+                        if (resultNewUser.Succeeded)
+                        {
+                            await _signInManager.SignInAsync(user, isPersistent: false, info.LoginProvider);
+                            if (Url.IsLocalUrl(returnUrl))
+                            {
+                                return Redirect(returnUrl);
+                            }
+                            else
+                            {
+                                return RedirectToAction("CallbackExternal");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        TempData["ErrorMessage"] = "Không liên kết được hỗ trợ tạo tài khoản mới - có email khác với email từ dịch vụ ngoài";
+                        return RedirectToAction("CallbackExternal");
+                    }
                 }
             }
-
-            return RedirectToAction("", "Home");
+            return View("CallbackExternal");  
         }
         private ApplicationUser CreateUser()
         {

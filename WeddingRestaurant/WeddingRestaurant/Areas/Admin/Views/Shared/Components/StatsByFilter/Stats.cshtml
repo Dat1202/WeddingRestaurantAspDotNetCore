@@ -1,0 +1,20 @@
+﻿@model IEnumerable<WeddingRestaurant.ViewModels.StatsVM>
+
+@foreach (var item in Model)
+{
+    <ul>
+        <li>@item.Month - @item.TotalPrice</li>
+        <li></li>
+    </ul>
+    <button class="click">Click me</button>
+}
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('.click').click(function () { 
+                alert("aefdwfew");
+            });
+        });
+    </script>
+}

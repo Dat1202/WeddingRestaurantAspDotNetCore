@@ -5,6 +5,8 @@ using WeddingRestaurant.Models;
 using WeddingRestaurant.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using WeddingRestaurant.Repositories;
+using WeddingRestaurant.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = true;
 })
+.AddRoles<IdentityRole>()
 .AddEntityFrameworkStores<ModelContext>()
 .AddDefaultTokenProviders();
 
@@ -31,23 +34,39 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true; 
 });
 
-builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
-
-builder.Services.AddSingleton<IVnPayService, VnPayService>();
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.Cookie.Name = "WeddingRestaurant";
     options.LoginPath = "/User/Login";
     options.AccessDeniedPath = "/Home/Error";
-}).AddFacebook(options =>
+    options.Cookie.Name = "WeddingRestaurant";
+});
+
+builder.Services.AddAuthentication()
+.AddFacebook(options =>
 {
     options.AppId = builder.Configuration["Facebook:AppId"];
     options.AppSecret = builder.Configuration["Facebook:AppSecret"];
-}).AddGoogle(options =>
+})
+.AddGoogle(options =>
 {
     options.ClientId = builder.Configuration["Google:ClientId"];
     options.ClientSecret = builder.Configuration["Google:ClientSecret"];
 });
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireUppercase = true;
+
+});
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+
+builder.Services.AddSingleton<IVnPayService, VnPayService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IMenuRepository, MenuRepository>();
+builder.Services.AddScoped<ITypeMenuRepository, TypeMenuRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 builder.Services.AddSingleton(x =>
     new PaypalClient(
@@ -56,7 +75,6 @@ builder.Services.AddSingleton(x =>
         builder.Configuration["PaypalOptions:Mode"]
     )
 );
-//builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
 var app = builder.Build();
 

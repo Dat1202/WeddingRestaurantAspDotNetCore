@@ -929,6 +929,10 @@
       "PackagePath": "staticwebassets\\Admin\\sparkline\\jquery.sparkline.min.js"
     },
     {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\123.jpg",
+      "PackagePath": "staticwebassets\\Image\\User\\123.jpg"
+    },
+    {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\DSCF0179.JPG",
       "PackagePath": "staticwebassets\\Image\\User\\DSCF0179.JPG"
     },
@@ -981,8 +985,16 @@
       "PackagePath": "staticwebassets\\Image\\User\\DSCF0246.JPG"
     },
     {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\IMG_1651247350686_1651306059675(1).jpg",
+      "PackagePath": "staticwebassets\\Image\\User\\IMG_1651247350686_1651306059675(1).jpg"
+    },
+    {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\IMG_20220428_214105.jpg",
       "PackagePath": "staticwebassets\\Image\\User\\IMG_20220428_214105.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\IMG_20220531_171953.jpg",
+      "PackagePath": "staticwebassets\\Image\\User\\IMG_20220531_171953.jpg"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\IMG_20220531_172328.jpg",
@@ -997,6 +1009,14 @@
       "PackagePath": "staticwebassets\\Image\\User\\IMG_20220531_181555.jpg"
     },
     {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\IMG_20220620_211603.jpg",
+      "PackagePath": "staticwebassets\\Image\\User\\IMG_20220620_211603.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\IMG_20220701_192401.jpg",
+      "PackagePath": "staticwebassets\\Image\\User\\IMG_20220701_192401.jpg"
+    },
+    {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\Screenshot 2024-04-12 051138.png",
       "PackagePath": "staticwebassets\\Image\\User\\Screenshot 2024-04-12 051138.png"
     },
@@ -1007,6 +1027,10 @@
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\12.css",
       "PackagePath": "staticwebassets\\css\\12.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\LoginStyle.css",
+      "PackagePath": "staticwebassets\\css\\LoginStyle.css"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\bootstrap.min.css",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZuYLf267pyZ7yb9QCG5QnkDma/Y5sPuYBuvRz935SDT5Ma5J9ezHxbXBRxp4LhRefVLDUleH2kvs0/WW6m0ZOA==",
+  "dgSpecHash": "U0v2Y7TAuS/6PCneup5F+Vqzb60dOh2LHk/50vS0N/CJdGFNiNPLj06HVRc1abXfEYY0/mWJYDwyt2IpnInB5g==",
   "success": true,
-  "projectFilePath": "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\WeddingRestaurant.csproj",
+  "projectFilePath": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\WeddingRestaurant.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

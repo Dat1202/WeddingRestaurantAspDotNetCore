@@ -1,9 +1,9 @@
-/*!
+!
  * Bootstrap v4.0.0 (https://getbootstrap.com)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
+ 
 :root {
     --blue: #007bff;
     --indigo: #6610f2;
@@ -331,7 +331,6 @@ legend {
     font-size: 1.5rem;
     line-height: inherit;
     color: inherit;
-    white-space: normal
 }
 
 progress {
@@ -2760,7 +2759,7 @@ select.form-control-lg:not([size]):not([multiple]) {
     }
 }
 
-/*.btn {
+.btn {
     display: inline-block;
     font-weight: 400;
     text-align: center;
@@ -2776,7 +2775,7 @@ select.form-control-lg:not([size]):not([multiple]) {
     line-height: 1.5;
     border-radius: .25rem;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
-}*/
+}
 
     .btn:focus,
     .btn:hover {
@@ -3651,7 +3650,7 @@ tbody.collapse.show {
     border: 0
 }
 
-/*  .dropdown-item:focus,
+  .dropdown-item:focus,
     .dropdown-item:hover {
         color: #16181b;
         text-decoration: none;
@@ -3669,7 +3668,7 @@ tbody.collapse.show {
     .dropdown-item:disabled {
         color: #6c757d;
         background-color: transparent
-    }*/
+    }
 
 .dropdown-menu.show {
     display: block

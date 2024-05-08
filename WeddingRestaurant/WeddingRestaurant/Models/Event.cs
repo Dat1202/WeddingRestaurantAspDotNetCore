@@ -21,8 +21,7 @@ namespace WeddingRestaurant.Models
         public virtual Room? Room { get; set; }
 
         [ForeignKey("User")]
-        public string? UserId { get; set; }
-        public virtual ApplicationUser? Users { get; set; }
+        public virtual ApplicationUser? UserId { get; set; }
     }
 }
 

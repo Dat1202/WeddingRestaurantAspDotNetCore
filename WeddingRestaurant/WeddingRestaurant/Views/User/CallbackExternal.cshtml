@@ -1,14 +1,21 @@
 ﻿@model WeddingRestaurant.ViewModels.ExternalLoginVM
 
 <p id="external-login-description" class="text-info">
-    You've successfully authenticated with <strong>@Model.Provider</strong>.
-    Please enter an email address for this site below and click the Register button to finish
+@*     You've successfully authenticated with <strong>@Model.Provider</strong>.
+ *@    Please enter an email address for this site below and click the Register button to finish
     logging in.
 </p>
 
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        <span>@TempData["ErrorMessage"]</span>
+    </div>
+}
+
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="ConfirmationExternal" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <form asp-action="ConfirmationExternal" asp-route-returnUrl="@ViewBag.returnUrl"  method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <input asp-for="Email" class="form-label"></input>
             <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>

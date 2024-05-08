@@ -5,12 +5,6 @@ namespace WeddingRestaurant.ViewModels
 {
     public class RegisterVM
     {
-
-        [Required(ErrorMessage = "*")]
-        [Display(Name = "Họ và tên")]   
-        [MaxLength(50, ErrorMessage = "{0} Tối đa {1} kí tự")]
-        public string? Name { get; set; }
-
         [Required(ErrorMessage = "*")]
         //[EmailAddress(ErrorMessage = "Chưa đúng định dạng email")]
         [Display(Name = "Email")]

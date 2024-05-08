@@ -1,0 +1,46 @@
+﻿.social-white-fb-blue-png {
+    background-position: 5.555555555555555% 62.666666666666664%;
+    background-size: 325% 287.5%;
+}
+
+.social-white-background {
+    background-image: url(https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/assets/7ffa33c1e9518f30.png);
+}
+.eADVqX {
+    flex: 1;
+    margin: 5px;
+}
+.b7kM6N {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .26);
+    border-radius: 2px;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, .87);
+    font-size: .875rem;
+    height: 40px;
+    outline: none;
+    padding: 0 2px;
+    width: 100%;
+}
+
+.b7kM6N, .zwXUkg {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.zwXUkg {
+    border-radius: 1px;
+    height: 36px;
+    width: 36px;
+}
+.XqhqCI, .zwXUkg {
+    flex-shrink: 0;
+}
+.XqhqCI {
+    height: 22px;
+    width: 22px;
+}
+.social-white-google-png {
+    background-position: 83.92857142857143% 5.154639175257732%;
+    background-size: 722.2222222222222% 638.8888888888889%;
+}
