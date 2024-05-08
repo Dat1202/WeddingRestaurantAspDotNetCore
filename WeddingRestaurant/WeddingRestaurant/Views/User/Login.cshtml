@@ -10,36 +10,70 @@
     </div>
 }
 
-<div class="container-fluid py-5">
-    <div class="container py-5">
-        <h1 class="mb-4">Billing details</h1>
-        <form asp-controller="User" asp-action="Login" method="post" asp-route-returnurl="@ViewBag.ReturnUrl">
-            <div class="text-danger" asp-validation-summary="All"></div>
-            <div class="row g-5">
-                <div class="col-md-12 col-lg-6 col-xl-7">
-                    <div class="form-item">
-                        <label asp-for="UserName" class="form-label my-3"></label><sup>*</sup>
-                        <input asp-for="UserName" class="form-control">
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                     class="img-fluid" alt="Sample image">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                    <p class="lead fw-normal mb-0 me-3">Sign in with</p>
+                    <a href="/User/External/?provider=Facebook" class="btn-hover">
+                        <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-floating mx-1 ">
+                            <div class="XqhqCI social-white-background social-white-fb-blue-png"></div>
+                        </button>
+                    </a>
+                    <a href="/User/External/?provider=Google" class="btn-hover">
+                        <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-floating mx-1 ">
+                            <div class="XqhqCI social-white-background social-white-google-png"></div>
+                        </button>
+                    </a>
+                </div>
+
+                <div class="divider d-flex align-items-center my-2">
+                    <p class="text-center fw-bold mb-0">Or</p>
+                </div>
+                <form asp-controller="User" asp-action="Login" method="post" asp-route-returnurl="@ViewBag.ReturnUrl">
+                    <div class="text-danger" asp-validation-summary="All"></div>
+                    <!-- Email input -->
+                    <div class="form-floating mb-3 mt-3">
+                        <input asp-for="UserName" type="text" class="form-control" id="email" placeholder="Enter email">
+                        <label asp-for="UserName">Email</label>
                         <span asp-validation-for="UserName" class="text-danger"></span>
                     </div>
-                    <div class="form-item">
-                        <label asp-for="Password" class="form-label my-3"></label><sup>*</sup>
-                        <input asp-for="Password" class="form-control">
+                    <!-- Password input -->
+                    <div class="form-floating mt-3 mb-3">
+                        <input asp-for="Password" type="password" class="form-control" id="pwd" placeholder="Enter password">
+                        <label asp-for="Password">Password</label>
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="row g-4 text-center align-items-center justify-content-center pt-4">
-                    <button type="submit" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Đăng nhập</button>
-                </div>
-                <a href="/User/External/?provider=Facebook" target="_blank">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1920px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" style="width: 150px; height: auto;">
-                </a>
 
-                <!-- Button kết nối với Google -->
-                <a href="/User/External/?provider=Google" target="_blank">
-                  <img src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg" alt="Google" style="width: 150px; height: auto;">
-                </a>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <!-- Checkbox -->
+                        <div class="form-check mb-0">
+                            <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                            <label class="form-check-label" for="form2Example3">
+                                Remember me
+                            </label>
+                        </div>
+                        <a href="#!" class="text-body">Forgot password?</a>
+                    </div>
+
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                        <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-lg"
+                                style="padding-left: 2.5rem; padding-right: 2.5rem;">
+                            Login
+                        </button>
+                        <p class="small fw-bold mt-2 pt-1 mb-0">
+                            Don't have an account? 
+                            <a asp-action="Register" class="link-danger">Register</a>
+                        </p>
+                    </div>
+                </form>
+
             </div>
-        </form>
+        </div>
     </div>
-</div>
+</section>

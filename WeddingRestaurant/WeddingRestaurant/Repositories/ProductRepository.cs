@@ -1,20 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WeddingRestaurant.Interfaces;
 using WeddingRestaurant.Models;
 
 namespace WeddingRestaurant.Repositories
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : Repository<Product>, IProductRepository
     {
-        private readonly ModelContext _model;
+        private readonly ModelContext _context;
 
-        public ProductRepository(ModelContext model)
+        public ProductRepository(ModelContext context) : base(context)
         {
-            _model = model;
+            _context = context;
         }
-        public async Task<List<Product>> GetAllAsync()
-        {
-            var p = await _model.Products!.ToListAsync();
-            return p;
-        }
+
     }
 }

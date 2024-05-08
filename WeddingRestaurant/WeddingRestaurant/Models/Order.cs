@@ -12,7 +12,6 @@ namespace WeddingRestaurant.Models
         public DateTime OrderDate { get; set; } = DateTime.Now;
         public string PaymentMethods {  get; set; }
         [ForeignKey("User")]
-        public string UserID { get; set; }
-        public virtual ApplicationUser? Users { get; set; }
+        public virtual ApplicationUser? UserId { get; set; }
     }
 }

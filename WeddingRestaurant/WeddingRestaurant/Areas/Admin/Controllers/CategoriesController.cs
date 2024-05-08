@@ -5,36 +5,38 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WeddingRestaurant.Interfaces;
 using WeddingRestaurant.Models;
+using WeddingRestaurant.Repositories;
 
 namespace WeddingRestaurant.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class CategoriesController : Controller
     {
-        private readonly ModelContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CategoriesController(ModelContext context)
+        public CategoriesController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: Admin/Categories
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Categories.ToListAsync());
+            return View(await _unitOfWork.Categories.GetAllAsync());
         }
 
         // GET: Admin/Categories/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var category = await _unitOfWork.Categories
+                .GetByIdAsync(id);
             if (category == null)
             {
                 return NotFound();
@@ -58,22 +60,23 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(category);
-                await _context.SaveChangesAsync();
+                _unitOfWork.Categories.AddAsync(category);
+                await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
         }
 
         // GET: Admin/Categories/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories.FindAsync(id);
+            var category = await _unitOfWork.Categories
+                .GetByIdAsync(id);
             if (category == null)
             {
                 return NotFound();
@@ -95,37 +98,24 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(category);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CategoryExists(category.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                    _unitOfWork.Categories.UpdateAsync(category);
+                    await _unitOfWork.SaveChangesAsync();
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
         }
 
         // GET: Admin/Categories/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var category = await _unitOfWork.Categories
+                .GetByIdAsync(id);
             if (category == null)
             {
                 return NotFound();
@@ -139,19 +129,14 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
-            if (category != null)
+            if (id == null)
             {
-                _context.Categories.Remove(category);
+                return NotFound();
             }
 
-            await _context.SaveChangesAsync();
+            _unitOfWork.Categories.DeleteAsync(id);
+            await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool CategoryExists(int id)
-        {
-            return _context.Categories.Any(e => e.Id == id);
         }
     }
 }

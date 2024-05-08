@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Core.Types;
+using WeddingRestaurant.Interfaces;
 using WeddingRestaurant.Models;
 
 namespace WeddingRestaurant.Areas.Admin.Controllers
@@ -12,31 +14,28 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
     [Area("Admin")]
     public class ProductsController : Controller
     {
-        private readonly ModelContext _context;
 
-        public ProductsController(ModelContext context)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public ProductsController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
-
         // GET: Admin/Products
         public async Task<IActionResult> Index()
         {
-            var modelContext = _context.Products.Include(p => p.Category);
-            return View(await modelContext.ToListAsync());
+            return View(await _unitOfWork.Products.GetAllAsync());
         }
 
         // GET: Admin/Products/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .Include(p => p.Category)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var product = await _unitOfWork.Products.GetByIdAsync(id);
             if (product == null)
             {
                 return NotFound();
@@ -46,9 +45,10 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
         }
 
         // GET: Admin/Products/Create
-        public IActionResult Create()
+        public async Task<IActionResult> CreateAsync()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
+            ViewData["CategoryId"] = new SelectList(await _unitOfWork.Categories.GetAllAsync(), "Id", "Name");
+
             return View();
         }
 
@@ -61,28 +61,28 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
+                _unitOfWork.Products.AddAsync(product);
+                await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
+            ViewData["CategoryId"] = new SelectList(await _unitOfWork.Categories.GetAllAsync(), "Id", "Name", product.CategoryId);
             return View(product);
         }
 
         // GET: Admin/Products/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products.FindAsync(id);
+            var product = await _unitOfWork.Products.GetByIdAsync(id);
             if (product == null)
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
+            ViewData["CategoryId"] = new SelectList(await _unitOfWork.Categories.GetAllAsync(), "Id", "Name", product.CategoryId);
             return View(product);
         }
 
@@ -100,39 +100,25 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductExists(product.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                    _unitOfWork.Products.UpdateAsync(product);
+                    await _unitOfWork.SaveChangesAsync();
+                
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
+            ViewData["CategoryId"] = new SelectList(await _unitOfWork.Categories.GetAllAsync(), "Id", "Name", product.CategoryId);
             return View(product);
         }
 
         // GET: Admin/Products/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .Include(p => p.Category)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var product = await _unitOfWork.Products.GetByIdAsync(id);
+
             if (product == null)
             {
                 return NotFound();
@@ -146,19 +132,14 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product != null)
+            if (id == null)
             {
-                _context.Products.Remove(product);
+                return NotFound();
             }
 
-            await _context.SaveChangesAsync();
+            _unitOfWork.Products.DeleteAsync(id);
+            await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool ProductExists(int id)
-        {
-            return _context.Products.Any(e => e.Id == id);
         }
     }
 }

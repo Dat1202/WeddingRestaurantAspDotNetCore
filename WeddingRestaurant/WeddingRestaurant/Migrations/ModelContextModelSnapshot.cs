@@ -288,17 +288,14 @@ namespace WeddingRestaurant.Migrations
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UsersId")
+                    b.Property<string>("User")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RoomId");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("User");
 
                     b.ToTable("Events");
                 });
@@ -364,16 +361,12 @@ namespace WeddingRestaurant.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UsersId")
+                    b.Property<string>("User")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("User");
 
                     b.ToTable("Orders");
                 });
@@ -562,13 +555,13 @@ namespace WeddingRestaurant.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WeddingRestaurant.Models.ApplicationUser", "Users")
+                    b.HasOne("WeddingRestaurant.Models.ApplicationUser", "UserId")
                         .WithMany()
-                        .HasForeignKey("UsersId");
+                        .HasForeignKey("User");
 
                     b.Navigation("Room");
 
-                    b.Navigation("Users");
+                    b.Navigation("UserId");
                 });
 
             modelBuilder.Entity("WeddingRestaurant.Models.Menu", b =>
@@ -603,11 +596,11 @@ namespace WeddingRestaurant.Migrations
 
             modelBuilder.Entity("WeddingRestaurant.Models.Order", b =>
                 {
-                    b.HasOne("WeddingRestaurant.Models.ApplicationUser", "Users")
+                    b.HasOne("WeddingRestaurant.Models.ApplicationUser", "UserId")
                         .WithMany()
-                        .HasForeignKey("UsersId");
+                        .HasForeignKey("User");
 
-                    b.Navigation("Users");
+                    b.Navigation("UserId");
                 });
 
             modelBuilder.Entity("WeddingRestaurant.Models.OrderDetail", b =>

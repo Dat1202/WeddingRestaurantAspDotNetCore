@@ -1,35 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WeddingRestaurant.Interfaces;
 using WeddingRestaurant.Models;
+using WeddingRestaurant.Repositories;
 using WeddingRestaurant.ViewModels;
 
 namespace WeddingRestaurant.Controllers
 {
     public class MenuController : Controller
     {
-        private readonly ModelContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public MenuController(ModelContext context)
+        public MenuController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
         public async Task<IActionResult> Index(int? id)
         {
-            var menu = await _context.TypeMenus
-                .Where(tm => tm.Id == id)
-                .Join(
-                    _context.Menus,
-                    tm => tm.Id,
-                    m => m.TypeID,
-                    (tm, m) => new TypeMenuVM
-                    {
-                        Id = m.Id,
-                        Name = m.Name
-                    }
-                )
-                .ToListAsync();
-
-            return View(menu);
+            var menus = await _unitOfWork.Menus.GetMenuByTypeMenuId(id);
+            return View(menus);
         }
 
     }

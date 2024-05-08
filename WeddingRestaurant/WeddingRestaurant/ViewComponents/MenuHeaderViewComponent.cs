@@ -1,21 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using WeddingRestaurant.Interfaces;
 using WeddingRestaurant.Models;
+using WeddingRestaurant.Repositories;
 using WeddingRestaurant.ViewModels;
 
 namespace WeddingRestaurant.ViewComponents
 {
     public class MenuHeaderViewComponent : ViewComponent
     {
-        private ModelContext _context;
-        public MenuHeaderViewComponent(ModelContext context)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public MenuHeaderViewComponent(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var typeMenus = await _context.TypeMenus.ToListAsync();
+            var typeMenus = await _unitOfWork.TypeMenus.GetAllAsync();
 
             return View("MenuHeaderItem", typeMenus.Select(m => new TypeMenuVM
             {
