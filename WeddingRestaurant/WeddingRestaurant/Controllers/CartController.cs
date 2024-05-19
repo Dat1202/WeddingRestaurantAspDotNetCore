@@ -12,6 +12,7 @@ using NuGet.Packaging.Signing;
 
 namespace WeddingRestaurant.Controllers
 {
+    [Authorize(Roles="User")]
     public class CartController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -30,22 +31,23 @@ namespace WeddingRestaurant.Controllers
         public List<CartItem> Cart => HttpContext.Session.Get<List<CartItem>>(Configuration.CART_KEY) ?? new List<CartItem>();
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int NumberTable)
         {
             ViewBag.PaypalClientId = _paypalClient.ClientId;
-            return View(Cart);
+			ViewBag.NumberTable = NumberTable;
+
+			return View(Cart);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(string payment = "COD")
+        public async Task<IActionResult> Index(string payment, int? numberTable = null)
         {
             if (payment == "Thanh toán VNPay")
             {
                 var vnPayModel = new VnPaymentRequestModel
                 {
-                    Amount = (double)Cart.Sum(p => (decimal)p.Price),
+                    Amount = (double)(Cart.Sum(p => (decimal)p.Price) * (numberTable ?? 1)),
                     CreatedDate = DateTime.Now,
-                    Description = "sèw",
                     FullName = "model.HoTen",
                     OrderId = new Random().Next(1000, 100000)
                 };
@@ -53,13 +55,47 @@ namespace WeddingRestaurant.Controllers
                 return Redirect(_vnPayservice.CreatePaymentUrl(HttpContext, vnPayModel));
             }
 
+            if(payment == "Thanh toán trực tiếp")
+            {
+                var order = new Order
+                {
+                    UserId = await _userManager.GetUserAsync(User),
+                    PaymentMethods = "cod",
+                };
+
+                db.Database.BeginTransaction();
+                try
+                {
+                    db.Database.CommitTransaction();
+                    db.Add(order);
+                    db.SaveChanges();
+
+                    var cthds = new List<OrderDetail>();
+                    foreach (var item in Cart)
+                    {
+                        cthds.Add(new OrderDetail
+                        {
+                            OrderId = order.Id,
+                            Price = item.Price,
+                            ProductId = item.Id,
+                        });
+                    }
+                    db.AddRange(cthds);
+                    db.SaveChanges();
+
+                    HttpContext.Session.Set<List<CartItem>>(Configuration.CART_KEY, new List<CartItem>());
+                    TempData["SuccessMessage"] = "Thanh toán thành công!";
+
+                    return View("Index", Cart);
+                }
+                catch
+                {
+                    db.Database.RollbackTransaction();
+                }
+            }   
             return View("Index", Cart);
         }
 
-        public IActionResult PaymentSuccess()
-        {
-            return View("Success");
-        }
         public IActionResult AddToCart(int[] ids, string type = "Normal")
         {
             var gioHang = Cart;

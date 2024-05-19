@@ -2,7 +2,8 @@
 {
     public static class Configuration
     {
-        public static string CART_KEY = "mycart";
+        public static string CART_KEY = "myCart";
+        public static string ROOM_KEY = "myRoom";
         public static string Claim_User_Id = "UserId";
     }
     public static class PaymentType

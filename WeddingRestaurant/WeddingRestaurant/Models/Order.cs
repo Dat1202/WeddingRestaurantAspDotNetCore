@@ -11,7 +11,7 @@ namespace WeddingRestaurant.Models
         public int Id { get; set; }
         public DateTime OrderDate { get; set; } = DateTime.Now;
         public string PaymentMethods {  get; set; }
-        [ForeignKey("User")]
+        [ForeignKey("ApplicationUser")]
         public virtual ApplicationUser? UserId { get; set; }
     }
 }

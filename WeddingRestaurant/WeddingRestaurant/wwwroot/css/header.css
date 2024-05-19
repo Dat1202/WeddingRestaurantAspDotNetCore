@@ -565,7 +565,7 @@ footer .name {
     visibility: hidden
 }
 
-.nav-right > li > ul > li:hover {
+.nav-right > li > ul > li.menu-item:hover {
     background-color: #ca1a1a !important;
 }
 
@@ -582,7 +582,7 @@ a {
     text-decoration: none !important
 }
 
-.nav-right > li > ul > li {
+.nav-right > li > ul > li.menu-item {
     height: 35px;
     overflow: hidden;
     border: none !important;

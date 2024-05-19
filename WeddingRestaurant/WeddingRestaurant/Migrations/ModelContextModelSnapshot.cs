@@ -47,6 +47,20 @@ namespace WeddingRestaurant.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -102,12 +116,10 @@ namespace WeddingRestaurant.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -136,6 +148,13 @@ namespace WeddingRestaurant.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "1",
+                            RoleId = "1"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -144,12 +163,10 @@ namespace WeddingRestaurant.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -169,8 +186,8 @@ namespace WeddingRestaurant.Migrations
 
                     b.Property<string>("Avatar")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -227,6 +244,25 @@ namespace WeddingRestaurant.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            Avatar = "",
+                            ConcurrencyStamp = "24eec990-c5b3-4658-9eab-fe1e09a0fee0",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMeX5e+RgjGkcpgvvDsNnUzXoe3JxJ5OyX3iWjppaBltveDoGZH9/KNlq26cZnPOiA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "42349461-30a7-4803-8c70-2f14e244e2da",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("WeddingRestaurant.Models.Category", b =>
@@ -247,25 +283,6 @@ namespace WeddingRestaurant.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("WeddingRestaurant.Models.Duration", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("IsWeekend")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Durations");
-                });
-
             modelBuilder.Entity("WeddingRestaurant.Models.Event", b =>
                 {
                     b.Property<int>("Id")
@@ -274,28 +291,27 @@ namespace WeddingRestaurant.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Capacity")
-                        .HasColumnType("int");
+                    b.Property<string>("ApplicationUser")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoomId")
+                    b.Property<int>("NumberTable")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RoomId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("User")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("RoomId");
+                    b.HasIndex("ApplicationUser");
 
-                    b.HasIndex("User");
+                    b.HasIndex("RoomId");
 
                     b.ToTable("Events");
                 });
@@ -354,6 +370,9 @@ namespace WeddingRestaurant.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ApplicationUser")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
@@ -361,12 +380,9 @@ namespace WeddingRestaurant.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("User")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("User");
+                    b.HasIndex("ApplicationUser");
 
                     b.ToTable("Orders");
                 });
@@ -413,6 +429,9 @@ namespace WeddingRestaurant.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -428,32 +447,6 @@ namespace WeddingRestaurant.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("WeddingRestaurant.Models.RentCost", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("DurationId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(10, 2)");
-
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DurationId");
-
-                    b.HasIndex("RoomId");
-
-                    b.ToTable("RentCosts");
-                });
-
             modelBuilder.Entity("WeddingRestaurant.Models.Room", b =>
                 {
                     b.Property<int>("Id")
@@ -465,6 +458,14 @@ namespace WeddingRestaurant.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Location")
                         .HasColumnType("int");
 
@@ -472,6 +473,9 @@ namespace WeddingRestaurant.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(10, 2)");
 
                     b.HasKey("Id");
 
@@ -549,15 +553,13 @@ namespace WeddingRestaurant.Migrations
 
             modelBuilder.Entity("WeddingRestaurant.Models.Event", b =>
                 {
-                    b.HasOne("WeddingRestaurant.Models.Room", "Room")
-                        .WithMany()
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("WeddingRestaurant.Models.ApplicationUser", "UserId")
                         .WithMany()
-                        .HasForeignKey("User");
+                        .HasForeignKey("ApplicationUser");
+
+                    b.HasOne("WeddingRestaurant.Models.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId");
 
                     b.Navigation("Room");
 
@@ -598,7 +600,7 @@ namespace WeddingRestaurant.Migrations
                 {
                     b.HasOne("WeddingRestaurant.Models.ApplicationUser", "UserId")
                         .WithMany()
-                        .HasForeignKey("User");
+                        .HasForeignKey("ApplicationUser");
 
                     b.Navigation("UserId");
                 });
@@ -631,25 +633,6 @@ namespace WeddingRestaurant.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("WeddingRestaurant.Models.RentCost", b =>
-                {
-                    b.HasOne("WeddingRestaurant.Models.Duration", "Duration")
-                        .WithMany()
-                        .HasForeignKey("DurationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WeddingRestaurant.Models.Room", "Room")
-                        .WithMany()
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Duration");
-
-                    b.Navigation("Room");
                 });
 #pragma warning restore 612, 618
         }

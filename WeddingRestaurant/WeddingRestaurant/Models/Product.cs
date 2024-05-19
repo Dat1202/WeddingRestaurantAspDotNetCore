@@ -16,6 +16,7 @@ namespace WeddingRestaurant.Models
         [Required]
         [Column(TypeName = "decimal(10, 2)")]
         public decimal Price { get; set; }
+        public bool IsAvailable { get; set; }
 
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
