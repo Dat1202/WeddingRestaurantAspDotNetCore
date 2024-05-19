@@ -5,7 +5,7 @@ namespace WeddingRestaurant.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        [StringLength(30)]
+		[StringLength(70)]
         public string Avatar { get; set; }
 
     }

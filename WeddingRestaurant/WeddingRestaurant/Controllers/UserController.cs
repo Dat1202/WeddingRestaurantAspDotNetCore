@@ -25,6 +25,7 @@ namespace WeddingRestaurant.Controllers
         private readonly ModelContext db;
         private readonly IMapper _mapper;
         private readonly ILogger<RegisterVM> _logger;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserStore<ApplicationUser> _userStore;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
@@ -32,8 +33,10 @@ namespace WeddingRestaurant.Controllers
             UserManager<ApplicationUser> userManager, 
             SignInManager<ApplicationUser> signInManager, 
             ILogger<RegisterVM> logger,
-            IUserStore<ApplicationUser> userStore)
+            IUserStore<ApplicationUser> userStore,
+            RoleManager<IdentityRole> roleManager)
         {
+            _roleManager = roleManager;
             _userStore = userStore;
             _signInManager = signInManager;
             _userManager = userManager;
@@ -57,14 +60,19 @@ namespace WeddingRestaurant.Controllers
                 user.EmailConfirmed = true;
                 if (Avatar != null)
                 {
-                    user.Avatar = MyUtil.UploadHinh(Avatar, "User");
+                    user.Avatar = MyUtil.UploadHinh(Avatar, "User", user.Id);
                 }
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
+                    var role = await _roleManager.FindByNameAsync("User");
+                    if (role != null)
+                    {
+                        await _userManager.AddToRoleAsync(user, role.Name);
+                    }
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");   
                 }
 
                 foreach (var error in result.Errors)
@@ -141,24 +149,41 @@ namespace WeddingRestaurant.Controllers
                 {
                     ModelState.AddModelError("loi", "Không có khách hàng này");
                 }
-                if (user != null)
+                else
                 {
-                    var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, lockoutOnFailure: false);
+                    var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, lockoutOnFailure: false);
 
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", "Home");
+                        var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.Email, user.Email), 
+                            new Claim("Avatar", user.Avatar),
+                        };
+
+                        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        await _signInManager.SignInWithClaimsAsync(user, isPersistent: false, claims);
+
+                        if (await _userManager.IsInRoleAsync(user, "Admin"))
+                        {
+                            return RedirectToAction("Index", "Admin");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("loi", "Đăng nhập không thành công");
                     }
                 }
-
-            }
-            else
-            {
-
             }
 
-            return View();
+            return View(model);
         }
+
+
 
         [Authorize]
         public IActionResult Profile()
@@ -195,6 +220,15 @@ namespace WeddingRestaurant.Controllers
             var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
             if (result.Succeeded)
             {
+                var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+                if (user != null)
+                {
+					var role = await _roleManager.FindByNameAsync("User");
+					if (role != null)
+                    {
+                        await _userManager.AddToRoleAsync(user, role.Name);
+                    }
+                }
                 return LocalRedirect(returnUrl);
             }
             if (result.IsLockedOut)

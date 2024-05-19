@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using WeddingRestaurant.Heplers;
 using WeddingRestaurant.Models;
@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using WeddingRestaurant.Repositories;
 using WeddingRestaurant.Interfaces;
+using Microsoft.Extensions.Options;
+using WeddingRestaurant.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +19,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ModelContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("Sale")));
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = true;
 })
@@ -58,6 +60,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireUppercase = true;
 
 });
+builder.Services.AddRazorPages();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 

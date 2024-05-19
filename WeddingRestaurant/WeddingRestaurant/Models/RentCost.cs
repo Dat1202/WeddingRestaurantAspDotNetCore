@@ -12,7 +12,7 @@ namespace WeddingRestaurant.Models
         
         [ForeignKey("Room")]
         public int RoomId { get; set; }
-        public virtual Room? Room { get; set; }
+        public virtual Room? Room { get; set; }                      
 
         [ForeignKey("Duration")]
         public int DurationId { get; set; }

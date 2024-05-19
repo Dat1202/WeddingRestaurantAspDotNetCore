@@ -1601,7 +1601,7 @@ li.has-dropdown:hover > .nav-dropdown-full {
 }
 
 .nav,
-.nav ul:not(.nav-dropdown) {
+.nav ul.dropdown-rs {
     margin: 0;
     padding: 0
 }

@@ -44,3 +44,53 @@
     background-position: 83.92857142857143% 5.154639175257732%;
     background-size: 722.2222222222222% 638.8888888888889%;
 }
+
+.user-header {
+    height: 175px !important;
+    padding: 10px;
+    text-align: center;
+}
+
+.user-header {
+    background-color: #3c8dbc;
+}
+
+.user-footer {
+    height: 55px !important;
+    background-color: #f9f9f9 !important;
+    padding: 10px !important;
+}
+
+.dropdown-list {
+    position: absolute;
+    right: 0;
+    left: auto;
+}
+
+.dropdown-list {
+    border-radius: 0;
+    border-top-width: 0;
+    width: 280px;
+}
+
+li.user-header > img {
+    z-index: 5;
+    height: 90px;
+    width: 90px;
+    border: 3px solid;
+    border-color: transparent;
+    border-color: rgba(255, 255, 255, 0.2);
+    margin: 10px;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+.btn.btn-flat {
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-width: 1px;
+}

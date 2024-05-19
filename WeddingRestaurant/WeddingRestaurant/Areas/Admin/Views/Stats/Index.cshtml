@@ -1,46 +1,158 @@
-﻿@await Component.InvokeAsync("WeddingRestaurant.Areas.Admin.ViewComponents.StatsByFilter")
+﻿
+<h1>
+    Morris Charts
+    <small>Preview sample</small>
+</h1>
+<oli;oiuoprewa class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="#">Charts</a></li>
+    <li class="active">Morris</li>
+</oli;oiuoprewa>
+<h2>Thống kê doanh thu</h2>
+<div class="row" >
+    <div class="col-md-5 col-sm-12 bg-white">
+        <form id="filter-form">
+            <table class="table">
+                <h4 class="m-2"><i class="fa-solid fa-filter"></i>Bộ lọc</h4>
+                <tr class="">
+                    <th><label>Tháng </label></th>
+                    <th><input type="number" name="month" min="1" max="12" placeholder="Nhập tháng..." style="width: 150px;" /></th>
+                </tr>
 
-    <h1>
-        Morris Charts
-        <small>Preview sample</small>
-    </h1>
-    <oli;oiuoprewa class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Charts</a></li>
-        <li class="active">Morris</li>
-    </oli;oiuoprewa>
+                <tr>
+                    <th><label>Quý </label></th>
+                    <th><input type="number" name="quarter" min="1" max="4" placeholder="Nhập quý..." style="width: 150px;" /></th>
+                </tr>
+                <tr>
+                    <th><label>Năm </label></th>
+                    <th><input type="number" name="year" min="2020" max="2030" placeholder="Nhập năm..." style="width: 150px;" /></th>
+                </tr>
+            </table>
 
-<!-- Main content -->
+            <div class="m-3">
+                <button type="submit" class="btn btn-info">Tìm kiếm</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-5 col-sm-12 bg-white">
+    </div>
+</div>
+
 <section class="content">
     <div class="row">
         <div class="col-md-6">
-            <!-- AREA CHART -->
+            <table class="table table-hover">
+                <thead>
+                    <tr class="table-info">
+                        <th>Month</th>
+                        <th>Doanh thu (VNĐ)</th>
+                    </tr>
+                </thead>
+                <tbody id="stats-body">
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
             <div class="box box-primary">
                 <div class="box-header">
                     <h3 class="box-title">Area Chart</h3>
                 </div>
                 <div class="box-body chart-responsive">
-                    <div class="chart" id="revenue-chart" style="height: 300px;"></div>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
-            <!-- DONUT CHART -->
-        </div><!-- /.col (LEFT) -->
-        <div class="col-md-6">
-            <!-- LINE CHART -->
-            <div class="box box-info">
-                <div class="box-header">
-                    <h3 class="box-title">Line Chart</h3>
+                    <canvas class="chart" id="revenue-chart" style="height: 300px;"></canvas>
                 </div>
-                <div class="box-body chart-responsive">
-                    <div class="chart" id="line-chart" style="height: 300px;"></div>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
-            <!-- BAR CHART -->
-        </div><!-- /.col (RIGHT) -->
-    </div><!-- /.row -->
-</section><!-- /.content -->
+            </div>
+        </div>
+    </div>
+</section>
+
 @section scripts {
+
     <script>
-        
+        $(document).ready(function () {
+            const ctx = document.getElementById('revenue-chart').getContext('2d');
+            let revenueChart;
+
+            function updateChart(labels, data) {
+                if (revenueChart) {
+                    revenueChart.destroy();
+                }
+
+                revenueChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Thống kê doanh thu',
+                            data: data,
+                            backgroundColor: data.map(() => `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 0.5)`),
+                            borderColor: data.map(() => `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 1)`),
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+
+            function fetchStats(query = '') {
+                $.ajax({
+                    url: `/Admin/Stats/stats?${query}`,
+                    method: 'GET',
+                    success: function (res) {
+                        const statsBody = $('#stats-body');
+                        statsBody.empty();
+                        if (res && Array.isArray(res) && res.length > 0) {
+                            const labels = [];
+                            const data = [];
+
+                            res.forEach(function (stat) {
+
+                                const row = `<tr>
+                                    <td>${stat.month}</td>
+                                    <td>${stat.totalPrice} VNĐ</td>
+                                </tr>`;
+                                statsBody.append(row);
+
+                                labels.push(stat.month);
+                                data.push(stat.totalPrice);
+                            });
+
+                            updateChart(labels, data);
+                        } else {
+                            console.error('Invalid response format or empty response:', res);
+                            statsBody.html('<tr><td colspan="2">No data available.</td></tr>');
+                            updateChart(null, null);
+                        }
+                        
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error fetching stats:', error);
+                        $('#stats-body').html('<tr><td colspan="2">Error fetching stats.</td></tr>');
+                    }
+                });
+            }
+
+            $('#filter-form').on('submit', function (e) {
+                e.preventDefault();
+
+                const month = $('input[name="month"]').val();
+                const quarter = $('input[name="quarter"]').val();
+                const year = $('input[name="year"]').val();
+                let query = '';
+
+                if (month) query += `month=${month}`;
+                if (quarter) query += `&quarter=${quarter}`;
+                if (year) query += `&year=${year}`;
+                console.log(query)
+                fetchStats(query);
+            });
+
+            fetchStats();
+        });
     </script>
 }
