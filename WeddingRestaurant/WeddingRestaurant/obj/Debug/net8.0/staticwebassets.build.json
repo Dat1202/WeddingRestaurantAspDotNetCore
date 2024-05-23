@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0ixfHabR0GXo6zHOnqerS5KK31aMtLSYivb2BjTnc1o=",
+  "Hash": "kDm90h4Ufa0cFPhdkNKHFal4LCnhJtb+WkDZ+Zwxot0=",
   "Source": "WeddingRestaurant",
   "BasePath": "_content/WeddingRestaurant",
   "Mode": "Default",
@@ -5584,25 +5584,6 @@
       "OriginalItemSpec": "wwwroot\\Admin\\sparkline\\jquery.sparkline.min.js"
     },
     {
-      "Identity": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\12.css",
-      "SourceId": "WeddingRestaurant",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\",
-      "BasePath": "_content/WeddingRestaurant",
-      "RelativePath": "css/12.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\12.css"
-    },
-    {
       "Identity": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\bootstrap.min.css",
       "SourceId": "WeddingRestaurant",
       "SourceType": "Discovered",
@@ -5622,6 +5603,25 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap.min.css"
     },
     {
+      "Identity": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\chat.css",
+      "SourceId": "WeddingRestaurant",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\",
+      "BasePath": "_content/WeddingRestaurant",
+      "RelativePath": "css/chat.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\chat.css"
+    },
+    {
       "Identity": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\header.css",
       "SourceId": "WeddingRestaurant",
       "SourceType": "Discovered",
@@ -5639,6 +5639,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\header.css"
+    },
+    {
+      "Identity": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\init.css",
+      "SourceId": "WeddingRestaurant",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\",
+      "BasePath": "_content/WeddingRestaurant",
+      "RelativePath": "css/init.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\init.css"
     },
     {
       "Identity": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\LoginStyle.css",
@@ -5774,6 +5793,25 @@
       "OriginalItemSpec": "wwwroot\\Image\\User\\05a6f894-b81d-4255-97a2-ec39f3359ab1.JPG"
     },
     {
+      "Identity": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\07a397d8-02b9-4000-9ccc-1641e0e6422d.JPG",
+      "SourceId": "WeddingRestaurant",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\",
+      "BasePath": "_content/WeddingRestaurant",
+      "RelativePath": "Image/User/07a397d8-02b9-4000-9ccc-1641e0e6422d.JPG",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Image\\User\\07a397d8-02b9-4000-9ccc-1641e0e6422d.JPG"
+    },
+    {
       "Identity": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\18a49f59-b70c-4861-b579-fa9b3199a003.JPG",
       "SourceId": "WeddingRestaurant",
       "SourceType": "Discovered",
@@ -5810,6 +5848,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Image\\User\\90da7031-3bc4-4cbb-a8e2-e3982b2f0999.JPG"
+    },
+    {
+      "Identity": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\c9ee5db7-8d72-47a2-87c7-84c0afc5361b.JPG",
+      "SourceId": "WeddingRestaurant",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\",
+      "BasePath": "_content/WeddingRestaurant",
+      "RelativePath": "Image/User/c9ee5db7-8d72-47a2-87c7-84c0afc5361b.JPG",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Image\\User\\c9ee5db7-8d72-47a2-87c7-84c0afc5361b.JPG"
     },
     {
       "Identity": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\img\\avatar.jpg",

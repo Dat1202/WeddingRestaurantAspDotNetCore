@@ -10,6 +10,7 @@ namespace WeddingRestaurant.Heplers
         {
             CreateMap<RegisterVM, ApplicationUser>();
             CreateMap<RoomVM, Room>();
+            CreateMap<MessageVM, ChatMessage>();
 
         }
 

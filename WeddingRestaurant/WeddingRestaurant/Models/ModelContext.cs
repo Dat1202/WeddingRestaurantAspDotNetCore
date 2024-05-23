@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WeddingRestaurant.Models;
 using WeddingRestaurant.Helpers;
+using System.Reflection.Emit;
 
 namespace WeddingRestaurant.Models
 {
@@ -22,11 +23,20 @@ namespace WeddingRestaurant.Models
 			builder.ApplyConfiguration(new SeedData() as IEntityTypeConfiguration<ApplicationUser>);
 			builder.ApplyConfiguration(new SeedData() as IEntityTypeConfiguration<IdentityRole>);
 			builder.ApplyConfiguration(new SeedData() as IEntityTypeConfiguration<IdentityUserRole<string>>);
+            builder.Entity<ChatMessage>()
+               .HasOne(m => m.Sender)
+               .WithMany()
+               .HasForeignKey(m => m.SenderId)
+               .OnDelete(DeleteBehavior.NoAction);
 
-			//builder.ApplyConfiguration(new AdminInitializer());
-		}
-
-		public DbSet<ApplicationUser> Users { get; set; }
+            builder.Entity<ChatMessage>()
+                .HasOne(m => m.Recipient)
+                .WithMany()
+                .HasForeignKey(m => m.RecipientId)
+                .OnDelete(DeleteBehavior.NoAction);
+        }
+        public DbSet<ChatMessage> ChatMessage { get; set; }
+        public DbSet<ApplicationUser> Users { get; set; }
 		public DbSet<Product> Products { get; set; }
 		public DbSet<Order> Orders { get; set; }
 		public DbSet<OrderDetail> OrderDetails { get; set; }

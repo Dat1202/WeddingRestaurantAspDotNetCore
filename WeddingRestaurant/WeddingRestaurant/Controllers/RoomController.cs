@@ -26,10 +26,25 @@ namespace WeddingRestaurant.Controllers
             _userManager = userManager;
             _context = context;
         }
-        public async Task<IActionResult> Index( )
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var rooms = await _context.Rooms.ToListAsync();
-            return View(rooms);
+            var rooms = from r in _context.Rooms select r;
+
+            if (sortOrder == "decrease")
+            {
+                rooms = rooms.OrderByDescending(r => r.Price);
+            }
+            else if (sortOrder == "ascending")
+            {
+                rooms = rooms.OrderBy(r => r.Price);
+            }
+
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView("_RoomsList", await rooms.ToListAsync());
+            }
+
+            return View(await rooms.ToListAsync());
         }
         [Authorize(Roles = "User")]
 		public async Task<IActionResult> CheckOut()
@@ -38,7 +53,7 @@ namespace WeddingRestaurant.Controllers
         }
 		[Authorize(Roles = "User")]
 		[HttpPost]
-        public async Task<IActionResult> CheckOut(CheckOutVM model, int id)
+        public async Task<IActionResult> CheckOut(CheckOutVM model, int? id)
         {
             if (ModelState.IsValid)
             {

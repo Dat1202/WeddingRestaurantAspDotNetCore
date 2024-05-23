@@ -941,6 +941,10 @@
       "PackagePath": "staticwebassets\\Image\\User\\05a6f894-b81d-4255-97a2-ec39f3359ab1.JPG"
     },
     {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\07a397d8-02b9-4000-9ccc-1641e0e6422d.JPG",
+      "PackagePath": "staticwebassets\\Image\\User\\07a397d8-02b9-4000-9ccc-1641e0e6422d.JPG"
+    },
+    {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\18a49f59-b70c-4861-b579-fa9b3199a003.JPG",
       "PackagePath": "staticwebassets\\Image\\User\\18a49f59-b70c-4861-b579-fa9b3199a003.JPG"
     },
@@ -949,8 +953,8 @@
       "PackagePath": "staticwebassets\\Image\\User\\90da7031-3bc4-4cbb-a8e2-e3982b2f0999.JPG"
     },
     {
-      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\12.css",
-      "PackagePath": "staticwebassets\\css\\12.css"
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\c9ee5db7-8d72-47a2-87c7-84c0afc5361b.JPG",
+      "PackagePath": "staticwebassets\\Image\\User\\c9ee5db7-8d72-47a2-87c7-84c0afc5361b.JPG"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\LoginStyle.css",
@@ -961,8 +965,16 @@
       "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
     },
     {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\chat.css",
+      "PackagePath": "staticwebassets\\css\\chat.css"
+    },
+    {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\header.css",
       "PackagePath": "staticwebassets\\css\\header.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\init.css",
+      "PackagePath": "staticwebassets\\css\\init.css"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\reset.css",

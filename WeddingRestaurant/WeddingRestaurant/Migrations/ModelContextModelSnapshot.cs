@@ -251,15 +251,15 @@ namespace WeddingRestaurant.Migrations
                             Id = "1",
                             AccessFailedCount = 0,
                             Avatar = "",
-                            ConcurrencyStamp = "24eec990-c5b3-4658-9eab-fe1e09a0fee0",
+                            ConcurrencyStamp = "a8d2a614-d20d-4bdb-95fa-98e395e1ab77",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMeX5e+RgjGkcpgvvDsNnUzXoe3JxJ5OyX3iWjppaBltveDoGZH9/KNlq26cZnPOiA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGIHRgqAYC1GXLpL9k96BDoQ8i89g8ihQavJCc2/HA+ghY+9X96IiMNpOlrIqYBJww==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "42349461-30a7-4803-8c70-2f14e244e2da",
+                            SecurityStamp = "eb6d2b51-6a05-438a-8371-a9fc43442964",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -281,6 +281,40 @@ namespace WeddingRestaurant.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("WeddingRestaurant.Models.ChatMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RecipientId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipientId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("ChatMessage");
                 });
 
             modelBuilder.Entity("WeddingRestaurant.Models.Event", b =>
@@ -549,6 +583,25 @@ namespace WeddingRestaurant.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WeddingRestaurant.Models.ChatMessage", b =>
+                {
+                    b.HasOne("WeddingRestaurant.Models.ApplicationUser", "Recipient")
+                        .WithMany()
+                        .HasForeignKey("RecipientId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("WeddingRestaurant.Models.ApplicationUser", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Recipient");
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("WeddingRestaurant.Models.Event", b =>

@@ -1,0 +1,15 @@
+﻿    @model IEnumerable<WeddingRestaurant.ViewModels.MessageVM>
+
+    @{
+        ViewData["Title"] = "Delete";
+        Layout = null;
+    }
+@* <div class="chat-messages" id="chat-messages"> *@
+
+    @foreach (var message in Model)
+    {        
+        <div data-user-name="@message.UserName" class="message  @((message.UserName == Context.User.Identity.Name) ? "sent" : "received")">
+            <div title="@message.Time">@message.Content</div>
+        </div>
+    }
+@* </div> *@

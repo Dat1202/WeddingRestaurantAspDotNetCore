@@ -36,7 +36,7 @@
                     <p class="text-center fw-bold mb-0">Or</p>
                 </div>
                 <form asp-controller="User" asp-action="Login" method="post" asp-route-returnurl="@ViewBag.ReturnUrl">
-                    <div class="text-danger" asp-validation-summary="All"></div>
+                    @* <div class="text-danger" asp-validation-summary="All"></div> *@
                     <!-- Email input -->
                     <div class="form-floating mb-3 mt-3">
                         <input asp-for="UserName" type="text" class="form-control" id="email" placeholder="Enter email">
