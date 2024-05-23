@@ -38,37 +38,26 @@
 
                          @await Component.InvokeAsync("MenuHeader")
                         <a asp-controller="Room" asp-action="Index">
-                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  menu-item-338 ">
-                                    <button style="border:none" class="nav-top-link btn btn-default " type="button">
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-338 ">
+                                        <button style="border:none" class="nav-top-link btn btn-default " type="button">
                                         <div class="text-center text-danger">
                                             <i class="fa-solid fa-bell-concierge" style="font-size: 30px;"></i>
                                             <br>Sảnh
                                             @* <i class="fa-solid fa-caret-down"></i> *@
                                         </div>
                                     </button>
-                          
-                               @*  <ul class="dropdown-menu">
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-395">
-                                        <a href="https://thefood.vn/dat-tiec-ban/">
-                                            <img data-lazyloaded="1"
-                                                 src="https://thefood.vn/wp-content/uploads/dining.png.webp"
-                                                 class="img-menu-con entered litespeed-loaded"
-                                                 data-src="https://thefood.vn/wp-content/uploads/dining.png.webp" alt=""
-                                                 data-ll-status="loaded">ĐẶT TIỆC BÀN
-                                        </a>
-                                    </li>
-                                </ul> *@
                             </li>
                         </a>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-132">
-                            <button style="border:none" class="nav-top-link btn btn-default " type="button" data-toggle="dropdown">
-                                <div class="text-center text-danger">
-                                    <i class="fa-solid fa-id-card-clip" style="font-size: 30px;"></i>
-                                    <br>Liên hệ
-                                </div>
-                            </button>
-                        </li>
-
+                        <a asp-controller="Chat" asp-action="Index">
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-132">
+                                <button style="border:none" class="nav-top-link btn btn-default " type="button" >
+                                    <div class="text-center text-danger">
+                                        <i class="fa-solid fa-id-card-clip" style="font-size: 30px;"></i>
+                                        <br>Liên hệ
+                                    </div>
+                                </button>
+                            </li>
+                        </a>
                         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  menu-item-341 has-dropdown">
                             <button style="border:none" class="nav-top-link btn btn-default " type="button" data-toggle="dropdown">
                                 <div class="text-center text-danger">

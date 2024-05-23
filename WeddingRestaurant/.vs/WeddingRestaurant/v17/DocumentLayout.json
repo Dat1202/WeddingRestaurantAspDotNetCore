@@ -3,48 +3,98 @@
   "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|c:\\users\\admin\\source\\repos\\weddingrestaurant\\weddingrestaurant\\views\\room\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|solutionrelative:weddingrestaurant\\views\\room\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|c:\\users\\admin\\source\\repos\\weddingrestaurant\\weddingrestaurant\\areas\\admin\\views\\chat\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|solutionrelative:weddingrestaurant\\areas\\admin\\views\\chat\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|c:\\users\\admin\\source\\repos\\weddingrestaurant\\weddingrestaurant\\controllers\\roomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|solutionrelative:weddingrestaurant\\controllers\\roomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|c:\\users\\admin\\source\\repos\\weddingrestaurant\\weddingrestaurant\\views\\chat\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|solutionrelative:weddingrestaurant\\views\\chat\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|c:\\users\\admin\\source\\repos\\weddingrestaurant\\weddingrestaurant\\wwwroot\\css\\chat.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|solutionrelative:weddingrestaurant\\wwwroot\\css\\chat.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|c:\\users\\admin\\source\\repos\\weddingrestaurant\\weddingrestaurant\\areas\\admin\\views\\chat\\detailmessage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|solutionrelative:weddingrestaurant\\areas\\admin\\views\\chat\\detailmessage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|c:\\users\\admin\\source\\repos\\weddingrestaurant\\weddingrestaurant\\areas\\admin\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{499E0C43-A1FB-4B5A-B4F3-2FB59A2E3F27}|WeddingRestaurant\\WeddingRestaurant.csproj|solutionrelative:weddingrestaurant\\areas\\admin\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
     {
-      "Orientation": 0,
+      "Orientation": 1,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "DockedHeight": 200,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "RoomController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\Controllers\\RoomController.cs",
-              "RelativeDocumentMoniker": "WeddingRestaurant\\Controllers\\RoomController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\Controllers\\RoomController.cs",
-              "RelativeToolTip": "WeddingRestaurant\\Controllers\\RoomController.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAiwBwAAAAvAAAA",
+              "DocumentIndex": 2,
+              "Title": "chat.css",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\chat.css",
+              "RelativeDocumentMoniker": "WeddingRestaurant\\wwwroot\\css\\chat.css",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\chat.css",
+              "RelativeToolTip": "WeddingRestaurant\\wwwroot\\css\\chat.css",
+              "ViewState": "AQIAADAAAAAAAAAAAAAtwDAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-05-23T20:59:50.245Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ChatController.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\Areas\\Admin\\Controllers\\ChatController.cs",
+              "RelativeDocumentMoniker": "WeddingRestaurant\\Areas\\Admin\\Controllers\\ChatController.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\Areas\\Admin\\Controllers\\ChatController.cs",
+              "RelativeToolTip": "WeddingRestaurant\\Areas\\Admin\\Controllers\\ChatController.cs",
+              "ViewState": "AQIAACcAAAAAAAAAAAAYwDYAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-18T15:47:14.637Z",
-              "IsPinned": true,
+              "WhenOpened": "2024-05-23T16:20:24.709Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DetailMessage.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\Areas\\Admin\\Views\\Chat\\DetailMessage.cshtml",
+              "RelativeDocumentMoniker": "WeddingRestaurant\\Areas\\Admin\\Views\\Chat\\DetailMessage.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\Areas\\Admin\\Views\\Chat\\DetailMessage.cshtml",
+              "RelativeToolTip": "WeddingRestaurant\\Areas\\Admin\\Views\\Chat\\DetailMessage.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-23T16:57:14.122Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\Views\\Room\\Index.cshtml",
-              "RelativeDocumentMoniker": "WeddingRestaurant\\Views\\Room\\Index.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\Views\\Room\\Index.cshtml",
-              "RelativeToolTip": "WeddingRestaurant\\Views\\Room\\Index.cshtml",
-              "ViewState": "AQIAADkAAAAAAAAAAAAAAEwAAAAfAAAA",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\Areas\\Admin\\Views\\Chat\\Index.cshtml",
+              "RelativeDocumentMoniker": "WeddingRestaurant\\Areas\\Admin\\Views\\Chat\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\Areas\\Admin\\Views\\Chat\\Index.cshtml",
+              "RelativeToolTip": "WeddingRestaurant\\Areas\\Admin\\Views\\Chat\\Index.cshtml",
+              "ViewState": "AQIAADAAAAAAAAAAAAAAAEEAAABbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-18T16:11:52.188Z",
+              "WhenOpened": "2024-05-23T13:55:38.856Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\Views\\Chat\\Index.cshtml",
+              "RelativeDocumentMoniker": "WeddingRestaurant\\Views\\Chat\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\Views\\Chat\\Index.cshtml",
+              "RelativeToolTip": "WeddingRestaurant\\Views\\Chat\\Index.cshtml",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAAADAAAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-23T16:23:55.376Z",
               "EditorCaption": ""
             }
           ]

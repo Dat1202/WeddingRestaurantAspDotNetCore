@@ -1,0 +1,12 @@
+﻿@model IEnumerable<WeddingRestaurant.ViewModels.MessageVM>
+@using WeddingRestaurant.Heplers
+
+
+@foreach (var item in Model)
+{
+        <div class="chat-messages" id="chat-messages">
+            <div title="@item.Time">@item.Content</div>
+        </div>
+}
+
+    

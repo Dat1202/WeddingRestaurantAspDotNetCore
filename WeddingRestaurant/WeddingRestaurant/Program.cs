@@ -9,6 +9,8 @@ using WeddingRestaurant.Repositories;
 using WeddingRestaurant.Interfaces;
 using Microsoft.Extensions.Options;
 using WeddingRestaurant.Helpers;
+using WeddingRestaurant.Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -78,6 +80,8 @@ builder.Services.AddSingleton(x =>
         builder.Configuration["PaypalOptions:Mode"]
     )
 );
+builder.Services.AddSignalR();
+builder.Services.AddSingleton<IUserIdProvider, NameUserIdProvider>();
 
 var app = builder.Build();
 
@@ -110,5 +114,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapHub<ChatHub>("/chathub");
 
 app.Run();

@@ -107,25 +107,7 @@ namespace WeddingRestaurant.Controllers
                     }
                 }
             }
-            //if (model.Password == model.ConfirmPassword)
-            //{
-            //    ModelState.Remove("Avatar");
-            //    if (ModelState.IsValid)
-            //    {
-            //        var user = _mapper.Map<ApplicationUser>(model);
 
-            //        user.PasswordHash = model.Password.ToMd5Hash();
-
-            //        if (Avatar != null)
-            //        {
-            //            user.Avatar = MyUtil.UploadHinh(Avatar, "User");
-            //        }
-
-            //        db.Users.Add(user);
-            //        await db.SaveChangesAsync();
-            //        return RedirectToAction("Index", "Home");
-            //    }
-            //}
             return View();
         }
 
@@ -227,6 +209,8 @@ namespace WeddingRestaurant.Controllers
 					if (role != null)
                     {
                         await _userManager.AddToRoleAsync(user, role.Name);
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+
                     }
                 }
                 return LocalRedirect(returnUrl);

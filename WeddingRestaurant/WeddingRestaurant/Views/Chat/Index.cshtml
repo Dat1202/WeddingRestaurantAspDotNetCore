@@ -1,0 +1,130 @@
+﻿@model IEnumerable<WeddingRestaurant.ViewModels.MessageVM>
+
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="chat-box">
+    <div class="chat-header">
+        <div class="chat-header">Chat with admin</div>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+        <div id="chatBoxes" class="chat-box-container">
+            <div id="chatBox-admin" class="chat-box">
+                    @foreach (var message in Model)
+                    {
+                        <div class="message @((message.UserName == Context.User.Identity.Name) ? "sent" : "received")">
+                                <div title="@message.Time">@message.Content</div>
+                        </div>  
+                    }
+                </div>  
+        </div>
+    </div>
+    <div class="chat-input">
+        <input type="text" name="content" id="messageInput" placeholder="Type a message...">
+        <input type="submit" id="sendButton" value="Send Message" />
+    </div>
+</div>
+
+
+@section scripts {
+        "use strict";
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.7/signalr.min.js"></script>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chathub")
+            .build();
+
+        //từ admin qua user
+        connection.on("ReceiveMessage", (user, message) => {
+            let chatBox = document.getElementById(`chatBox-${user}`);
+
+            if (!chatBox) {
+                chatBox = createChatBox(user);
+            }
+
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add('message', 'received');
+            const messageContent = document.createElement('p');
+            messageContent.textContent = `${message}`;
+            const messageTime = document.createElement('span');
+            messageTime.textContent = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString();
+            messageDiv.appendChild(messageContent);
+            // messageDiv.appendChild(messageTime);
+            chatBox.appendChild(messageDiv);
+
+        });
+        function createChatBox(user) {
+            const chatBoxContainer = document.getElementById("chatBoxes");
+
+            const chatBox = document.createElement("div");
+            chatBox.id = `chatBox-${user}`;
+            chatBox.classList.add("chat-box");
+
+
+            const messagesList = document.createElement("ul");
+            messagesList.classList.add("messages-list");
+
+            chatBox.appendChild(messagesList);
+            chatBoxContainer.appendChild(chatBox);
+
+            return chatBox;
+        }
+        //từ user gửi qua
+        document.getElementById("sendButton").addEventListener("click", function (event) {
+            event.preventDefault(); 
+
+            var receiver = 'admin'
+            var message = document.getElementById("messageInput").value;
+
+            if (message === '') {
+                this.disabled = false;
+                return; 
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/Chat/CreateMessage",
+                data: {
+                    content:message
+                },
+                success: function (response) {
+                    console.log("Message sent successfully.");
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Error sending message: " + xhr.responseText);
+                }
+            });
+            console.log(receiver)
+
+            sendMessage(receiver, message);
+            document.getElementById("messageInput").value = '';
+        });
+
+        connection.start().catch(err => console.error(err.toString()));
+
+        function sendMessage(receiver, message) {
+            connection.invoke("SendMessageToUser", receiver, message).catch(function (err) {
+                return console.error(err.toString());
+            });
+
+            let chatBox = document.getElementById(`chatBox-${receiver}`);
+
+            if (!chatBox) {
+                chatBox = createChatBox(receiver);
+            }
+
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add('message', 'sent');
+            const messageContent = document.createElement('p');
+            messageContent.textContent = `${message}`;
+            messageDiv.appendChild(messageContent);
+            chatBox.appendChild(messageDiv);
+        }
+
+       
+
+        
+    </script>
+}

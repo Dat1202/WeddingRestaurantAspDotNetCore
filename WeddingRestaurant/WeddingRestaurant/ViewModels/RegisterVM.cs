@@ -5,33 +5,33 @@ namespace WeddingRestaurant.ViewModels
 {
     public class RegisterVM
     {
-        [Required(ErrorMessage = "*")]
-        //[EmailAddress(ErrorMessage = "Chưa đúng định dạng email")]
+        [Required(ErrorMessage = "Chưa nhập email")]
+        [EmailAddress(ErrorMessage = "Chưa đúng định dạng email")]
         [Display(Name = "Email")]
         [MaxLength(50, ErrorMessage = "{0} Tối đa {1} kí tự")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "Chưa nhập tên đăng nhập")]
         [Display(Name = "Tên đăng nhập")]
         [MaxLength(20, ErrorMessage = "{0} Tối đa {1} kí tự")]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "Chưa nhập Số điện thoại")]
         [Display(Name = "Số điện thoại")]
         [MaxLength(20, ErrorMessage = "{0} Tối đa {1} kí tự")]
         public string PhoneNumber { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "Chưa nhập Mật khẩu")]
         [DataType(DataType.Password)]
         [Display(Name = "Mật khẩu")]
         [MaxLength(20, ErrorMessage = "{0} Tối đa {1} kí tự")]
         [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*?])(?=.*[0-9]).{6,}$", ErrorMessage = "Password must be at least 6 characters long and contain at least one uppercase letter, one special character, and one digit.")]
         public string Password { get; set; }
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "Chưa nhập Mật khẩu")]
         [DataType(DataType.Password)]
         [Display(Name = "Xác nhận mật khẩu")]
         [MaxLength(20, ErrorMessage = "{0} Tối đa {1} kí tự")]
-        [Compare("Password", ErrorMessage = "Password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Password và confirmation password không giống nhau.")]
         public string ConfirmPassword { get; set; }
         public string Avatar { get; set; }
 

@@ -3,7 +3,9 @@
 @{
 	ViewData["Title"] = "Checkout";
 }
-
+@{
+	var firstItem = Model?.FirstOrDefault();
+}
 <!-- Checkout Page Start -->
 <div class="container-fluid py-5">
 	<div class="container py-5">
@@ -11,7 +13,7 @@
 		<form asp-action="Checkout" asp-controller="Room">
 			<div class="row g-5">
 					<div class="col-md-12 col-lg-6 col-xl-7">
-					<input type="hidden" name="Id" value="@Model.FirstOrDefault()?.Id" />
+					<input type="hidden" name="Id" value="@firstItem?.Id" />
 
 						<div class="form-item delivery-info">
 							<label class="form-label my-3">Người đặt<sup>*</sup></label>
@@ -41,18 +43,20 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach (var item in Model)
+								@if (Model != null && Model.Any())
 								{
-									<tr>	
-										<th scope="row">
-											<div class="d-flex align-items-center mt-2">
-												<img src="~/Image/Room/@item.Image" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="@item.Name">
-											</div>
-										</th>
-										<td class="py-5">@item.Name</td>
-										<td class="py-5">@item.Price</td>
-									</tr>
-								}
+									@foreach (var item in Model)
+									{
+										<tr>
+											<th scope="row">
+												<div class="d-flex align-items-center mt-2">
+													<img src="~/Image/Room/@item.Image" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="@item.Name">
+												</div>
+											</th>
+											<td class="py-5">@item.Name</td>
+											<td class="py-5">@item.Price</td>
+										</tr>
+									}
 								<tr>
 									<th scope="row">
 									</th>
@@ -67,6 +71,8 @@
 										</div>
 									</td>
 								</tr>
+								}
+
 								<tr>
 									<th scope="row">
 									</th>

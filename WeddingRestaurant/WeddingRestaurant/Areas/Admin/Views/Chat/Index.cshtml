@@ -1,0 +1,162 @@
+﻿@model IEnumerable<WeddingRestaurant.Models.ChatMessage>
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/chat.css" rel="stylesheet">
+
+<div class="chat-container">
+    <div class="user-list">
+        <div class="user-list-header">
+            <h3>Users</h3>
+        </div>
+        <div class="users" id="users">
+            <!-- User list will be displayed here -->
+            @foreach (var u in Model)
+            {
+                <button class="user-item" id="@u.UserName" data-user-name="@u.UserName">
+                    <div>@u.UserName</div>
+                    @* <div>@u.Content</div> *@
+                    @* <div>@u.Time</div> *@
+                    @* <div>@u.SenderId</div> *@
+                </button>
+            }
+        </div>      
+    </div>
+    <div class="chat-box">
+        <div class="chat-header">
+            <h2>Chat Room</h2>
+        </div>
+        <div class="chat-messages-empty" id="chat-messages-empty">
+            <!-- Chat messages will be displayed here -->
+        </div>
+            <div class="chat-input">
+                <input type="text" name="content" id="messageInput" placeholder="Type a message...">
+                <input type="submit" id="sendButton" value="Send Message" />
+            </div>
+    </div>
+</div>
+
+
+@section scripts {
+            
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.7/signalr.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '.user-item', function () {
+                var userName = $(this).data('user-name');
+                console.log("Clicked user:", userName);
+                $.get(`/Admin/Chat/DetailMessage?userName=${userName}`, function (data) {
+                    var chatMessageEmpty = $('#chat-messages-empty');
+
+                    if (chatMessageEmpty.length) {
+                        chatMessageEmpty.html(data)
+                            .removeClass('chat-messages-empty')
+                            .addClass('chat-messages')
+                            .removeAttr('id')
+                            .attr('id', 'chat-messages');
+                    }
+                    else {
+                        $('#chat-messages').html(data)
+                    } 
+                    var chatMessage = $('#chat-messages');
+
+                    chatMessage.animate({ scrollTop: chatMessage.prop("scrollHeight")}, 1);
+                    console.log(chatMessage.prop("scrollHeight"));
+                });
+            });
+        });
+
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chathub")
+            .build();
+
+        //từ user gửi qua admin
+        connection.on("ReceiveMessage", (user, message) => {
+            let chatBox = document.getElementById(`${user}`);
+            let chatMessages = document.getElementById("chat-messages");
+
+            if (!chatBox) {
+                updateUserList(user);
+            }
+
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add('message', 'received');
+
+            const messageContent = document.createElement('p');
+            messageContent.textContent = `${message}`
+
+            messageDiv.appendChild(messageContent);
+            chatMessages.appendChild(messageDiv);
+
+        });
+
+        //từ admin gửi đi
+        document.getElementById("sendButton").addEventListener("click", function (event) {
+            event.preventDefault();
+            var messageElement = document.querySelector('.message.received');
+
+            var receiver = messageElement.getAttribute('data-user-name');
+            var message = document.getElementById("messageInput").value;
+
+            console.log(receiver);
+
+            if (message === '') {
+                this.disabled = false;
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/Chat/CreateMessage",
+                data: {
+                    content: message,
+                    receiver: receiver
+                },
+                success: function (response) {
+                    console.log("Message sent successfully.");
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Error sending message: " + xhr.responseText);
+                }
+            });
+            console.log(receiver)
+            sendMessage(receiver, message);
+            document.getElementById("messageInput").value = '';
+        });
+
+
+        connection.start().catch(err => console.error(err.toString()));
+
+        function sendMessage(receiver, message) {
+            connection.invoke("SendMessageToUser", receiver, message).catch(function (err) {
+                return console.error(err.toString());
+            });
+
+            let chatMessages = document.getElementById("chat-messages");
+
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add('message', 'sent');
+
+            const messageContent = document.createElement('p');
+            messageContent.textContent = `${message}`;
+
+            messageDiv.appendChild(messageContent);
+            chatMessages.appendChild(messageDiv);
+        }
+
+        function updateUserList(userName) {
+            const userElement = document.createElement('button');
+            userElement.classList.add('user-item');
+            userElement.id = `${userName}`;
+            userElement.setAttribute('data-user-name', `${userName}`);
+
+            const userDiv = document.createElement('div');
+            userDiv.textContent = userName
+            userElement.appendChild(userDiv)
+            document.getElementById('users').appendChild(userElement);
+        }
+    </script>
+}
