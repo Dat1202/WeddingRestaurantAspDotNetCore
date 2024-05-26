@@ -933,8 +933,40 @@
       "PackagePath": "staticwebassets\\Image\\Room\\0.JPG"
     },
     {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\Room\\04bb356e-1128-4de2-a621-1b196ae65464.jpg",
+      "PackagePath": "staticwebassets\\Image\\Room\\04bb356e-1128-4de2-a621-1b196ae65464.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\Room\\07b7bbbc-57f7-4b2e-b98c-7191fa6078e4.jpg",
+      "PackagePath": "staticwebassets\\Image\\Room\\07b7bbbc-57f7-4b2e-b98c-7191fa6078e4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\Room\\65923054-43ca-42ab-b35d-30103b92ff4d.jpg",
+      "PackagePath": "staticwebassets\\Image\\Room\\65923054-43ca-42ab-b35d-30103b92ff4d.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\Room\\8c4989dd-977b-4972-89f7-c2c1fecbc3cc.jpg",
+      "PackagePath": "staticwebassets\\Image\\Room\\8c4989dd-977b-4972-89f7-c2c1fecbc3cc.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\Room\\964025e9-ae76-4312-92eb-891ef25c95f2.jpg",
+      "PackagePath": "staticwebassets\\Image\\Room\\964025e9-ae76-4312-92eb-891ef25c95f2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\Room\\b0c43307-feb5-47d1-80b3-0c2b7adeb752.docx",
+      "PackagePath": "staticwebassets\\Image\\Room\\b0c43307-feb5-47d1-80b3-0c2b7adeb752.docx"
+    },
+    {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\Room\\b8f54958-5fa6-4343-bcd5-d6382f141f3c.JPG",
       "PackagePath": "staticwebassets\\Image\\Room\\b8f54958-5fa6-4343-bcd5-d6382f141f3c.JPG"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\Room\\e096621b-9ae9-4d62-869e-cbaf798cdae6.jpg",
+      "PackagePath": "staticwebassets\\Image\\Room\\e096621b-9ae9-4d62-869e-cbaf798cdae6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\Room\\e4718569-c05a-4876-8796-ee7d1ca5284e.jpg",
+      "PackagePath": "staticwebassets\\Image\\Room\\e4718569-c05a-4876-8796-ee7d1ca5284e.jpg"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\05a6f894-b81d-4255-97a2-ec39f3359ab1.JPG",
@@ -949,12 +981,20 @@
       "PackagePath": "staticwebassets\\Image\\User\\18a49f59-b70c-4861-b579-fa9b3199a003.JPG"
     },
     {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\7ef25df0-510b-45a6-97cd-fabb4ba91e6d.jpg",
+      "PackagePath": "staticwebassets\\Image\\User\\7ef25df0-510b-45a6-97cd-fabb4ba91e6d.jpg"
+    },
+    {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\90da7031-3bc4-4cbb-a8e2-e3982b2f0999.JPG",
       "PackagePath": "staticwebassets\\Image\\User\\90da7031-3bc4-4cbb-a8e2-e3982b2f0999.JPG"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\c9ee5db7-8d72-47a2-87c7-84c0afc5361b.JPG",
       "PackagePath": "staticwebassets\\Image\\User\\c9ee5db7-8d72-47a2-87c7-84c0afc5361b.JPG"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\User\\ed3e1501-5f06-49af-98c5-303a2da1d6e5.jpg",
+      "PackagePath": "staticwebassets\\Image\\User\\ed3e1501-5f06-49af-98c5-303a2da1d6e5.jpg"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\css\\LoginStyle.css",

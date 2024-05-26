@@ -9,23 +9,26 @@ namespace WeddingRestaurant.Repositories
         private readonly ModelContext _context;
 
         public UnitOfWork(ModelContext context, IProductRepository productRepository, 
-            IMenuRepository menuRepository, ITypeMenuRepository typeMenus, ICategoryRepository categories)
+            IMenuRepository menuRepository, ITypeMenuRepository typeMenus, ICategoryRepository categories,
+            IRoomRepository rooms)
         {
             _context = context;
             Products = productRepository;
             Menus = menuRepository;
             TypeMenus = typeMenus;
             Categories = categories;
+            Rooms = rooms;
         }
 
         public IProductRepository Products { get; private set; }
         public IMenuRepository Menus { get; private set; }
         public ITypeMenuRepository TypeMenus { get; private set; }
         public ICategoryRepository Categories { get; private set; }
-
+        public IRoomRepository Rooms { get; private set; }
         public async Task<int> SaveChangesAsync()
         {
-            return await _context.SaveChangesAsync();
+            var save = await _context.SaveChangesAsync();
+            return save;
         }
 
         public void Dispose()

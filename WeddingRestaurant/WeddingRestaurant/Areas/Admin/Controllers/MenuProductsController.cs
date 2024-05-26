@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Azure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WeddingRestaurant.Models;
+using X.PagedList;
 
 namespace WeddingRestaurant.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class MenuProductsController : Controller
     {
         private readonly ModelContext _context;
@@ -20,10 +24,12 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
         }
 
         // GET: Admin/MenuProducts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            var modelContext = _context.MenuProducts.Include(m => m.Menu).Include(m => m.Product);
-            return View(await modelContext.ToListAsync());
+            page = page < 1 ? 1 : page;
+            int pageSize = 12;
+            var modelContext = _context.MenuProducts.Include(m => m.Menu).Include(m => m.Product).ToPagedList(page, pageSize);
+            return View(modelContext);
         }
 
         // GET: Admin/MenuProducts/Details/5

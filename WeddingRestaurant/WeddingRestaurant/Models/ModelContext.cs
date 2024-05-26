@@ -34,6 +34,34 @@ namespace WeddingRestaurant.Models
                 .WithMany()
                 .HasForeignKey(m => m.RecipientId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Product>()
+			   .HasOne(p => p.Category)
+			   .WithMany()
+			   .HasForeignKey(p => p.CategoryId)
+			   .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Menu>()
+               .HasOne(p => p.TypeMenu)
+               .WithMany()
+               .HasForeignKey(p => p.TypeID)
+               .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<MenuProduct>()
+               .HasOne(p => p.Product)
+               .WithMany()
+               .HasForeignKey(p => p.ProductId)
+               .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<MenuProduct>()
+                .HasOne(p => p.Menu)
+                .WithMany()
+                .HasForeignKey(p => p.MenuId)
+                .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Event>()
+              .HasOne(p => p.Room)
+              .WithMany()
+              .HasForeignKey(p => p.RoomId)
+              .OnDelete(DeleteBehavior.Cascade);
         }
         public DbSet<ChatMessage> ChatMessage { get; set; }
         public DbSet<ApplicationUser> Users { get; set; }

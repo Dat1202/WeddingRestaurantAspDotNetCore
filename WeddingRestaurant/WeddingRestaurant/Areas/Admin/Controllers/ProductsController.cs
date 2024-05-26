@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using WeddingRestaurant.Models;
 namespace WeddingRestaurant.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ProductsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -21,9 +23,12 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
   }
 
         // GET: Admin/Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View(await _unitOfWork.Products.GetAllProducts());
+            int pageSize = 12;
+            var pagedList = await _unitOfWork.Products.GetAllProducts(page, pageSize);
+
+            return View(pagedList);
 
         }
 

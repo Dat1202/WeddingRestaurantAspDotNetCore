@@ -1,15 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WeddingRestaurant.Models;
 using WeddingRestaurant.ViewModels;
 
 namespace WeddingRestaurant.Controllers
 {
+    [Authorize(Roles = "User")]
     public class ListOrderController : Controller
     {
         private readonly ModelContext _modelContext;
         private readonly UserManager<ApplicationUser> _userManager;
-
         public ListOrderController(UserManager<ApplicationUser> userManager, ModelContext modelContext)
         {
             _modelContext = modelContext;

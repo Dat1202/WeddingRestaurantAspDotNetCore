@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WeddingRestaurant.ViewModels.ListOrderVM>
+
+
+@if (Model != null && Model.Count() > 0)
+{
+    <h1 class="text-center" style="margin-bottom:5px;">Danh sách sản phẩm đã đặt</h1>
+
+    <div style="margin: 0 auto; width: 75%; padding: 20px; border: 1px solid #343a40; border-radius: 8px; background-color: #fff;">
+        @foreach (var order in Model)
+        {
+            <div style="background:white; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid #ddd; margin: 16px; padding: 16px;">
+                <div style="margin: 16px;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <h3 style="margin-left: 35px; font-size: 1.25em; color: #343a40;">
+                            Sản phẩm
+                        </h3>
+                        <h3 style="margin-left: 380px; font-size: 1.25em; color: #343a40;">
+                            Đơn giá
+                        </h3>
+                    </div>
+                    @foreach (var detail in order.OrderDetails)
+                    {
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; margin: 16px 0;">
+                            <div style="display: flex; width: 50%; margin-left: 16px;">
+                                <div style="margin-left: 8px;">
+                                    <h2 style="font-size: 1.5em; color: #343a40;">@detail.ProductName</h2>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 style="color: #dc3545; font-size: 1.1em;">@detail.UnitPrice VNĐ</h4>
+                            </div>
+                        </div>
+                    }
+                    <h5 style="margin: 16px; text-align: right; color: #343a40;">Hình thức thanh toán: @order.PaymentMethods</h5>
+                    <h3 style="text-align: right; margin: 24px; color: #343a40;">
+                        Tổng thanh toán:
+                        <span style="color: #dc3545;">
+                            @order.OrderDetails.Sum(m => m.UnitPrice) VNĐ
+                        </span>
+                    </h3>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h3 class="mx-5 my-2 text-center text-danger">Bạn chưa có đơn hàng</h3>
+}

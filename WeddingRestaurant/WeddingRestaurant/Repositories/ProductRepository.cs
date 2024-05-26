@@ -2,6 +2,7 @@
 using WeddingRestaurant.Interfaces;
 using WeddingRestaurant.Models;
 using WeddingRestaurant.ViewModels;
+using X.PagedList;
 
 namespace WeddingRestaurant.Repositories
 {
@@ -14,9 +15,9 @@ namespace WeddingRestaurant.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Product>> GetAllProducts()
+        public async Task<IEnumerable<Product>> GetAllProducts(int page, int pageSize)
         {
-            return await _context.Products.Include(c => c.Category).ToListAsync();
+            return await _context.Products.Include(c => c.Category).ToPagedListAsync(page,  pageSize);
         }
 
         public async Task<Product> GetProductById(int id)

@@ -72,6 +72,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IMenuRepository, MenuRepository>();
 builder.Services.AddScoped<ITypeMenuRepository, TypeMenuRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 
 builder.Services.AddSingleton(x =>
     new PaypalClient(

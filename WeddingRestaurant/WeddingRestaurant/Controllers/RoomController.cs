@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using WeddingRestaurant.Heplers;
 using WeddingRestaurant.Models;
 using WeddingRestaurant.ViewModels;
+using X.PagedList;
 
 namespace WeddingRestaurant.Controllers
 {
@@ -26,17 +27,19 @@ namespace WeddingRestaurant.Controllers
             _userManager = userManager;
             _context = context;
         }
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, int page = 1)
         {
-            var rooms = from r in _context.Rooms select r;
+            page = page < 1 ? 1 : page;
+            int pageSize = 6;
+            var rooms = _context.Rooms.ToPagedList(page, pageSize);
 
             if (sortOrder == "decrease")
             {
-                rooms = rooms.OrderByDescending(r => r.Price);
-            }
+                rooms = rooms.OrderByDescending(r => r.Price).ToPagedList(page, pageSize);
+            }   
             else if (sortOrder == "ascending")
             {
-                rooms = rooms.OrderBy(r => r.Price);
+                rooms = rooms.OrderBy(r => r.Price).ToPagedList(page, pageSize);
             }
 
             if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
@@ -44,7 +47,7 @@ namespace WeddingRestaurant.Controllers
                 return PartialView("_RoomsList", await rooms.ToListAsync());
             }
 
-            return View(await rooms.ToListAsync());
+            return View(rooms);
         }
         [Authorize(Roles = "User")]
 		public async Task<IActionResult> CheckOut()
@@ -63,19 +66,18 @@ namespace WeddingRestaurant.Controllers
                         Name = model.Name,
                         Time = model.Time,
                         NumberTable = model.NumberTable,
-						RoomId= null,
+						RoomId= id,
+                        Note = model.Note,
 						UserId = await _userManager.GetUserAsync(User),
                     };
+                    var room = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == id);
 
-					var r = await _context.Rooms.FirstOrDefaultAsync(a => a.Id == id);
-					if (r != null)
-					{
-                        events.RoomId = r.Id;
-					}
-					_context.Add(events);
+                    var roomPrice = room?.Price; // Get the room price, or null if the room is not found
+
+                    _context.Add(events);
                     await _context.SaveChangesAsync();
 
-                    return RedirectToAction("Index", "Cart", new { NumberTable = model.NumberTable });
+                    return RedirectToAction("Index", "Cart", new { numberTable = model.NumberTable, roomPrice = roomPrice });
                 }
             }
 
@@ -84,7 +86,12 @@ namespace WeddingRestaurant.Controllers
         public IActionResult AddToCart(int id, string type = "Normal")
         {
             var gioHang = Cart;
-
+            if (gioHang.Count() > 0 )
+            {
+                TempData["Message"] = "Chỉ có thể thêm 1 sảnh";
+            }
+            else
+            {
                 var item = gioHang.SingleOrDefault(p => p.Id == id);
                 if (item == null)
                 {
@@ -99,28 +106,54 @@ namespace WeddingRestaurant.Controllers
                         Id = r.Id,
                         Name = r.Name,
                         Price = r.Price,
-						Capacity=r.Capacity,
-						Location=r.Location,
+                        Capacity = r.Capacity,
+                        Location = r.Location,
                         Image = r.Image,
-					};
+                    };
                     gioHang.Add(item);
+                }
+
+                HttpContext.Session.Set(Configuration.ROOM_KEY, gioHang);
+
             }
+			if (type == "ajax")
+			{
+				return Json(new
+				{
+					success = true,
+					message = TempData["Message"]
+				});
+			}
+			return RedirectToAction("Index");
 
-            HttpContext.Session.Set(Configuration.ROOM_KEY, gioHang);
+		}
+		public IActionResult RemoveCart(int[] ids, string type = "Normal")
+		{
+			var gioHang = Cart;
 
-            if (type == "ajax")
-            {
-                return Json(new
-                {
-                    success = true
-                });
-            }
+			foreach (var id in ids)
+			{
+				var item = gioHang.SingleOrDefault(p => p.Id == id);
+				if (item != null)
+				{
+					gioHang.Remove(item);
+				}
+			}
 
-            return RedirectToAction("Index");
-        }
+			HttpContext.Session.Set(Configuration.ROOM_KEY, gioHang);
 
-        // GET: Rooms/Details/5
-        public async Task<IActionResult> Details(int? id)
+			if (type == "ajax")
+			{
+				return Json(new
+				{
+					success = true
+				});
+			}
+
+			return RedirectToAction("CheckOut");
+		}
+		// GET: Rooms/Details/5
+		public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {

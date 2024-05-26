@@ -2,27 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WeddingRestaurant.Interfaces;
 using WeddingRestaurant.Models;
+using WeddingRestaurant.Repositories;
 
 namespace WeddingRestaurant.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class TypeMenusController : Controller
     {
         private readonly ModelContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public TypeMenusController(ModelContext context)
+        public TypeMenusController(ModelContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
+            _unitOfWork = unitOfWork;
+
         }
 
         // GET: Admin/TypeMenus
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page=1)
         {
-            return View(await _context.TypeMenus.ToListAsync());
+            int pageSize = 12;
+            var pagedList = await _unitOfWork.TypeMenus.GetAllPagedListAsync(page, pageSize);
+            return View(pagedList);
         }
 
         // GET: Admin/TypeMenus/Details/5

@@ -185,7 +185,6 @@ namespace WeddingRestaurant.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Avatar")
-                        .IsRequired()
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
@@ -251,15 +250,15 @@ namespace WeddingRestaurant.Migrations
                             Id = "1",
                             AccessFailedCount = 0,
                             Avatar = "",
-                            ConcurrencyStamp = "a8d2a614-d20d-4bdb-95fa-98e395e1ab77",
+                            ConcurrencyStamp = "3c680eab-0ee3-459f-983b-d5418515d180",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGIHRgqAYC1GXLpL9k96BDoQ8i89g8ihQavJCc2/HA+ghY+9X96IiMNpOlrIqYBJww==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEG31hSJROQbZ5Zs/PxRgBdIwKZSP7eFxz1sgyWi4/t0lhZHbBa6thj7b1KPyNV00kg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eb6d2b51-6a05-438a-8371-a9fc43442964",
+                            SecurityStamp = "4c3ec4cf-6650-4b76-9a6d-b15688aed34d",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -330,6 +329,9 @@ namespace WeddingRestaurant.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumberTable")
@@ -612,7 +614,8 @@ namespace WeddingRestaurant.Migrations
 
                     b.HasOne("WeddingRestaurant.Models.Room", "Room")
                         .WithMany()
-                        .HasForeignKey("RoomId");
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Room");
 

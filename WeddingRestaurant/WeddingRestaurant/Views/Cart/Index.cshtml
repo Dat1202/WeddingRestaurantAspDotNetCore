@@ -5,13 +5,16 @@
     ViewData["Title"] = "Cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h3>Số bàn: @ViewBag.NumberTable</h3>
+@* <h3>Số bàn: @ViewBag.NumberTable</h3>
+<h3>Số bàn: @ViewBag.RoomPrice</h3> *@
+
 @if (TempData["SuccessMessage"] != null)
 {
     <div class="alert alert-success">
         @TempData["SuccessMessage"]
     </div>
 }
+
 <section class="h-100 gradient-custom">
     <div class="container py-1">
         @ViewBag.CustomerId
@@ -75,7 +78,10 @@
                                 Tổng tiền thực đơn
                                 <span>@Model.Sum(p => p.Price).ToVnd()</span>
                             </li>
-                            
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                Tiền sảnh
+                                <span>@ViewBag.RoomPrice</span>
+                            </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                                 <div>
                                     <strong>Tổng tiền</strong>
@@ -91,7 +97,8 @@
                                                 decimal numberTable;
                                                 if (decimal.TryParse(ViewBag.NumberTable.ToString(), out numberTable))
                                                 {
-                                                    var totalPrice = Model.Sum(p => p.Price) * numberTable;
+                                                    var RoomPrice = (decimal)ViewBag.RoomPrice;
+                                                    var totalPrice = Model.Sum(p => p.Price) * numberTable + RoomPrice;
                                                     @totalPrice.ToVnd()
                                                 }
                                                 else
@@ -153,7 +160,7 @@
                     }
 
                     //Đổi địa chỉ tới action thông báo thành công
-                    window.location.href = "/Cart/PaymentSuccess";
+                    window.location.href = "/Cart/Index";
                 }).catch(error => alert(error.message));
             }
         }).render('#paypal-button-container');

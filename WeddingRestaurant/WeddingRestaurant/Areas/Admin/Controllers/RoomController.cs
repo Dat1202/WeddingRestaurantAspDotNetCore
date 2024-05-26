@@ -3,30 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WeddingRestaurant.Heplers;
+using WeddingRestaurant.Interfaces;
 using WeddingRestaurant.Models;
+using WeddingRestaurant.Repositories;
 
 namespace WeddingRestaurant.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class RoomController : Controller
     {
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ModelContext _context;
 
-        public RoomController(ModelContext context, IMapper mapper)
+        public RoomController(ModelContext context, IMapper mapper, IUnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
             _context = context;
         }
 
         // GET: Admin/Room
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View(await _context.Rooms.ToListAsync());
+            int pageSize = 12;
+            var pagedList = await _unitOfWork.Rooms.GetAllPagedListAsync(page, pageSize);
+            return View(pagedList);
         }
 
         // GET: Admin/Room/Details/5
@@ -98,8 +106,10 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Location,Capacity,Description")] Room room)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Location,Capacity,Description")] Room room, IFormFile Image)
         {
+            ModelState.Remove("Image");
+
             if (id != room.Id)
             {
                 return NotFound();
@@ -109,6 +119,10 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (Image != null)
+                    {
+                        room.Image = MyUtil.UploadHinh(Image, "Room", Guid.NewGuid().ToString());
+                    }
                     _context.Update(room);
                     await _context.SaveChangesAsync();
                 }

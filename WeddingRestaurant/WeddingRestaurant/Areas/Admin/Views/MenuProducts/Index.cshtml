@@ -1,5 +1,6 @@
-﻿@model IEnumerable<WeddingRestaurant.Models.MenuProduct>
-
+﻿@* @model IEnumerable<WeddingRestaurant.Models.MenuProduct> *@
+@model X.PagedList.IPagedList<WeddingRestaurant.Models.MenuProduct>
+@using X.PagedList.Mvc.Core
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -10,33 +11,39 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Menu)
+                Menu
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product)
+                Product
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Menu.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Menu.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+
+        <div class ="d-flex justify-content-center">
+            @Html.PagedListPager(Model, page => Url.Action("Index", "MenuProducts", new { page = page }))
+        </div>
     </tbody>
 </table>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -24,9 +25,11 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
         }
 
         // GET: Admin/Categories
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View(await _unitOfWork.Categories.GetAllAsync());
+            int pageSize = 12;
+            var pagedList = await _unitOfWork.Categories.GetAllPagedListAsync(page, pageSize);
+            return View(pagedList);
         }
 
         // GET: Admin/Categories/Details/5
@@ -136,7 +139,7 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            _unitOfWork.Categories.DeleteAsync(id);
+            await _unitOfWork.Categories.DeleteAsync(id);
             await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

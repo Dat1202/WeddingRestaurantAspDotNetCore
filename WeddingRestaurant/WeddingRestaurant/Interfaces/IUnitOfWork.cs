@@ -10,7 +10,7 @@ namespace WeddingRestaurant.Interfaces
         IMenuRepository Menus { get; }
         ITypeMenuRepository TypeMenus { get; }
         ICategoryRepository Categories { get; }
-
+        IRoomRepository Rooms { get; }
         Task<int> SaveChangesAsync();
     }
 }

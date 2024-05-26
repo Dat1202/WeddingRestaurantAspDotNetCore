@@ -5,7 +5,7 @@ namespace WeddingRestaurant.Interfaces
 {
     public interface IProductRepository : IRepository<Product>
     {
-        Task<IEnumerable<Product>> GetAllProducts();
+        Task<IEnumerable<Product>> GetAllProducts(int page, int pageSize);
         Task<Product> GetProductById(int id);
         Task<IEnumerable<ProductVM>> GetProductByMenuId(int id);
     }
