@@ -14,6 +14,7 @@ namespace WeddingRestaurant.Models
         public DateTime Time { get; set; }
         [Required]
         public int NumberTable { get; set; }
+        public string? Note { get; set; }
         [ForeignKey("Room")]
         public int? RoomId { get; set; }
         public virtual Room? Room { get; set; }

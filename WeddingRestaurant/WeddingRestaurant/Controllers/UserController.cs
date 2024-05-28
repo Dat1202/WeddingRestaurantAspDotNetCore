@@ -52,10 +52,31 @@ namespace WeddingRestaurant.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM model, IFormFile Avatar)
         {
+        
+            //if (string.IsNullOrWhiteSpace(model.Email))
+            //{
+            //    ModelState.AddModelError("Email", "Vui lòng nhập địa chỉ email.");
+            //}
+
+            //if (string.IsNullOrWhiteSpace(model.UserName))
+            //{
+            //    ModelState.AddModelError("Email", "Vui lòng nhập địa chỉ email.");
+            //}
+            
             ModelState.Remove("Avatar");
 
             if (ModelState.IsValid)
             {
+                var existingUserByEmail = await _userManager.FindByEmailAsync(model.Email);
+                if (existingUserByEmail != null)
+                {
+                    ModelState.AddModelError("Email", "Email đã được sử dụng.");
+                }
+                var existingUserByName = await _userManager.FindByNameAsync(model.UserName);
+                if (existingUserByName != null)
+                {
+                    ModelState.AddModelError("UserName", "Tên người dùng đã được sử dụng.");
+                }
                 var user = _mapper.Map<ApplicationUser>(model);
                 user.EmailConfirmed = true;
                 if (Avatar != null)
@@ -91,26 +112,25 @@ namespace WeddingRestaurant.Controllers
                     }
                     else if(error.Code == "PasswordTooShort")
                     {
-                        ModelState.AddModelError(string.Empty, error.Description);
+                        ModelState.AddModelError("Password", error.Description);
                     }
                     else if (error.Code == "PasswordRequiresLower")
                     {
-                        ModelState.AddModelError(string.Empty, error.Description);
+                        ModelState.AddModelError("Password", "Mật khẩu phải chứa ít nhất một chữ thường.");
                     }
                     else if (error.Code == "PasswordRequiresUpper")
                     {
-                        ModelState.AddModelError(string.Empty, error.Description);
+                        ModelState.AddModelError("Password", "Mật khẩu phải chứa ít nhất một chữ hoa.");
                     }
                     else if (error.Code == "PasswordRequiresNonAlphanumeric")
                     {
-                        ModelState.AddModelError(string.Empty, error.Description);
+                        ModelState.AddModelError("Password", "Mật khẩu phải chứa ít nhất một ký tự đặc biệt.");
                     }
                 }
             }
 
-            return View();
+            return View(model);
         }
-
         [HttpGet]
         public async Task<IActionResult> Login(string? ReturnUrl)
         {
@@ -119,7 +139,6 @@ namespace WeddingRestaurant.Controllers
             return View("Login");
 
         }
-
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM model, string? ReturnUrl)
         {
@@ -129,7 +148,7 @@ namespace WeddingRestaurant.Controllers
                 var user = await _userManager.FindByNameAsync(model.UserName);
                 if (user == null)
                 {
-                    ModelState.AddModelError("loi", "Không có khách hàng này");
+                    ModelState.AddModelError("UserName", "Không có khách hàng này");
                 }
                 else
                 {
@@ -146,33 +165,36 @@ namespace WeddingRestaurant.Controllers
                         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                         await _signInManager.SignInWithClaimsAsync(user, isPersistent: false, claims);
 
-                        if (await _userManager.IsInRoleAsync(user, "Admin"))
+                        if (Url.IsLocalUrl(ReturnUrl))
                         {
-                            return RedirectToAction("Index", "Admin");
+                            return Redirect(ReturnUrl);
                         }
                         else
                         {
-                            return RedirectToAction("Index", "Home");
+                            if (await _userManager.IsInRoleAsync(user, "Admin"))
+                            {
+                                return RedirectToAction("Index", "Admin");
+                            }
+                            else
+                            {
+                                return RedirectToAction("Index", "Home");
+                            }
                         }
                     }
                     else
                     {
-                        ModelState.AddModelError("loi", "Đăng nhập không thành công");
+                        ModelState.AddModelError("UserName", "Đăng nhập không thành công");
                     }
                 }
             }
 
             return View(model);
         }
-
-
-
         [Authorize]
         public IActionResult Profile()
         {
             return View();
         }
-        
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
@@ -267,7 +289,7 @@ namespace WeddingRestaurant.Controllers
                     externalEmailUser = await _userManager.FindByEmailAsync(externalEmail);
                 }
 
-                if(externalEmailUser != null && registerUser!= null)
+                if(externalEmailUser != null && registerUser != null)
                 {
                     if(externalEmailUser.Id == registerUser.Id)
                     {

@@ -5,5 +5,6 @@ namespace WeddingRestaurant.Interfaces
 {
     public interface ITypeMenuRepository : IRepository<TypeMenu>
     {
+        Task<bool> GetTypeMenuByName(string name);
     }
 }

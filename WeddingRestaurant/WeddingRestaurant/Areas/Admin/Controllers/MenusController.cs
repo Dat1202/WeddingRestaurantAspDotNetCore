@@ -2,41 +2,44 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WeddingRestaurant.Interfaces;
 using WeddingRestaurant.Models;
+using WeddingRestaurant.Repositories;
 
 namespace WeddingRestaurant.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class MenusController : Controller
     {
-        private readonly ModelContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public MenusController(ModelContext context)
+        public MenusController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: Admin/Menus
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            var modelContext = _context.Menus.Include(m => m.TypeMenu);
-            return View(await modelContext.ToListAsync());
-        }
+            int pageSize = 12;
+            var pagedList = await _unitOfWork.Menus.GetAllMenus(page, pageSize);
+            return View(pagedList);
 
+        }
         // GET: Admin/Menus/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var menu = await _context.Menus
-                .Include(m => m.TypeMenu)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var menu = await _unitOfWork.Menus.GetMenuById(id);
             if (menu == null)
             {
                 return NotFound();
@@ -46,9 +49,9 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
         }
 
         // GET: Admin/Menus/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["TypeID"] = new SelectList(_context.TypeMenus, "Id", "Name");
+            ViewData["TypeID"] = new SelectList(await _unitOfWork.TypeMenus.GetAllAsync(), "Id", "Name");
             return View();
         }
 
@@ -61,28 +64,37 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(menu);
-                await _context.SaveChangesAsync();
+                string menuName = menu.Name.Trim();
+                if (await MenuExistsByName(menuName))
+                {
+                    TempData["MenuExists"] = "Tên Menu đã tồn tại";
+                    ViewData["TypeID"] = new SelectList(await _unitOfWork.TypeMenus.GetAllAsync(), "Id", "Name");
+
+                    return View(menu);
+                }
+                await _unitOfWork.Menus.AddAsync(menu);
+                await _unitOfWork.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TypeID"] = new SelectList(_context.TypeMenus, "Id", "Name", menu.TypeID);
+            ViewData["TypeID"] = new SelectList(await _unitOfWork.TypeMenus.GetAllAsync(), "Id", "Name");
             return View(menu);
         }
 
         // GET: Admin/Menus/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var menu = await _context.Menus.FindAsync(id);
+            var menu = await _unitOfWork.Menus.GetMenuById(id);
             if (menu == null)
             {
                 return NotFound();
             }
-            ViewData["TypeID"] = new SelectList(_context.TypeMenus, "Id", "Name", menu.TypeID);
+            ViewData["TypeID"] = new SelectList(await _unitOfWork.TypeMenus.GetAllAsync(), "Id", "Name");
             return View(menu);
         }
 
@@ -97,42 +109,43 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
-                try
+                var existingMenu = await _unitOfWork.Menus.GetByIdAsync(id);
+                string menuName = menu.Name.Trim();
+                if (!existingMenu.Name.Equals(menuName))
                 {
-                    _context.Update(menu);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MenuExists(menu.Id))
+                    if (await MenuExistsByName(menuName))
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
+                        TempData["MenuExists"] = "Món ăn đã tồn tại";
+                        ViewData["TypeID"] = new SelectList(await _unitOfWork.TypeMenus.GetAllAsync(), "Id", "Name");
+
+                        return View(menu);
                     }
                 }
+
+                existingMenu.Name = menu.Name;
+                existingMenu.TypeID = menu.TypeID;
+
+                //await _unitOfWork.Menus.UpdateAsync(menu);
+                await _unitOfWork.SaveChangesAsync();
+                
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TypeID"] = new SelectList(_context.TypeMenus, "Id", "Name", menu.TypeID);
+            ViewData["TypeID"] = new SelectList(await _unitOfWork.TypeMenus.GetAllAsync(), "Id", "Name");
             return View(menu);
         }
 
         // GET: Admin/Menus/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var menu = await _context.Menus
-                .Include(m => m.TypeMenu)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var menu = await _unitOfWork.Menus.GetMenuById(id);
+
             if (menu == null)
             {
                 return NotFound();
@@ -146,19 +159,19 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var menu = await _context.Menus.FindAsync(id);
-            if (menu != null)
+            if (id == null)
             {
-                _context.Menus.Remove(menu);
+                return NotFound();
             }
 
-            await _context.SaveChangesAsync();
+            await _unitOfWork.Menus.DeleteAsync(id);
+            await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MenuExists(int id)
+        private async Task<bool> MenuExistsByName(string name)
         {
-            return _context.Menus.Any(e => e.Id == id);
+            return await _unitOfWork.Menus.GetMenuByName(name);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WeddingRestaurant.Models;
 using WeddingRestaurant.ViewModels;
@@ -6,10 +7,10 @@ using WeddingRestaurant.ViewModels;
 namespace WeddingRestaurant.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class StatsController : Controller
     {
         private readonly ModelContext _context;
-
         public StatsController(ModelContext context) {
             _context = context;
         }

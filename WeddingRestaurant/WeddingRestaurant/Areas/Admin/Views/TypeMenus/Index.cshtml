@@ -1,5 +1,6 @@
-﻿@model IEnumerable<WeddingRestaurant.Models.TypeMenu>
-
+﻿@* @model IEnumerable<WeddingRestaurant.Models.TypeMenu> *@
+@model X.PagedList.IPagedList<WeddingRestaurant.Models.TypeMenu>
+@using X.PagedList.Mvc.Core
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -14,7 +15,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Name
             </th>
             <th></th>
         </tr>
@@ -31,6 +32,9 @@
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+        }
+        <div class="d-flex justify-content-center">
+            @Html.PagedListPager(Model, page => Url.Action("Index", "Categories", new { page = page }))
+        </div>
     </tbody>
 </table>

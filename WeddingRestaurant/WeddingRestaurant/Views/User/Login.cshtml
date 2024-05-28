@@ -38,9 +38,10 @@
                 <form asp-controller="User" asp-action="Login" method="post" asp-route-returnurl="@ViewBag.ReturnUrl">
                     @* <div class="text-danger" asp-validation-summary="All"></div> *@
                     <!-- Email input -->
+                    <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl" />
                     <div class="form-floating mb-3 mt-3">
-                        <input asp-for="UserName" type="text" class="form-control" id="email" placeholder="Enter email">
-                        <label asp-for="UserName">Email</label>
+                        <input asp-for="UserName" type="text" class="form-control" id="email" placeholder="Enter UserName">
+                        <label asp-for="UserName">UserName</label>
                         <span asp-validation-for="UserName" class="text-danger"></span>
                     </div>
                     <!-- Password input -->

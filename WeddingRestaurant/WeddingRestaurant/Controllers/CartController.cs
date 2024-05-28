@@ -31,12 +31,13 @@ namespace WeddingRestaurant.Controllers
         public List<CartItem> Cart => HttpContext.Session.Get<List<CartItem>>(Configuration.CART_KEY) ?? new List<CartItem>();
 
         [HttpGet]
-        public IActionResult Index(int NumberTable)
+        public IActionResult Index(int numberTable, decimal roomPrice)
         {
             ViewBag.PaypalClientId = _paypalClient.ClientId;
-			ViewBag.NumberTable = NumberTable;
+			ViewBag.NumberTable = numberTable;
+            ViewBag.RoomPrice = roomPrice;
 
-			return View(Cart);
+            return View(Cart);
         }
 
         [HttpPost]
@@ -95,7 +96,6 @@ namespace WeddingRestaurant.Controllers
             }   
             return View("Index", Cart);
         }
-
         public IActionResult AddToCart(int[] ids, string type = "Normal")
         {
             var gioHang = Cart;
@@ -177,7 +177,6 @@ namespace WeddingRestaurant.Controllers
                 return BadRequest(error);
             }
         }
-
         [HttpPost("/Cart/capture-paypal-order")]
         public async Task<IActionResult> CapturePaypalOrder(string orderID, CancellationToken cancellationToken)
         {
@@ -212,8 +211,10 @@ namespace WeddingRestaurant.Controllers
                     db.SaveChanges();
 
                     HttpContext.Session.Set<List<CartItem>>(Configuration.CART_KEY, new List<CartItem>());
+                    TempData["SuccessMessage"] = "Thanh toán thành công!";
 
-                    return View("Success", Cart);
+                    return View("Index", Cart);
+
                 }
                 catch
                 {
@@ -235,7 +236,7 @@ namespace WeddingRestaurant.Controllers
             if (response == null || response.VnPayResponseCode != "00")
             {
                 TempData["Message"] = $"Lỗi thanh toán VN Pay: {response.VnPayResponseCode}";
-                return RedirectToAction("PaymentFail");
+                return RedirectToAction("Index", Cart);
             }
             // Lưu đơn hàng vô database
             var order = new Order
@@ -265,15 +266,19 @@ namespace WeddingRestaurant.Controllers
                 db.SaveChanges();
 
                 HttpContext.Session.Set<List<CartItem>>(Configuration.CART_KEY, new List<CartItem>());
+                TempData["SuccessMessage"] = "Thanh toán VNPay thành công";
 
-                return View("Success", Cart);
+                return View("Index", Cart);
+
             }
             catch
             {
                 db.Database.RollbackTransaction();
             }
-            TempData["Message"] = $"Thanh toán VNPay thành công";
-            return RedirectToAction("PaymentSuccess");
+
+            TempData["SuccessMessage"] = "Thanh toán VNPay thành công";
+            return View("Index", Cart);
+
         }
     }
 }

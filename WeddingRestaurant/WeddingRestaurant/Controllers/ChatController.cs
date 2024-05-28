@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Azure.Messaging;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WeddingRestaurant.Models;
@@ -7,6 +8,7 @@ using WeddingRestaurant.ViewModels;
 
 namespace WeddingRestaurant.Controllers
 {
+    [Authorize(Roles = "User")]
     public class ChatController : Controller
     {
         private readonly ModelContext _model;

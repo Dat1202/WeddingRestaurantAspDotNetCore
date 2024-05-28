@@ -14,5 +14,10 @@ namespace WeddingRestaurant.Repositories
             _context = context;
 
         }
+
+        public async Task<bool> GetTypeMenuByName(string name)
+        {
+            return await _context.TypeMenus.AnyAsync(e => e.Name.Equals(name));
+        }
     }
 }

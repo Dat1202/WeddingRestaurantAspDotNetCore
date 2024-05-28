@@ -8,7 +8,7 @@
         <div style="margin: 0 auto;" class="w-75 border-dark">
             @foreach (var order in Model)
             {
-                <div style="background:white;" class="shadow border m-4">
+                <div style="background:white;" class="shadow border m-4 p-4">
                     <div class="m-4">
                         <div class="d-flex justify-content-between">
                             <h3 style="margin-left: 35px;">
@@ -20,8 +20,8 @@
                         </div>
                         @foreach (var detail in order.OrderDetails)
                         {
-                            <div class="d-flex justify-content-between align-items-center p-2 my-4 border border-bottom">
-                                <div class="d-flex w-50">
+                            <div class="d-flex justify-content-between align-items-center p-2 my-4">
+                                <div class="d-flex w-50 ml-4">
 
                                     @* <div style="width: 165px; height: 180px;">
                                         <a style="margin-bottom:5px" href="@Url.Action("Detail", "Book", new { id = detail.ProductID })">

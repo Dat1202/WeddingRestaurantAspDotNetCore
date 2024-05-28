@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WeddingRestaurant.Heplers;
 using WeddingRestaurant.Interfaces;
 using WeddingRestaurant.Models;
 using WeddingRestaurant.Repositories;
@@ -17,16 +19,17 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
     public class CategoriesController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-
         public CategoriesController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
         // GET: Admin/Categories
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View(await _unitOfWork.Categories.GetAllAsync());
+            int pageSize = 12;
+            var pagedList = await _unitOfWork.Categories.GetAllPagedListAsync(page, pageSize);
+            return View(pagedList);
         }
 
         // GET: Admin/Categories/Details/5
@@ -37,8 +40,8 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var category = await _unitOfWork.Categories
-                .GetByIdAsync(id);
+            var category = await _unitOfWork.Categories.GetByIdAsync(id);
+
             if (category == null)
             {
                 return NotFound();
@@ -62,7 +65,14 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Categories.AddAsync(category);
+                string categoryName = category.Name.Trim();
+                if (await CategoryExistsByName(categoryName))
+                {
+                    TempData["CategoryExists"] = "Thể loại đã tồn tại";
+
+                    return View(category);
+                }
+                await _unitOfWork.Categories.AddAsync(category);
                 await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -77,8 +87,7 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var category = await _unitOfWork.Categories
-                .GetByIdAsync(id);
+            var category = await _unitOfWork.Categories.GetByIdAsync(id);
             if (category == null)
             {
                 return NotFound();
@@ -100,8 +109,20 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                    _unitOfWork.Categories.UpdateAsync(category);
-                    await _unitOfWork.SaveChangesAsync();
+                var existingCategory = await _unitOfWork.Categories.GetByIdAsync(id);
+                string categoryName = category.Name.Trim();
+                if (!existingCategory.Name.Equals(categoryName))
+                {
+                    if (await CategoryExistsByName(categoryName))
+                    {
+                        TempData["CategoryExists"] = "Thể loại đã tồn tại";
+
+                        return View(category);
+                    }
+                }
+                existingCategory.Name= category.Name;
+                //await _unitOfWork.Categories.UpdateAsync(category);
+                await _unitOfWork.SaveChangesAsync();
                 
                 return RedirectToAction(nameof(Index));
             }
@@ -116,12 +137,12 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var category = await _unitOfWork.Categories
-                .GetByIdAsync(id);
+            var category = await _unitOfWork.Categories.GetByIdAsync(id);
+
             if (category == null)
             {
                 return NotFound();
-            }
+            }   
 
             return View(category);
         }
@@ -136,9 +157,13 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            _unitOfWork.Categories.DeleteAsync(id);
+            await _unitOfWork.Categories.DeleteAsync(id);
             await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+        private async Task<bool> CategoryExistsByName(string name)
+        {
+            return await _unitOfWork.Categories.GetCategoryByName(name);
         }
     }
 }

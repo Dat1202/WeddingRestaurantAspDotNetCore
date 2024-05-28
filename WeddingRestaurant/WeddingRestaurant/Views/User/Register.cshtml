@@ -12,8 +12,8 @@
                     <div class="card-body p-5 shadow-5">
                         <h2 class="fw-bold mb-5">Sign up now</h2>
                         <form asp-controller="User" asp-action="Register" method="post" asp-route-returnurl="@ViewBag.ReturnUrl" enctype="multipart/form-data">
-@*                             <div class="text-danger" asp-validation-summary="All"></div>
- *@                            <div class="row">
+                            @* <div class="text-danger" asp-validation-summary="All"></div> *@
+                            <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-floating mt-3">
                                         <input asp-for="Email" type="email" class="form-control" id="email" placeholder="Enter email">
@@ -31,7 +31,7 @@
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input asp-for="PhoneNumber" type="text" class="form-control" id="PhoneNumber" placeholder="Enter PhoneNumber">
+                                <input asp-for="PhoneNumber" type="number" class="form-control" id="PhoneNumber" placeholder="Enter PhoneNumber">
                                 <label asp-for="PhoneNumber">PhoneNumber</label>
                                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                             </div>

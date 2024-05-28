@@ -8,7 +8,15 @@
 <h1>Edit</h1>
 
 <h4>Menu</h4>
-<hr />
+
+@if (TempData["MenuExists"] != null)
+{
+    <h4 style="color: #dc3545;
+    padding: 5px;">
+        @TempData["MenuExists"]
+    </h4>
+}
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">

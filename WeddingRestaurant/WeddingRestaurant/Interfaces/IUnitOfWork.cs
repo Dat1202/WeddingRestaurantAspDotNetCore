@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using WeddingRestaurant.Models;
-using System.Threading.Tasks;
-
-namespace WeddingRestaurant.Interfaces
+﻿namespace WeddingRestaurant.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
@@ -10,7 +6,7 @@ namespace WeddingRestaurant.Interfaces
         IMenuRepository Menus { get; }
         ITypeMenuRepository TypeMenus { get; }
         ICategoryRepository Categories { get; }
-
+        IRoomRepository Rooms { get; }
         Task<int> SaveChangesAsync();
     }
 }

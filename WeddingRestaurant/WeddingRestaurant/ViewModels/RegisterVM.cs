@@ -25,15 +25,15 @@ namespace WeddingRestaurant.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Mật khẩu")]
         [MaxLength(20, ErrorMessage = "{0} Tối đa {1} kí tự")]
-        [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*?])(?=.*[0-9]).{6,}$", ErrorMessage = "Password must be at least 6 characters long and contain at least one uppercase letter, one special character, and one digit.")]
+        [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*?])(?=.*[0-9]).{6,}$", ErrorMessage = "Mật khẩu phải có ít nhất 6 ký tự và chứa ít nhất một chữ cái viết hoa, một ký tự đặc biệt và một chữ số.")]
         public string Password { get; set; }
         [Required(ErrorMessage = "Chưa nhập Mật khẩu")]
         [DataType(DataType.Password)]
         [Display(Name = "Xác nhận mật khẩu")]
         [MaxLength(20, ErrorMessage = "{0} Tối đa {1} kí tự")]
-        [Compare("Password", ErrorMessage = "Password và confirmation password không giống nhau.")]
+        [Compare("Password", ErrorMessage = "Mật khẩu và xác nhận mật khẩu không giống nhau.")]
         public string ConfirmPassword { get; set; }
-        public string Avatar { get; set; }
+        public string? Avatar { get; set; }
 
     }
 }
