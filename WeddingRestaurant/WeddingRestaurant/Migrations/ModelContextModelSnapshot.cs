@@ -250,15 +250,15 @@ namespace WeddingRestaurant.Migrations
                             Id = "1",
                             AccessFailedCount = 0,
                             Avatar = "",
-                            ConcurrencyStamp = "d506ba77-237b-41c5-8280-1a51ff334cd2",
+                            ConcurrencyStamp = "577109cf-3701-48e7-adfa-97fc1be17eca",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJG+cyWGowKt89KepCOmoqWa0wTHJTDD8HqTBDV08W95pouTI9IEu4Z5dNZDPVoq7w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHsZgLsKtgIlSCH1sHDryvHf6yjQjH1UsZXZPbdNC5JrreV7EglSOK84RNVH69tiDA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f0d8d4c8-8855-4c8a-be51-22df7d3e2b56",
+                            SecurityStamp = "ca244f53-ef1a-41d5-9d9a-352201340995",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -324,9 +324,6 @@ namespace WeddingRestaurant.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ApplicationUser")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -337,6 +334,9 @@ namespace WeddingRestaurant.Migrations
                     b.Property<int>("NumberTable")
                         .HasColumnType("int");
 
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("RoomId")
                         .HasColumnType("int");
 
@@ -345,7 +345,7 @@ namespace WeddingRestaurant.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUser");
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("RoomId");
 
@@ -608,18 +608,20 @@ namespace WeddingRestaurant.Migrations
 
             modelBuilder.Entity("WeddingRestaurant.Models.Event", b =>
                 {
-                    b.HasOne("WeddingRestaurant.Models.ApplicationUser", "UserId")
+                    b.HasOne("WeddingRestaurant.Models.Order", "Order")
                         .WithMany()
-                        .HasForeignKey("ApplicationUser");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("WeddingRestaurant.Models.Room", "Room")
                         .WithMany()
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.Navigation("Room");
+                    b.Navigation("Order");
 
-                    b.Navigation("UserId");
+                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("WeddingRestaurant.Models.Menu", b =>

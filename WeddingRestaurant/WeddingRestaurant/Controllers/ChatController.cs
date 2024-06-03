@@ -3,12 +3,12 @@ using Azure.Messaging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WeddingRestaurant.Models;
 using WeddingRestaurant.ViewModels;
 
 namespace WeddingRestaurant.Controllers
 {
-    [Authorize(Roles = "User")]
     public class ChatController : Controller
     {
         private readonly ModelContext _model;
@@ -21,11 +21,13 @@ namespace WeddingRestaurant.Controllers
             _mapper=mapper;
             _userManager = userManager;
         }
+
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Index()
         {
             var currentUser = await _userManager.GetUserAsync(User);
             var adminUsers = await _userManager.FindByNameAsync("admin");
-            var messages = _model.ChatMessage
+            var messages = _model.ChatMessage.AsNoTracking()
                 .Where(m => m.SenderId == currentUser.Id && m.RecipientId == adminUsers.Id ||
                 m.RecipientId == currentUser.Id && m.SenderId == adminUsers.Id)
                 .OrderBy(m => m.Time)
@@ -44,34 +46,49 @@ namespace WeddingRestaurant.Controllers
         }
         public async Task<IActionResult> CreateMessage(string content, string? receiver)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var currentUser = await _userManager.GetUserAsync(User);
-                var adminUsers = await _userManager.FindByNameAsync("admin");
-                var message = new ChatMessage
-                {
-                    Content = content,
-                    Time = DateTime.Now,
-                    UserName = currentUser.UserName,
-                    Sender = currentUser,
-                };
-
-                if(receiver != null)
-                {
-                    var receiverUser = await _userManager.FindByNameAsync(receiver);
-
-                    message.Recipient = receiverUser;
-                }
-                else
-                {
-                    message.Recipient = adminUsers;
-                }
-                await _model.ChatMessage.AddAsync(message);
-                await _model.SaveChangesAsync();
-                return Ok();
+                return BadRequest(ModelState);
             }
-            return BadRequest(ModelState);
+
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser == null)
+            {
+                return Unauthorized();
+            }
+
+            var message = new ChatMessage
+            {
+                Content = content,
+                Time = DateTime.Now,
+                UserName = currentUser.UserName,
+                Sender = currentUser,
+            };
+
+            if (!string.IsNullOrEmpty(receiver))
+            {
+                var receiverUser = await _userManager.FindByNameAsync(receiver);
+                if (receiverUser == null)
+                {
+                    return NotFound("Receiver not found");
+                }
+                message.Recipient = receiverUser;
+            }
+            else
+            {
+                var adminUser = await _userManager.FindByNameAsync("admin");
+                if (adminUser == null)
+                {
+                    return NotFound("Admin user not found");
+                }
+                message.Recipient = adminUser;
+            }
+
+            await _model.ChatMessage.AddAsync(message);
+            await _model.SaveChangesAsync();
+            return Ok();
         }
+
 
     }
 }

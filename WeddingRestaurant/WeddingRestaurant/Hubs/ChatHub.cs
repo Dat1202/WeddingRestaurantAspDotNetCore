@@ -11,7 +11,7 @@ namespace WeddingRestaurant.Hubs
 
             return base.OnConnectedAsync();
         }
-        public async Task SendMessageToUser(string user, string message)
+        public async Task SendMessageToUser(string user, string  message)
         {
             await Clients.User(user).SendAsync("ReceiveMessage", Context.UserIdentifier, message);
         }

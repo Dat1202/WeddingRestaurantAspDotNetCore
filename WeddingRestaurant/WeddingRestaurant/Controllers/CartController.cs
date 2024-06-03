@@ -9,6 +9,11 @@ using System;
 using WeddingRestaurant.Services;
 using Microsoft.AspNetCore.Identity;
 using NuGet.Packaging.Signing;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace WeddingRestaurant.Controllers
 {
@@ -29,29 +34,39 @@ namespace WeddingRestaurant.Controllers
             _vnPayservice = vnPayservice;
         }
         public List<CartItem> Cart => HttpContext.Session.Get<List<CartItem>>(Configuration.CART_KEY) ?? new List<CartItem>();
+        public Event CartEvent => HttpContext.Session.Get<Event>(Configuration.EVENT_KEY) ?? new Event();
+        public List<RoomVM> CartRoom => HttpContext.Session.Get<List<RoomVM>>(Configuration.ROOM_KEY) ?? new List<RoomVM>();
 
         [HttpGet]
-        public IActionResult Index(int numberTable, decimal roomPrice)
+        public IActionResult Index(decimal roomPrice)
         {
             ViewBag.PaypalClientId = _paypalClient.ClientId;
-			ViewBag.NumberTable = numberTable;
             ViewBag.RoomPrice = roomPrice;
-
+            if (CartEvent != null)
+            {
+                ViewBag.NumberTable = CartEvent.NumberTable;
+            }
             return View(Cart);
         }
 
         [HttpPost]
         public async Task<IActionResult> Index(string payment, int? numberTable = null)
         {
+            var room = await db.Rooms.FirstOrDefaultAsync(r => r.Id == CartEvent.RoomId);
+            decimal roomPrice = room != null ? room.Price : 0;
+
+            var tongTien = (Cart.Sum(t => t.Price) ).ToString();
             if (payment == "Thanh toán VNPay")
             {
                 var vnPayModel = new VnPaymentRequestModel
                 {
-                    Amount = (double)(Cart.Sum(p => (decimal)p.Price) * (numberTable ?? 1)),
+                    Amount = (double)(Cart.Sum(p => (decimal)p.Price) * (numberTable ?? 1) + roomPrice),
                     CreatedDate = DateTime.Now,
-                    FullName = "model.HoTen",
+                    //FullName = "model.HoTen",
                     OrderId = new Random().Next(1000, 100000)
                 };
+                TempData["SuccessMessage"] = "Thanh toán VNPay thành công!";
+
 
                 return Redirect(_vnPayservice.CreatePaymentUrl(HttpContext, vnPayModel));
             }
@@ -65,11 +80,11 @@ namespace WeddingRestaurant.Controllers
                 };
 
                 db.Database.BeginTransaction();
+
                 try
                 {
-                    db.Database.CommitTransaction();
-                    db.Add(order);
-                    db.SaveChanges();
+                    db.Orders.Add(order);
+                    await db.SaveChangesAsync();
 
                     var cthds = new List<OrderDetail>();
                     foreach (var item in Cart)
@@ -82,10 +97,23 @@ namespace WeddingRestaurant.Controllers
                         });
                     }
                     db.AddRange(cthds);
-                    db.SaveChanges();
 
+                    Event e = new Event{
+                        OrderId = order.Id,
+                        Name = CartEvent.Name,
+                        Time = CartEvent.Time,
+                        NumberTable = CartEvent.NumberTable,
+                        RoomId = CartEvent.RoomId,
+                        Note = CartEvent.Note,
+                    };
+                    db.Events.Add(e);
+                    await db.SaveChangesAsync();
+
+                    HttpContext.Session.Set<Event>(Configuration.EVENT_KEY, new Event());
                     HttpContext.Session.Set<List<CartItem>>(Configuration.CART_KEY, new List<CartItem>());
+                    HttpContext.Session.Set<List<RoomVM>>(Configuration.ROOM_KEY, new List<RoomVM>());
                     TempData["SuccessMessage"] = "Thanh toán thành công!";
+                    db.Database.CommitTransaction();
 
                     return View("Index", Cart);
                 }
@@ -159,15 +187,25 @@ namespace WeddingRestaurant.Controllers
         }
         #region paypal 
         [HttpPost("/Cart/create-paypal-order")]
-        public async Task<IActionResult> CreatePaypalOrder(CancellationToken cancellationToken)
+        public async Task<IActionResult> CreatePaypalOrder(CancellationToken cancellationToken, int? numberTable = null)
         {
-            var tongTien = Cart.Sum(t => t.Price).ToString();
-            var donViTienTe = "USD";
+            var room = await db.Rooms.FirstOrDefaultAsync(r => r.Id == CartEvent.RoomId);
+            decimal roomPrice = room != null ? room.Price : 0;
+            decimal tyGiaVNDtoUSD = 0.000039m;
+
+            var tongTienVND = Cart.Sum(t => t.Price) * (numberTable ?? 1) + roomPrice;
+            decimal tongTienUSD = Math.Floor(tongTienVND * tyGiaVNDtoUSD);
+            string tongTienUSDString = tongTienUSD.ToString(); ;
+            var donViTienTe = "USD";    
             var maDH = "DH" + DateTime.Now.Ticks.ToString();
+
+            //var tongTien = Cart.Sum(t => t.Price).ToString();
+            //var donViTienTe = "USD";
+            //var maDH = "DH" + DateTime.Now.Ticks.ToString();
 
             try
             {
-                var response = await _paypalClient.CreateOrder(tongTien, donViTienTe, maDH);
+                var response = await _paypalClient.CreateOrder(tongTienUSDString, donViTienTe, maDH);
 
                 return Ok(response);
             }
@@ -209,9 +247,21 @@ namespace WeddingRestaurant.Controllers
                     }
                     db.AddRange(cthds);
                     db.SaveChanges();
+                    Event e = new Event
+                    {
+                        OrderId = order.Id,
+                        Name = CartEvent.Name,
+                        Time = CartEvent.Time,
+                        NumberTable = CartEvent.NumberTable,
+                        RoomId = CartEvent.RoomId,
+                        Note = CartEvent.Note,
+                    };
+                    db.Events.Add(e);
+                    await db.SaveChangesAsync();
 
+                    HttpContext.Session.Set<Event>(Configuration.EVENT_KEY, new Event());
                     HttpContext.Session.Set<List<CartItem>>(Configuration.CART_KEY, new List<CartItem>());
-                    TempData["SuccessMessage"] = "Thanh toán thành công!";
+                    HttpContext.Session.Set<List<RoomVM>>(Configuration.ROOM_KEY, new List<RoomVM>());
 
                     return View("Index", Cart);
 
@@ -264,19 +314,29 @@ namespace WeddingRestaurant.Controllers
                 }
                 db.AddRange(cthds);
                 db.SaveChanges();
+                Event e = new Event
+                {
+                    OrderId = order.Id,
+                    Name = CartEvent.Name,
+                    Time = CartEvent.Time,
+                    NumberTable = CartEvent.NumberTable,
+                    RoomId = CartEvent.RoomId,
+                    Note = CartEvent.Note,
+                };
+                db.Events.Add(e);
+                await db.SaveChangesAsync();
 
+                HttpContext.Session.Set<Event>(Configuration.EVENT_KEY, new Event());
                 HttpContext.Session.Set<List<CartItem>>(Configuration.CART_KEY, new List<CartItem>());
-                TempData["SuccessMessage"] = "Thanh toán VNPay thành công";
+                HttpContext.Session.Set<List<RoomVM>>(Configuration.ROOM_KEY, new List<RoomVM>());
 
                 return View("Index", Cart);
-
             }
             catch
             {
                 db.Database.RollbackTransaction();
             }
 
-            TempData["SuccessMessage"] = "Thanh toán VNPay thành công";
             return View("Index", Cart);
 
         }

@@ -6,8 +6,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @* <h3>Số bàn: @ViewBag.NumberTable</h3>
-<h3>Số bàn: @ViewBag.RoomPrice</h3> *@
-
+<h3>Số bàn: @ViewBag.RoomPrice</h3>
+ *@
 @if (TempData["SuccessMessage"] != null)
 {
     <div class="alert alert-success">
@@ -67,6 +67,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-4">
                 <div class="card mb-4">
                     <div class="card-header py-3">
@@ -99,33 +100,38 @@
                                                 {
                                                     var RoomPrice = (decimal)ViewBag.RoomPrice;
                                                     var totalPrice = Model.Sum(p => p.Price) * numberTable + RoomPrice;
-                                                    @totalPrice.ToVnd()
+                                                        @totalPrice.ToVnd()
                                                 }
                                                 else
                                                 {
-                                                    <text>0 VNĐ</text>
+                                                        <text>0 VNĐ</text>
                                                 }
                                             }
                                             else
                                             {
-                                                <text>0 VNĐ</text>
+                                                    <text>0 VNĐ</text>
                                             }
                                         }
                                     </strong>
                                 </span>
 
                             </li>
-                        </ul>                   
-                        <div id="paypal-button-container" ></div>
+                        </ul>
+                        @if (Model.Any())
+                        {
+                            <div id="paypal-button-container"></div>
 
-                        <form asp-action="Index" asp-controller="Cart">
-                            <input type="hidden" name="NumberTable" value="@ViewBag.NumberTable" />
-                            <input type="submit" name="payment" class="btn border-secondary text-uppercase text-primary w-100 mt-2" value="Thanh toán VNPay">
-                            <input type="submit" name="payment" class="btn border-secondary text-uppercase text-primary w-100 mt-2" value="Thanh toán trực tiếp">
-                        </form>
+                            <form asp-action="Index" asp-controller="Cart">
+                                <input type="hidden" name="NumberTable" value="@ViewBag.NumberTable" />
+                                <input type="submit" name="payment" class="btn border-secondary text-uppercase text-primary w-100 mt-2" value="Thanh toán VNPay">
+                                <input type="submit" name="payment" class="btn border-secondary text-uppercase text-primary w-100 mt-2" value="Thanh toán trực tiếp">
+                            </form>
+                        }
+                        
                     </div>
                 </div>
             </div>
+
         </div>
 
     </div>
@@ -139,22 +145,31 @@
             style: {
                 disableMaxWidth: true
             },
-            createOrder: (data, actions) => {
+            createOrder: (data, actions) => {   
                 return fetch("/Cart/create-paypal-order", {
                     method: "post",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 }).then((response) => {
                     if (!response.ok) {
                         return response.json().then(error => { throw error; });
                     }
 
                     return response.json();
-                }).then((order) => order.id)
+                }).then((order) => {
+                    console.log('Order ID: ', order.id);
+                    return order.id;
+                })
                     .catch(error => alert(error.message));
             },
             onApprove: (data, actions) => {
                 return fetch(`/Cart/capture-paypal-order?orderId=${data.orderID}`, {
                     method: "post",
-                }).then((response) => {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then((response) => { 
                     if (!response.ok) {
                         return response.json().then(error => { throw error; });
                     }

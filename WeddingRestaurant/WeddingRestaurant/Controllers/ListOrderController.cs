@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WeddingRestaurant.Models;
 using WeddingRestaurant.ViewModels;
 
@@ -20,25 +21,34 @@ namespace WeddingRestaurant.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
 
-            var danhSachDonHang = (
-                from o in _modelContext.Orders
-                join od in _modelContext.OrderDetails on o.Id equals od.OrderId
-                join p in _modelContext.Products on od.ProductId equals p.Id
-                where o.UserId == user
-                group new { o, od, p } by o.Id into grouped
+            if(user != null)
+            {
+                var orderId = await _modelContext.Orders
+                                            .Where(u => u.UserId == user)
+                                            .Select(u => u.Id)
+                                            .ToListAsync();
 
-                select new ListOrderVM
-                {
-                    OrderId = grouped.Key,
-                    PaymentMethods = grouped.FirstOrDefault().o.PaymentMethods,
-                    OrderDetails = grouped.Select(g => new OrderDetailVM
+                var danhSachDonHang = (
+                    from od in _modelContext.OrderDetails
+                    join p in _modelContext.Products on od.ProductId equals p.Id
+                    where orderId.Contains(od.OrderId)
+                    group new { od, p } by od.OrderId into grouped
+
+                    select new ListOrderVM
                     {
-                        ProductName = g.p.Name,
-                        UnitPrice = g.od.Price ,
-                        ProductID = g.p.Id
-                    }).ToList()
-                }).ToList();
-            return View(danhSachDonHang);
+                        OrderId = grouped.Key,
+                        PaymentMethods = grouped.FirstOrDefault().od.Order.PaymentMethods,
+                        OrderDetails = grouped.Select(g => new OrderDetailVM
+                        {
+                            ProductName = g.p.Name,
+                            UnitPrice = g.od.Price,
+                            ProductID = g.p.Id
+                        }).ToList()
+                    }).ToList();
+                return View(danhSachDonHang);
+            }
+
+            return View();
         }
     }
 }

@@ -2,7 +2,6 @@
 
 namespace WeddingRestaurant.Hubs
 {
-
     public class NameUserIdProvider : IUserIdProvider
     {
         public string GetUserId(HubConnectionContext connection)

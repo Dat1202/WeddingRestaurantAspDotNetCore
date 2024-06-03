@@ -9,35 +9,28 @@
         <div class="chat-header">Chat with admin</div>
     </div>
     <div class="chat-messages" id="chat-messages">
-        <div id="chatBoxes" class="chat-box-container">
-            <div id="chatBox-admin" class="chat-box">
-                    @foreach (var message in Model)
-                    {
-                        <div class="message @((message.UserName == Context.User.Identity.Name) ? "sent" : "received")">
-                                <div title="@message.Time">@message.Content</div>
-                        </div>  
-                    }
-                </div>  
-        </div>
-    </div>
+        @foreach (var message in Model)
+        {
+            <div class="message @((message.UserName == Context.User.Identity.Name) ? "sent" : "received")">
+                    <div title="@message.Time">@message.Content</div>
+            </div>  
+        }
+    </div>  
     <div class="chat-input">
         <input type="text" name="content" id="messageInput" placeholder="Type a message...">
-        <input type="submit" id="sendButton" value="Send Message" />
+        <input type="submit" id="sendButton" value="Send Message" style="background-color: #dc3545;" />
     </div>
 </div>
 
 
 @section scripts {
-        "use strict";
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.7/signalr.min.js"></script>
     <script>
 
         $(document).ready(function () {
             var chatMessage = $('#chat-messages');
-
             chatMessage.animate({ scrollTop: chatMessage.prop("scrollHeight") }, 1);
-            console.log(chatMessage.prop("scrollHeight"));
         });
 
         const connection = new signalR.HubConnectionBuilder()
@@ -46,56 +39,50 @@
 
         //từ admin qua user
         connection.on("ReceiveMessage", (user, message) => {
-            let chatBox = document.getElementById(`chatBox-${user}`);
+            const now = new Date();
+            let chatMessages = document.getElementById('chat-messages');
 
-            if (!chatBox) {
-                chatBox = createChatBox(user);
-            }
-
+            let dateTimeString = now.toLocaleDateString() + " " + now.toLocaleTimeString();
+            let box = document.getElementsByClassName("chat-box-container");
             const messageDiv = document.createElement("div");
             messageDiv.classList.add('message', 'received');
             const messageContent = document.createElement('p');
             messageContent.textContent = `${message}`;
-            const messageTime = document.createElement('span');
-            messageTime.textContent = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString();
             messageDiv.appendChild(messageContent);
-            // messageDiv.appendChild(messageTime);
-            chatBox.appendChild(messageDiv);
+            messageContent.setAttribute('title', dateTimeString)
 
+            chatMessages.appendChild(messageDiv);
+
+            chatMessages.scrollTop += messageDiv.scrollHeight;
         });
-        function createChatBox(user) {
-            const chatBoxContainer = document.getElementById("chatBoxes");
 
-            const chatBox = document.createElement("div");
-            chatBox.id = `chatBox-${user}`;
-            chatBox.classList.add("chat-box");
-
-
-            const messagesList = document.createElement("ul");
-            messagesList.classList.add("messages-list");
-
-            chatBox.appendChild(messagesList);
-            chatBoxContainer.appendChild(chatBox);
-
-            return chatBox;
-        }
-        //từ user gửi qua
+        //từ user gửi qua admin
         document.getElementById("sendButton").addEventListener("click", function (event) {
-            event.preventDefault(); 
+            sendMessageHandler(event);
+        });
+
+        document.getElementById("messageInput").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                sendMessageHandler(event);
+            }
+        });
+
+        function sendMessageHandler(event) {
+            event.preventDefault();
 
             var receiver = 'admin'
             var message = document.getElementById("messageInput").value;
 
             if (message === '') {
                 this.disabled = false;
-                return; 
+                return;
             }
 
             $.ajax({
                 type: "POST",
                 url: "/Chat/CreateMessage",
                 data: {
-                    content:message
+                    content: message
                 },
                 success: function (response) {
                     console.log("Message sent successfully.");
@@ -108,31 +95,33 @@
 
             sendMessage(receiver, message);
             document.getElementById("messageInput").value = '';
-        });
+        }
 
-        connection.start().catch(err => console.error(err.toString()));
-
+        //từ user gửi qua admin - render user 
         function sendMessage(receiver, message) {
             connection.invoke("SendMessageToUser", receiver, message).catch(function (err) {
                 return console.error(err.toString());
             });
 
-            let chatBox = document.getElementById(`chatBox-${receiver}`);
+            const now = new Date();
+            let chatMessages = document.getElementById('chat-messages');
 
-            if (!chatBox) {
-                chatBox = createChatBox(receiver);
-            }
-
+            let dateTimeString = now.toLocaleDateString() + " " + now.toLocaleTimeString();
+            let box = document.getElementsByClassName("chat-box-container");
             const messageDiv = document.createElement("div");
             messageDiv.classList.add('message', 'sent');
             const messageContent = document.createElement('p');
             messageContent.textContent = `${message}`;
             messageDiv.appendChild(messageContent);
-            chatBox.appendChild(messageDiv);
+            messageContent.setAttribute('title', dateTimeString)
+
+            chatMessages.appendChild(messageDiv);
+
+            chatMessages.scrollTop += messageDiv.scrollHeight;
+
         }
 
-       
+        connection.start().catch(err => console.error(err.toString()));
 
-        
     </script>
 }

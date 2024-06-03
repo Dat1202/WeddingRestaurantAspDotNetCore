@@ -6,9 +6,9 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<div class="message"></div>
 <!-- Shop Start -->
-<div class=" pt-5">
+<div class=" pt-2">
     <div class="row px-xl-5">
         <!-- Shop Sidebar Start -->
         <div class="col-lg-3 col-md-12">
@@ -56,23 +56,19 @@
             <div class="row pb-3">
                 <div class="col-12 pb-1">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <form>
                             <div class="input-group">
                                 
                             </div>
-                        </form>
-                        <form asp-action="Index" > 
                             <div class="dropdown ml-4">
-                                <button class="btn border dropdown-toggle button-text" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                <button class="btn border dropdown-toggle button-text" type="submit" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                     Sort by
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                                    <a class="dropdown-item" href="#" data-sort-order="decrease">Giảm dần</a>
-                                    <a class="dropdown-item" href="#" data-sort-order="ascending">Tăng dần</a>
+                                    <a data-sort-order="decrease" class="dropdown-item" >Giảm dần</a>
+                                    <a  data-sort-order="ascending" class="dropdown-item">Tăng dần</a>
                                 </div>
                             </div>
-                        </form>
                     </div>
                 </div>
 
@@ -94,8 +90,9 @@
 
 @section scripts {
     <script>
+
         $(document).ready(function () {
-            $('.add-to-cart').click(function () {
+            $('#roomsList').on('click', '.add-to-cart', function () {
                 var id = $(this).data('id');
 
                 $.ajax({
@@ -106,16 +103,18 @@
                         type: "ajax"
                     },
                     success: function (response) {
-                        console.log(response.message);
-                        var container = $("#roomsList");
-                        var alertSuccess = $(".alert-success");
-                        console.log(alertSuccess.length)
+                        // console.log(response.message);
+                        var message = $(".message");
+
+                        var alertSuccess = $(".alert-danger");
+                        // console.log(alertSuccess.length)
+
                         if (alertSuccess.length <=0) { // Check if there is at least one element with the class "alert-success"
                             var messageElement = document.createElement("p");
-                            messageElement.classList.add("alert", "alert-success");
+                            messageElement.classList.add("alert", "alert-danger");
                             messageElement.textContent = response.message;
 
-                            container.append(messageElement); // Convert messageElement to a jQuery object before appending
+                            message.append(messageElement); // Convert messageElement to a jQuery object before appending
                         }
                     },
                     error: function (error) {
@@ -124,25 +123,27 @@
                     }
                 });
             });
-        });
 
-        $('.dropdown-item').click(function (e) {
-            e.preventDefault();
-            var sortOrder = $(this).data('sort-order'); 
-            var textSortOrder = $(this).text();
-            console.log(sortOrder)
-            $.ajax({
-                url: '/Room/Index',
-                type: 'GET',
-                data: { sortOrder: sortOrder },
-                success: function (result) {
-                    $('#roomsList').html(result);
-                    console.log(textSortOrder)
-                    $('.button-text').text(textSortOrder)
+            $('.dropdown-item').click(function (e) {
+                e.preventDefault();
+                var sortOrder = $(this).data('sort-order');
+                var textSortOrder = $(this).text();
+                console.log(sortOrder)
 
-                }
+                $.ajax({
+                    url: '/Room/Index',
+                    type: 'GET',
+                    data: { sortOrder: sortOrder },
+                    success: function (result) {
+                        $('#roomsList').html(result);
+                        console.log(result)
+                        $('.button-text').text(textSortOrder)
+                    }
+                });
             });
         });
+
+       
             
         
     </script> 

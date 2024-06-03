@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.Elfie.Model.Strings;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using WeddingRestaurant.Heplers;
 using WeddingRestaurant.Models;
 using WeddingRestaurant.ViewModels;
@@ -19,7 +21,8 @@ namespace WeddingRestaurant.Controllers
         private readonly ModelContext _context; 
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public List<RoomVM> Cart => HttpContext.Session.Get<List<RoomVM>>(Configuration.ROOM_KEY) ?? new List<RoomVM>();
+        public List<RoomVM> CartRoom => HttpContext.Session.Get<List<RoomVM>>(Configuration.ROOM_KEY) ?? new List<RoomVM>();
+        public Event CartEvent => HttpContext.Session.Get<Event>(Configuration.EVENT_KEY) ?? new Event();
 
         public RoomController(ModelContext context,
             UserManager<ApplicationUser> userManager)
@@ -27,32 +30,31 @@ namespace WeddingRestaurant.Controllers
             _userManager = userManager;
             _context = context;
         }
-        public async Task<IActionResult> Index(string sortOrder, int page = 1)
+        public async Task<IActionResult> Index(string? sortOrder, int page = 1)
         {
             page = page < 1 ? 1 : page;
             int pageSize = 6;
-            var rooms = _context.Rooms.ToPagedList(page, pageSize);
+            IQueryable<Room> roomsQuery = _context.Rooms;
 
-            if (sortOrder == "decrease")
+            if (sortOrder == "ascending")
             {
-                rooms = rooms.OrderByDescending(r => r.Price).ToPagedList(page, pageSize);
-            }   
-            else if (sortOrder == "ascending")
-            {
-                rooms = rooms.OrderBy(r => r.Price).ToPagedList(page, pageSize);
+                roomsQuery = roomsQuery.OrderByDescending(r => r.Price);
             }
-
+            else if (sortOrder == "decrease")
+            {
+                roomsQuery = roomsQuery.OrderBy(r => r.Price);
+            }
+            var rooms = await roomsQuery.ToPagedListAsync(page, pageSize);
             if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
-                return PartialView("_RoomsList", await rooms.ToListAsync());
+                return PartialView("_RoomsList", rooms);
             }
-
             return View(rooms);
         }
         [Authorize(Roles = "User")]
 		public async Task<IActionResult> CheckOut()
         {
-            return View(Cart);
+            return View(CartRoom);
         }
 		[Authorize(Roles = "User")]
 		[HttpPost]
@@ -61,23 +63,21 @@ namespace WeddingRestaurant.Controllers
             if (ModelState.IsValid)
             {
                 {
-					var events = new Event
+                    var room = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == id);
+                    var roomPrice = room?.Price;
+
+                    var events = new Event
                     {
                         Name = model.Name,
                         Time = model.Time,
                         NumberTable = model.NumberTable,
 						RoomId= id,
                         Note = model.Note,
-						UserId = await _userManager.GetUserAsync(User),
                     };
-                    var room = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == id);
 
-                    var roomPrice = room?.Price;
+                    HttpContext.Session.Set(Configuration.EVENT_KEY, events);
 
-                    _context.Add(events);
-                    await _context.SaveChangesAsync();
-
-                    return RedirectToAction("Index", "Cart", new { numberTable = model.NumberTable, roomPrice = roomPrice });
+                    return RedirectToAction("Index", "Cart", new { roomPrice = roomPrice });
                 }
             }
 
@@ -85,7 +85,7 @@ namespace WeddingRestaurant.Controllers
         }
         public IActionResult AddToCart(int id, string type = "Normal")
         {
-            var gioHang = Cart;
+            var gioHang = CartRoom;
             if (gioHang.Count() > 0 )
             {
                 TempData["Message"] = "Chỉ có thể thêm 1 sảnh";
@@ -129,7 +129,7 @@ namespace WeddingRestaurant.Controllers
 		}
 		public IActionResult RemoveCart(int[] ids, string type = "Normal")
 		{
-			var gioHang = Cart;
+			var gioHang = CartRoom;
 
 			foreach (var id in ids)
 			{

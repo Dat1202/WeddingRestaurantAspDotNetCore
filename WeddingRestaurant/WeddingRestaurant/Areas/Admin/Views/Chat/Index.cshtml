@@ -31,10 +31,10 @@
         <div class="chat-messages-empty" id="chat-messages-empty">
             <!-- Chat messages will be displayed here -->
         </div>
-            <div class="chat-input">
-                <input type="text" name="content" id="messageInput" placeholder="Type a message...">
-                <input type="submit" id="sendButton" value="Send Message" />
-            </div>
+        <div class="chat-input">
+            <input type="text" name="content" id="messageInput" placeholder="Type a message...">
+            <input type="submit" id="sendButton" value="Send Message" style="background-color: #dc3545;" />
+        </div>
     </div>
 </div>
 
@@ -47,6 +47,10 @@
         $(document).ready(function () {
             $(document).on('click', '.user-item', function () {
                 var userName = $(this).data('user-name');
+                var chatBox = $('.chat-box');
+
+                chatBox.removeClass().addClass(`chat-box chat-box-${userName}`);
+
                 console.log("Clicked user:", userName);
                 $.get(`/Admin/Chat/DetailMessage?userName=${userName}`, function (data) {
                     var chatMessageEmpty = $('#chat-messages-empty');
@@ -62,9 +66,16 @@
                         $('#chat-messages').html(data)
                     } 
                     var chatMessage = $('#chat-messages');
-
                     chatMessage.animate({ scrollTop: chatMessage.prop("scrollHeight")}, 1);
-                    console.log(chatMessage.prop("scrollHeight"));
+
+                    var headerChatMessage = `
+                            <div class="row">
+                                    <div class="chat-about">
+                                     <h2 class="m-b-0">${userName}</h2>
+                                </div>
+                            </div>`;
+
+                    $('.chat-header').html(headerChatMessage);
                 });
             });
         });
@@ -73,35 +84,54 @@
             .withUrl("/chathub")
             .build();
 
-        //từ user gửi qua admin
+        //từ user gửi qua admin - admin là người nhận
         connection.on("ReceiveMessage", (user, message) => {
+
             let chatBox = document.getElementById(`${user}`);
-            let chatMessages = document.getElementById("chat-messages");
+            let chatMessages = document.getElementById("chat-messages"); 
+            const now = new Date();
+
+            let dateTimeString = now.toLocaleDateString() + " " + now.toLocaleTimeString();
 
             if (!chatBox) {
                 updateUserList(user);
             }
+            var chatBoxUserName = document.getElementsByClassName(`chat-box-${user}`)
+            console.log(chatBoxUserName)
 
-            const messageDiv = document.createElement("div");
-            messageDiv.classList.add('message', 'received');
+            if (chatBoxUserName.length > 0) {
+                const messageDiv = document.createElement("div");
+                messageDiv.setAttribute('data-user-name', `${user}`);
+                messageDiv.classList.add('message', 'received');
 
-            const messageContent = document.createElement('p');
-            messageContent.textContent = `${message}`
+                const messageContent = document.createElement('p');
+                messageContent.textContent = `${message}`;
+                messageContent.setAttribute('title', dateTimeString);
 
-            messageDiv.appendChild(messageContent);
-            chatMessages.appendChild(messageDiv);
+                messageDiv.appendChild(messageContent);
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
 
         });
 
         //từ admin gửi đi
         document.getElementById("sendButton").addEventListener("click", function (event) {
+            sendMessageHandler(event);
+        });
+
+        document.getElementById("messageInput").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                sendMessageHandler(event);
+            }
+        });
+
+        function sendMessageHandler(event) {
             event.preventDefault();
             var messageElement = document.querySelector('.message.received');
 
             var receiver = messageElement.getAttribute('data-user-name');
             var message = document.getElementById("messageInput").value;
-
-            console.log(receiver);
 
             if (message === '') {
                 this.disabled = false;
@@ -122,18 +152,19 @@
                     console.log("Error sending message: " + xhr.responseText);
                 }
             });
-            console.log(receiver)
+
             sendMessage(receiver, message);
             document.getElementById("messageInput").value = '';
-        });
+        }
 
-
-        connection.start().catch(err => console.error(err.toString()));
-
+        //từ admin gửi đi
         function sendMessage(receiver, message) {
             connection.invoke("SendMessageToUser", receiver, message).catch(function (err) {
                 return console.error(err.toString());
-            });
+            }); 
+            const now = new Date();
+            
+            let dateTimeString = now.toLocaleDateString() + " " + now.toLocaleTimeString();
 
             let chatMessages = document.getElementById("chat-messages");
 
@@ -142,10 +173,11 @@
 
             const messageContent = document.createElement('p');
             messageContent.textContent = `${message}`;
-
+            messageContent.setAttribute('title', dateTimeString);
             messageDiv.appendChild(messageContent);
             chatMessages.appendChild(messageDiv);
-        }
+            chatMessages.scrollTop += messageDiv.scrollHeight;
+        }   
 
         function updateUserList(userName) {
             const userElement = document.createElement('button');
@@ -157,6 +189,8 @@
             userDiv.textContent = userName
             userElement.appendChild(userDiv)
             document.getElementById('users').appendChild(userElement);
-        }
+        } 
+        connection.start().catch(err => console.error(err.toString()));
+
     </script>
 }

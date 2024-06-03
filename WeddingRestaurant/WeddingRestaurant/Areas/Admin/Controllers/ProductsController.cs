@@ -71,7 +71,7 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
 
                 if (productExistsInCategory)
                 {
-                    TempData["ProductExists"] = "Món ăn đã tồn tại trong danh mục này.";
+                    TempData["ProductExists"] = "Món ăn đã tồn tại trong danh mục này.";    
                     ViewData["CategoryId"] = new SelectList(await _unitOfWork.Categories.GetAllAsync(), "Id", "Name", product.CategoryId);
 
                     return View(product);
