@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AGWU+Y1XDAXhM1LQz4heAcmYunZQIFvNgSGiIMPpKZM=",
+  "Hash": "57BLbTmBOQTY7yILAh33Nl5sj2BwPtxLdEkul5kpSZo=",
   "Source": "WeddingRestaurant",
   "BasePath": "_content/WeddingRestaurant",
   "Mode": "Default",
@@ -6133,6 +6133,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Image\\Room\\e096621b-9ae9-4d62-869e-cbaf798cdae6.jpg"
+    },
+    {
+      "Identity": "D:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\Room\\e0f71ea4-afdd-4526-ac0b-8388caff952d.jpg",
+      "SourceId": "WeddingRestaurant",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\",
+      "BasePath": "_content/WeddingRestaurant",
+      "RelativePath": "Image/Room/e0f71ea4-afdd-4526-ac0b-8388caff952d.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Image\\Room\\e0f71ea4-afdd-4526-ac0b-8388caff952d.jpg"
     },
     {
       "Identity": "D:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\wwwroot\\Image\\Room\\e4718569-c05a-4876-8796-ee7d1ca5284e.jpg",

@@ -34,7 +34,7 @@ namespace WeddingRestaurant.Controllers
         {
             page = page < 1 ? 1 : page;
             int pageSize = 6;
-            IQueryable<Room> roomsQuery = _context.Rooms;
+            IQueryable<Room> roomsQuery = _context.Rooms.AsNoTracking();
 
             if (sortOrder == "ascending")
             {
@@ -51,11 +51,13 @@ namespace WeddingRestaurant.Controllers
             }
             return View(rooms);
         }
+
         [Authorize(Roles = "User")]
 		public async Task<IActionResult> CheckOut()
         {
             return View(CartRoom);
         }
+
 		[Authorize(Roles = "User")]
 		[HttpPost]
         public async Task<IActionResult> CheckOut(CheckOutVM model, int? id)
@@ -83,6 +85,7 @@ namespace WeddingRestaurant.Controllers
 
             return View();
         }
+
         public IActionResult AddToCart(int id, string type = "Normal")
         {
             var gioHang = CartRoom;

@@ -10,11 +10,11 @@ namespace WeddingRestaurant.Controllers
     [Authorize(Roles = "User")]
     public class ListOrderController : Controller
     {
-        private readonly ModelContext _modelContext;
+        private readonly ModelContext _model;
         private readonly UserManager<ApplicationUser> _userManager;
-        public ListOrderController(UserManager<ApplicationUser> userManager, ModelContext modelContext)
+        public ListOrderController(UserManager<ApplicationUser> userManager, ModelContext model)
         {
-            _modelContext = modelContext;
+            _model = _model;
             _userManager = userManager;
         }
         public async Task<IActionResult> Index()
@@ -23,14 +23,14 @@ namespace WeddingRestaurant.Controllers
 
             if(user != null)
             {
-                var orderId = await _modelContext.Orders
+                var orderId = await _model.Orders
                                             .Where(u => u.UserId == user)
                                             .Select(u => u.Id)
                                             .ToListAsync();
 
                 var danhSachDonHang = (
-                    from od in _modelContext.OrderDetails
-                    join p in _modelContext.Products on od.ProductId equals p.Id
+                    from od in _model.OrderDetails
+                    join p in _model.Products on od.ProductId equals p.Id
                     where orderId.Contains(od.OrderId)
                     group new { od, p } by od.OrderId into grouped
 

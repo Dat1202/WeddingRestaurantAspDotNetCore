@@ -22,7 +22,6 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-
             var currentUser = await _userManager.GetUserAsync(User);
 
             var distinctUsernames = await _model.ChatMessage
@@ -44,12 +43,14 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
             }
             return View();
         }
+
         public async Task<IActionResult> DetailMessage(string? userName)
         {
             var currentUser = await _userManager.GetUserAsync(User);
             var sentUser = await _userManager.FindByNameAsync(userName);
-
-            var messages = _model.ChatMessage
+            if (currentUser != null)
+            {
+                var messages = _model.ChatMessage
                 .Where(m => m.SenderId == currentUser.Id && m.Recipient == sentUser ||
                 m.RecipientId == currentUser.Id && m.Sender == sentUser)
                 .OrderBy(m => m.Time)
@@ -60,11 +61,11 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
                     Time = m.Time,
                     UserName = m.Sender.UserName,
                     Recipient = m.Recipient
-                });
+                }); 
+                return View(messages);
+            }
 
-            ViewBag.User = currentUser;
-
-            return View(messages);
+            return View();
         }
     }
 }

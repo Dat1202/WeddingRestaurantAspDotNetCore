@@ -22,7 +22,6 @@ namespace WeddingRestaurant.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ModelContext db;
         private readonly IMapper _mapper;
         private readonly ILogger<RegisterVM> _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -40,29 +39,19 @@ namespace WeddingRestaurant.Controllers
             _userStore = userStore;
             _signInManager = signInManager;
             _userManager = userManager;
-            db = context; 
             _mapper = mapper; 
             _logger = logger;
         }
+
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM model, IFormFile Avatar)
         {
-        
-            //if (string.IsNullOrWhiteSpace(model.Email))
-            //{
-            //    ModelState.AddModelError("Email", "Vui lòng nhập địa chỉ email.");
-            //}
-
-            //if (string.IsNullOrWhiteSpace(model.UserName))
-            //{
-            //    ModelState.AddModelError("Email", "Vui lòng nhập địa chỉ email.");
-            //}
-            
             ModelState.Remove("Avatar");
 
             if (ModelState.IsValid)
@@ -131,6 +120,7 @@ namespace WeddingRestaurant.Controllers
 
             return View(model);
         }
+
         [HttpGet]
         public async Task<IActionResult> Login(string? ReturnUrl)
         {
@@ -139,6 +129,7 @@ namespace WeddingRestaurant.Controllers
             return View("Login");
 
         }
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM model, string? ReturnUrl)
         {

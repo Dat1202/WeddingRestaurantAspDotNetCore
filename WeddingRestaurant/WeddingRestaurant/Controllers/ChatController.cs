@@ -14,7 +14,6 @@ namespace WeddingRestaurant.Controllers
         private readonly ModelContext _model;
         private readonly IMapper _mapper;
         private readonly UserManager<ApplicationUser> _userManager;
-
         public ChatController(ModelContext model, UserManager<ApplicationUser> userManager
             , IMapper mapper) {
             _model = model;
@@ -26,10 +25,11 @@ namespace WeddingRestaurant.Controllers
         public async Task<IActionResult> Index()
         {
             var currentUser = await _userManager.GetUserAsync(User);
-            var adminUsers = await _userManager.FindByNameAsync("admin");
+            var adminUser = await _userManager.FindByNameAsync("admin");
+
             var messages = _model.ChatMessage.AsNoTracking()
-                .Where(m => m.SenderId == currentUser.Id && m.RecipientId == adminUsers.Id ||
-                m.RecipientId == currentUser.Id && m.SenderId == adminUsers.Id)
+                .Where(m => (m.SenderId == currentUser.Id && m.RecipientId == adminUser.Id) ||
+                (m.RecipientId == currentUser.Id && m.SenderId == adminUser.Id))
                 .OrderBy(m => m.Time)
                 .Select(m => new MessageVM
                 {
@@ -41,7 +41,7 @@ namespace WeddingRestaurant.Controllers
                 }); 
 
             ViewBag.User = currentUser;
-            ViewBag.admin = adminUsers;
+            ViewBag.admin = adminUser;
             return View(messages);
         }
         public async Task<IActionResult> CreateMessage(string content, string? receiver)
@@ -88,7 +88,5 @@ namespace WeddingRestaurant.Controllers
             await _model.SaveChangesAsync();
             return Ok();
         }
-
-
     }
 }

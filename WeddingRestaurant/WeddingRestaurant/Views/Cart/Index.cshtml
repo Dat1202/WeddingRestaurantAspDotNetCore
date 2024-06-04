@@ -165,10 +165,7 @@
             },
             onApprove: (data, actions) => {
                 return fetch(`/Cart/capture-paypal-order?orderId=${data.orderID}`, {
-                    method: "post",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
+                    method: "post"
                 }).then((response) => { 
                     if (!response.ok) {
                         return response.json().then(error => { throw error; });
