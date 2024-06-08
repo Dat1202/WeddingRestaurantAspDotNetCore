@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WeddingRestaurant.Heplers;
 using WeddingRestaurant.Models;
 
 namespace WeddingRestaurant.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = Configuration.RoleAdmin)]
     public class DashboardController : Controller
     {
         private readonly ModelContext _model;

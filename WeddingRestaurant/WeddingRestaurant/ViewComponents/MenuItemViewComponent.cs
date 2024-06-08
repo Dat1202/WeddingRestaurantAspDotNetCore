@@ -16,9 +16,9 @@ namespace WeddingRestaurant.ViewComponents
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<IViewComponentResult> InvokeAsync(int id)
+        public async Task<IViewComponentResult> InvokeAsync(int id, List<int> productIds)
         {
-            var products = await _unitOfWork.Products.GetProductByMenuId(id);
+            var products = await _unitOfWork.Products.GetProductByMenuId(id, productIds);
 
 			return View("MenuSubItem", products);
         }

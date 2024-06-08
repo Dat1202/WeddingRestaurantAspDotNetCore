@@ -7,7 +7,7 @@ namespace WeddingRestaurant.Interfaces
     public interface IMenuRepository : IRepository<Menu>
     {
         Task<IEnumerable<Menu>> GetAllMenus(int page, int pageSize);
-        Task<IEnumerable<MenuVM>> GetMenuByTypeMenuId(int? id);
+        Task<IEnumerable<MenuVM>> GetMenuByTypeMenuId(int? id, List<int> productIds);
         Task<bool> GetMenuByName(string name);
         Task<Menu> GetMenuById(int id);
     }

@@ -1,0 +1,140 @@
+﻿@* @model IEnumerable<WeddingRestaurant.Models.Room> *@
+@model X.PagedList.IPagedList<WeddingRestaurant.Models.Room>
+@using WeddingRestaurant.ViewModels
+@using X.PagedList.Mvc.Core
+
+@{
+    ViewData["Title"] = "Index";
+    // Layout = "~/Areas/Customers/Views/Shared/_Layout.cshtml";
+}
+@{
+    // Dữ liệu giả định
+    var priceRanges = new List<PriceRange>
+    {
+        new PriceRange { Id = 1, From = 0, To = 100 },
+        new PriceRange { Id = 2, From = 100, To = 200 },
+        new PriceRange { Id = 3, From = 200, To = 300 },
+        new PriceRange { Id = 4, From = 300, To = 400 },
+        new PriceRange { Id = 5, From = 400, To = 500 }
+    };
+}
+<div class="message"></div>
+<!-- Shop Start -->
+<div class=" pt-2">
+    <div class="row px-xl-5">
+        <!-- Shop Sidebar Start -->
+        <div class="col-lg-3 col-md-12">
+            <!-- Price Start -->
+            <div class="border-bottom mb-4 pb-4">
+                <h5 class="font-weight-semi-bold mb-4">Filter by price</h5>
+                @foreach (var priceRange in priceRanges)
+                {
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="price-@priceRange.Id" name="priceRangeIds" value="@priceRange.Id" onchange="submitFilterForm()">
+                            <label class="custom-control-label" for="price-@priceRange.Id">@($"${priceRange.From} - ${priceRange.To}")</label>
+                            <span class="badge border font-weight-normal">...</span> 
+                        </div>
+                }
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                        <input type="checkbox" class="custom-control-input" id="price-5">
+                        <label class="custom-control-label" for="price-5">$400 - $500</label>
+                        <span class="badge border font-weight-normal">168</span>
+                    </div>
+            
+                </div>
+            <!-- Price End -->
+        </div>
+        <!-- Shop Sidebar End -->
+        <!-- Shop Product Start -->
+        <div class="col-lg-9 col-md-12">
+            <div class="row pb-3">
+                <div class="col-12 pb-1">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div class="input-group">
+                                
+                            </div>
+                            <div class="dropdown ml-4">
+                            <button class="btn border dropdown-toggle button-text" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                @ViewData["DropdownItemName"]
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
+                                    <a asp-action="Index" asp-route-sortOrder="decrease" class="dropdown-item">Giảm dần</a>
+                                    <a asp-action="Index" asp-route-sortOrder="ascending" class="dropdown-item">Tăng dần</a>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+
+                <div id="roomsList" class="row">
+                    ﻿@foreach (var item in Model)
+                    {
+                        <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+                            <div class="card product-item border-0 mb-4">
+                                <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                    <img class="img-fluid w-100" src="~/Image/Room/@item.Image" alt="">
+                                </div>
+                                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                    <h6 class="text-truncate mb-3">@item.Name</h6>
+                                    <div class="d-flex justify-content-center">
+                                        <h6>@item.Price</h6>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between bg-light border">
+                                    <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Detail</a>
+                                    <a data-id="@item.Id" class="btn btn-sm text-dark p-0 add-To-cart"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="col-12 pb-1">
+                    <nav aria-label="Page navigation" class="d-flex justify-content-center">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", "Room", new { sortOrder = ViewData["CurrentSort"], page = page }))
+                    </nav>
+                </div> 
+            </div>
+        </div>
+        <!-- Shop Product End -->
+    </div>
+</div>
+<!-- Shop End -->
+
+@section scripts {
+    <script>
+
+        $(document).ready(function () {
+
+            $('#roomsList').on('click', '.add-To-cart', function () {
+                var id = $(this).data('id');
+
+                $.ajax({
+                    url: '/Customers/Room/AddToCart',
+                    method: 'POST',
+                    data: {
+                        id: id,
+                        type: "ajax"
+                    },
+                    success: function (response) {
+                        var message = $(".message");
+
+                        var alertSuccess = $(".alert-danger");
+
+                        if (alertSuccess.length <=0) { 
+                            var messageElement = document.createElement("p");
+                            messageElement.classList.add("alert", "alert-danger");
+                            messageElement.textContent = response.message;
+
+                            message.append(messageElement); 
+                        }
+                    },
+                    error: function (error) {
+                        console.error('Error adding To cart:', error);
+                        alert('There was an error adding the item To your cart.');
+                    }
+                });
+            });
+        });
+    </script> 
+}

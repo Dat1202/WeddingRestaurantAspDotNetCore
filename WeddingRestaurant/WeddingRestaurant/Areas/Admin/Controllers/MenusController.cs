@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WeddingRestaurant.Heplers;
 using WeddingRestaurant.Interfaces;
 using WeddingRestaurant.Models;
 using WeddingRestaurant.Repositories;
@@ -13,7 +14,7 @@ using WeddingRestaurant.Repositories;
 namespace WeddingRestaurant.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = Configuration.RoleAdmin)]
     public class MenusController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

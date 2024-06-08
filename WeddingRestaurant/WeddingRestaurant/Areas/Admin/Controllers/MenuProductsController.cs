@@ -7,13 +7,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WeddingRestaurant.Heplers;
 using WeddingRestaurant.Models;
 using X.PagedList;
 
 namespace WeddingRestaurant.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = Configuration.RoleAdmin)]
     public class MenuProductsController : Controller
     {
         private readonly ModelContext _context;
@@ -69,13 +70,11 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Check if the combination of MenuId and ProductId already exists
                 bool exists = await _context.MenuProducts
                                             .AnyAsync(mp => mp.MenuId == menuProduct.MenuId && mp.ProductId == menuProduct.ProductId);
 
                 if (exists)
                 {
-                    // Add a model error and re-populate the dropdown lists
                     ModelState.AddModelError(string.Empty, "Món ăn đã có trong menu");
                     ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Name", menuProduct.MenuId);
                     ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name", menuProduct.ProductId);

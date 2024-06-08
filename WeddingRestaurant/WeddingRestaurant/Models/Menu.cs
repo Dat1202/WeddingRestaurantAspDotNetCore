@@ -13,5 +13,6 @@ namespace WeddingRestaurant.Models
         [ForeignKey("TypeMenu")]
         public int TypeID { get; set; }
         public virtual TypeMenu? TypeMenu { get; set; }
+        //public ICollection<Product>? Products { get; set; }
     }
 }

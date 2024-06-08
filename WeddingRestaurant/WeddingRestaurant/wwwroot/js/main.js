@@ -114,20 +114,7 @@ jQuery(document).ready(function () {
             jQuery(tdstt[i]).html(i + 1)
         }
     });
-    jQuery("span.del-all a").click(function (e) {
-        e.preventDefault();
-        var r = confirm("Bạn muốn xóa tất cả món ăn đã chọn?");
-        if (r == !0) {
-            jQuery("#order table").find("tr").remove();
-            jQuery(".list-food").find(".check-dish").prop('checked', !1);
-            jQuery("#tong-tien span").html("0");
-            jQuery("#numb-order").html("0");
-            tonggia = 0;
-            stt = 1;
-            return tonggia;
-            return stt
-        } else { }
-    })
+ 
     jQuery("#toggle-order").click(function () {
         jQuery("#order").toggle()
     })

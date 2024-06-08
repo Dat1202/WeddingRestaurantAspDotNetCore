@@ -1,5 +1,6 @@
 ﻿using Azure;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using WeddingRestaurant.Interfaces;
 using WeddingRestaurant.Models;
 using X.PagedList;
@@ -15,18 +16,20 @@ namespace WeddingRestaurant.Repositories
             _context = context;
             _dbSet = _context.Set<T>();
         }
+
         public async Task<IPagedList<T>> GetAllPagedListAsync(int page, int pageSize)
         {
             page = page < 1 ? 1 : page; 
             var query = _dbSet.AsQueryable();
             return await query.ToPagedListAsync(page, pageSize);
         }
+
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(int? id)
         {
             return await _dbSet.FindAsync(id);
         }
@@ -56,6 +59,18 @@ namespace WeddingRestaurant.Repositories
             _dbSet.Remove(entity);
             //await _context.SaveChangesAsync();
             return true;
+        }
+
+        public T Get(Expression<Func<T, bool>> filter)
+        {
+            IQueryable<T> query = _dbSet.Where(filter).AsNoTracking();
+            return query.FirstOrDefault();
+        }
+
+        public IQueryable<T> GetRange(Expression<Func<T, bool>> filter)
+        {
+            IQueryable<T> query = _dbSet.Where(filter).AsNoTracking();
+            return query;
         }
     }
 }

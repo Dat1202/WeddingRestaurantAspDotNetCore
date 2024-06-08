@@ -1,0 +1,128 @@
+﻿@model IEnumerable<WeddingRestaurant.ViewModels.MessageVM>
+
+@{
+    Layout = "~/Areas/Customers/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Chat";
+}
+
+<div class="chat-box">
+    <div class="chat-header">
+        <div class="chat-header">Chat with admin</div>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+        @foreach (var message in Model)
+        {
+            <div class="message @((message.UserName == Context.User.Identity.Name) ? "sent" : "received")">
+                    <div title="@message.Time">@message.Content</div>
+            </div>  
+        }
+    </div>  
+    <div class="chat-input">
+        <input type="text" name="content" id="messageInput" placeholder="Type a message...">
+        <input type="submit" id="sendButton" value="Send Message" style="background-color: #dc3545;" />
+    </div>
+</div>
+
+
+@section scripts {
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.7/signalr.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            var chatMessage = $('#chat-messages');
+            chatMessage.animate({ scrollTop: chatMessage.prop("scrollHeight") }, 1);
+        });
+
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chathub")
+            .build();
+
+        //từ admin qua user
+        connection.on("ReceiveMessage", (user, message) => {
+            const now = new Date();
+            let chatMessages = document.getElementById('chat-messages');
+
+            let dateTimeString = now.toLocaleDateString() + " " + now.toLocaleTimeString();
+            let box = document.getElementsByClassName("chat-box-container");
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add('message', 'received');
+            const messageContent = document.createElement('p');
+            messageContent.textContent = `${message}`;
+            messageDiv.appendChild(messageContent);
+            messageContent.setAttribute('title', dateTimeString)
+
+            chatMessages.appendChild(messageDiv);
+
+            chatMessages.scrollTop += messageDiv.scrollHeight;
+        });
+
+        //từ user gửi qua admin
+        document.getElementById("sendButton").addEventListener("click", function (event) {
+            sendMessageHandler(event);
+        });
+
+        document.getElementById("messageInput").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                sendMessageHandler(event);
+            }
+        });
+
+        function sendMessageHandler(event) {
+            event.preventDefault();
+
+            var receiver = 'admin'
+            var message = document.getElementById("messageInput").value;
+
+            if (message === '') {
+                this.disabled = false;
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/Customers/Chat/CreateMessage",
+                data: {
+                    content: message
+                },
+                success: function (response) {
+                    console.log("Message sent successfully.");
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Error sending message: " + xhr.responseText);
+                }
+            });
+            console.log(receiver)
+
+            sendMessage(receiver, message);
+            document.getElementById("messageInput").value = '';
+        }
+
+        //từ user gửi qua admin - render user 
+        function sendMessage(receiver, message) {
+            connection.invoke("SendMessageToUser", receiver, message).catch(function (err) {
+                return console.error(err.toString());
+            });
+
+            const now = new Date();
+            let chatMessages = document.getElementById('chat-messages');
+
+            let dateTimeString = now.toLocaleDateString() + " " + now.toLocaleTimeString();
+            let box = document.getElementsByClassName("chat-box-container");
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add('message', 'sent');
+            const messageContent = document.createElement('p');
+            messageContent.textContent = `${message}`;
+            messageDiv.appendChild(messageContent);
+            messageContent.setAttribute('title', dateTimeString)
+
+            chatMessages.appendChild(messageDiv);
+
+            chatMessages.scrollTop += messageDiv.scrollHeight;
+
+        }
+
+        connection.start().catch(err => console.error(err.toString()));
+
+    </script>
+}

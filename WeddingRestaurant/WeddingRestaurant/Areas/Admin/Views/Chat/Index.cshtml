@@ -33,7 +33,7 @@
         </div>
         <div class="chat-input">
             <input type="text" name="content" id="messageInput" placeholder="Type a message...">
-            <input type="submit" id="sendButton" value="Send Message" style="background-color: #dc3545;" />
+            <input type="submit" id="sendButton" value="Send Message" style="background-color: #3c8dbc;" />
         </div>
     </div>
 </div>
@@ -140,7 +140,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "/Chat/CreateMessage",
+                url: "/Customers/Chat/CreateMessage",
                 data: {
                     content: message,
                     receiver: receiver

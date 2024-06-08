@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 using WeddingRestaurant.Helpers;
 using WeddingRestaurant.Hubs;
 using Microsoft.AspNetCore.SignalR;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,8 +41,8 @@ builder.Services.AddSession(options =>
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/User/Login";
-    options.AccessDeniedPath = "/Home/Error";
+    options.LoginPath = "/Customers/User/Login";
+    options.AccessDeniedPath = "/Customers/Home/Error";
     options.Cookie.Name = "WeddingRestaurant";
 });
 
@@ -74,6 +75,8 @@ builder.Services.AddScoped<ITypeMenuRepository, TypeMenuRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository >();
+builder.Services.AddScoped<IChatRepository, ChatRepository>();
 
 builder.Services.AddSingleton(x =>
     new PaypalClient(
@@ -114,8 +117,8 @@ app.MapAreaControllerRoute(
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
+    pattern: "{area=Customers}/{controller=Home}/{action=Index}/{id?}"
+);
 app.MapHub<ChatHub>("/chathub");
 
 app.Run();

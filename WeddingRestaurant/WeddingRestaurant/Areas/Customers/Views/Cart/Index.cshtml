@@ -1,0 +1,191 @@
+﻿@model IEnumerable<WeddingRestaurant.ViewModels.CartItem>
+@using WeddingRestaurant.Heplers
+
+@{
+    ViewData["Title"] = "Giỏ hàng";
+    Layout = "~/Areas/Customers/Views/Shared/_Layout.cshtml";
+}
+@* <h3>Số bàn: @ViewBag.NumberTable</h3>
+<h3>Số bàn: @ViewBag.RoomPrice</h3>
+ *@
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<div id="message"></div>
+
+<section class="h-100 gradient-custom">
+    <div class="container py-1">
+        @ViewBag.CustomerId
+        <div class="row d-flex justify-content-center my-4">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header py-3">
+                        <h5 class="mb-0">Giỏ hàng</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (TempData["UserID"] != null)
+                        {
+                            <div class="alert alert-danger">@TempData["UserID"]</div>
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                                    <p><strong>@item.Name</strong></p>
+                                </div>
+                                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                                    <p class="text-start text-md-center">
+                                        <strong>@item.Price</strong>
+                                    </p>
+                                </div>
+
+                                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                        <a asp-action="RemoveCart" asp-route-ids="@item.Id" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4" />
+                        }
+                    </div>
+                </div>
+
+                <div class="card mb-4 mb-lg-0">
+                    <div class="card-body">
+                        <p><strong>We accept</strong></p>
+                        <img class="me-2" width="45px"
+                             src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                             alt="Visa" />
+                        <img class="me-2" width="45px"
+                             src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                             alt="American Express" />
+                        <img class="me-2" width="45px"
+                             src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                             alt="Mastercard" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header py-3">
+                        <h5 class="mb-0">Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                Tổng tiền thực đơn
+                                <span>@Model.Sum(p => p.Price).ToVnd()</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                Tiền sảnh
+                                <span>@ViewBag.RoomPrice</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                <div>
+                                    <strong>Tổng tiền</strong>
+                                    <strong>
+                                        <p class="mb-0">(including VAT)</p>
+                                    </strong>
+                                </div>
+                                <span>
+                                    <strong>
+                                        @{
+                                            if (ViewBag.NumberTable != null)
+                                            {
+                                                decimal numberTable;
+                                                if (decimal.TryParse(ViewBag.NumberTable.ToString(), out numberTable))
+                                                {
+                                                    var RoomPrice = (decimal)ViewBag.RoomPrice;
+                                                    var totalPrice = Model.Sum(p => p.Price) * numberTable + RoomPrice;
+                                                        @totalPrice.ToVnd()
+                                                }
+                                                else
+                                                {
+                                                        <text>0 VNĐ</text>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                    <text>0 VNĐ</text>
+                                            }
+                                        }
+                                    </strong>
+                                </span>
+
+                            </li>
+                        </ul>
+                        @if (Model.Any())
+                        {
+                            <div id="paypal-button-container"></div>
+
+                            <form asp-action="Index" asp-controller="Cart">
+                                <input type="hidden" name="NumberTable" value="@ViewBag.NumberTable" />
+                                <input type="submit" name="payment" class="btn border-secondary text-uppercase text-primary w-100 mt-2" value="Thanh toán VNPay">
+                                <input type="submit" name="payment" class="btn border-secondary text-uppercase text-primary w-100 mt-2" value="Thanh toán trực tiếp">
+                            </form>
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+@section scripts {
+    <script src="https://www.paypal.com/sdk/js?client-id=@ViewBag.PaypalClientId"></script>
+    <script>
+
+        paypal.Buttons({
+            style: {
+                disableMaxWidth: true
+            },
+            createOrder: (data, actions) => {   
+                return fetch("/Cart/create-paypal-order", {
+                    method: "post",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then((response) => {
+                    if (!response.ok) {
+                        return response.json().then(error => { throw error; });
+                    }
+
+                    return response.json();
+                }).then((order) => {
+                    console.log('Order ID: ', order.id);
+                    return order.id;
+                })
+                    .catch(error => alert(error.message));
+            },
+            onApprove: (data, actions) => {
+                return fetch(`/Cart/capture-paypal-order?orderId=${data.orderID}`, {
+                    method: "post"
+                }).then((response) => { 
+                    if (!response.ok) {
+                        return response.json().then(error => { throw error; });
+                    }
+
+                    var successMessage = document.createElement('div');
+                    successMessage.classList.add('alert', 'alert-success');
+                    successMessage.textContent = 'Payment successful!Your order has been processed.';
+                    var messageElement = document.getElementById('message');
+
+                    messageElement.appendChild(successMessage);
+
+                    //Đổi địa chỉ tới action thông báo thành công
+                    setTimeout(function () {
+                        window.location.href = "/Customers/Cart/Index";
+                    }, 3000); 
+                }).catch(error => alert(error.message));
+            }
+        }).render('#paypal-button-container');
+    </script>
+}

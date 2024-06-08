@@ -15,7 +15,7 @@ using WeddingRestaurant.ViewModels;
 namespace WeddingRestaurant.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = Configuration.RoleAdmin)]
     public class TypeMenusController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

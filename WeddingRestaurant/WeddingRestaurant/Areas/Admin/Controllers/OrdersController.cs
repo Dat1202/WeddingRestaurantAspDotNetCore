@@ -7,13 +7,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WeddingRestaurant.Heplers;
 using WeddingRestaurant.Models;
 using WeddingRestaurant.ViewModels;
 
 namespace WeddingRestaurant.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = Configuration.RoleAdmin)]
     public class OrdersController : Controller
     {
         private readonly ModelContext _context;
@@ -22,13 +23,11 @@ namespace WeddingRestaurant.Areas.Admin.Controllers
             _context = context;
         }
 
-        // GET: Admin/Orders
         public async Task<IActionResult> Index()
         {
             return View(await _context.Orders.ToListAsync());
         }
 
-        // GET: Admin/Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
 
