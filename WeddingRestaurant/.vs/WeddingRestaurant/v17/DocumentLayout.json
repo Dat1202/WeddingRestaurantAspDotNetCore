@@ -44,9 +44,10 @@
               "RelativeDocumentMoniker": "WeddingRestaurant\\appsettings.json",
               "ToolTip": "D:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\appsettings.json",
               "RelativeToolTip": "WeddingRestaurant\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAUwBoAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-06-10T21:16:38.781Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
@@ -57,7 +58,7 @@
               "RelativeDocumentMoniker": "WeddingRestaurant\\Program.cs",
               "ToolTip": "D:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\Program.cs",
               "RelativeToolTip": "WeddingRestaurant\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-10T21:16:37.782Z",
               "EditorCaption": ""
@@ -96,8 +97,7 @@
               "RelativeToolTip": "WeddingRestaurant\\Areas\\Customers\\Controllers\\CartController.cs",
               "ViewState": "AQIAAL8AAAAAAAAAAAAUwM0AAAA/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-10T16:51:21.097Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-10T16:51:21.097Z"
             },
             {
               "$type": "Document",
