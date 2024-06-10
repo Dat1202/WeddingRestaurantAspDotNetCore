@@ -29,6 +29,7 @@
                 return string.Empty;
             }
         }
+
         public static string ToVnd(this decimal giaTri)
         {
             return $"{giaTri:#,##0}đ";

@@ -7,13 +7,15 @@ namespace WeddingRestaurant.Repositories
 {
     public class CartRepository : ICartRepository
     {
-        private readonly ModelContext db;
+        private readonly ModelContext _context;
         public CartRepository(ModelContext context) 
         {
-            db = context;
+            _context = context;
         }
-        public async Task<Order> CreateOrderAsync(Order order, List<CartItem> cart, Event cartEvent)
+        public async Task CreateOrderAsync(Order order, List<CartItem> cart, Event cartEvent)
         {
+            try
+            {
                 var cthds = new List<OrderDetail>();
                 foreach (var item in cart)
                 {
@@ -24,7 +26,7 @@ namespace WeddingRestaurant.Repositories
                         ProductId = item.Id,
                     });
                 }
-                db.AddRange(cthds);
+                _context.AddRange(cthds);
 
                 Event e = new Event
                 {
@@ -32,14 +34,19 @@ namespace WeddingRestaurant.Repositories
                     Name = cartEvent.Name,
                     Time = cartEvent.Time,
                     NumberTable = cartEvent.NumberTable,
-                    RoomId = cartEvent.RoomId,
-                    Note = cartEvent.Note,
+                    RoomId = cartEvent.RoomId ?? null,
+                    Note = cartEvent?.Note,
                 };
-                db.Events.Add(e);
-                await db.SaveChangesAsync();
+                _context.Events.Add(e);
 
-                return order;
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw; 
+            }
         }
+
     }
 
 }

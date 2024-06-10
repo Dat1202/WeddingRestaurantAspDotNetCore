@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\WeddingRestaurant.csproj": {}
+    "D:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\WeddingRestaurant.csproj": {}
   },
   "projects": {
-    "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\WeddingRestaurant.csproj": {
+    "D:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\WeddingRestaurant.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\WeddingRestaurant.csproj",
+        "projectUniqueName": "D:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\WeddingRestaurant.csproj",
         "projectName": "WeddingRestaurant",
-        "projectPath": "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\WeddingRestaurant.csproj",
+        "projectPath": "D:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\WeddingRestaurant.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\obj\\",
+        "outputPath": "D:\\WeddingRestaurantAspDotNetCore\\WeddingRestaurant\\WeddingRestaurant\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",

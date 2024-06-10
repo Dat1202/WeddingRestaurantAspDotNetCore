@@ -22,8 +22,9 @@ namespace WeddingRestaurant.Areas.Customers.Controllers
         {
             var cart = HttpContext.Session.Get<List<CartItem>>(Configuration.CART_KEY) ?? new List<CartItem>();
 
-            List<int> productIds = cart.Select(item => item.Id).ToList();
-            var menus = await _unitOfWork.Menus.GetMenuByTypeMenuId(id, productIds);
+            List<int> productIdsInCart = cart.Select(item => item.Id).ToList();
+            var menus = await _unitOfWork.Menus.GetMenuByTypeMenuId(id, productIdsInCart);
+
             return View(menus);
         }
 

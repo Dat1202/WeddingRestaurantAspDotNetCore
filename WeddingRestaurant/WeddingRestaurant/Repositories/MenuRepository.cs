@@ -19,12 +19,12 @@ namespace WeddingRestaurant.Repositories
 
         public async Task<IEnumerable<Menu>> GetAllMenus(int page, int pageSize)
         {
-            return await _context.Menus.Include(c => c.TypeMenu).ToPagedListAsync(page, pageSize);
+            return await _context.Menus.Include(c => c.TypeMenu).AsNoTracking().ToPagedListAsync(page, pageSize);
         }
 
         public async Task<Menu> GetMenuById(int id)
         {
-            return await _context.Menus.Include(tm => tm.TypeMenu).FirstOrDefaultAsync(m => m.Id == id);
+            return await _context.Menus.Include(tm => tm.TypeMenu).AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
         }
 
         public async Task<bool> GetMenuByName(string name)
@@ -32,7 +32,7 @@ namespace WeddingRestaurant.Repositories
             return await _context.Menus.AnyAsync(e => e.Name.Equals(name));
         }
 
-        public async Task<IEnumerable<MenuVM>> GetMenuByTypeMenuId(int? typeID, List<int> productIds)
+        public async Task<IEnumerable<MenuVM>> GetMenuByTypeMenuId(int? typeID, List<int> productIdsInCart)
         {
             var menuViewModels = await _context.Menus.AsNoTracking()
                                     .Where(m => m.TypeID == typeID)
@@ -41,7 +41,7 @@ namespace WeddingRestaurant.Repositories
                                     {
                                         Id = m.Id,
                                         Name = m.Name,
-                                        ProductIds = productIds
+                                        productIdsInCart = productIdsInCart
                                     })
                                     .ToListAsync();
             return menuViewModels;

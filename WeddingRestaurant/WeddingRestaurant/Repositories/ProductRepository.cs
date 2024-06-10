@@ -17,12 +17,12 @@ namespace WeddingRestaurant.Repositories
 
         public async Task<IEnumerable<Product>> GetAllProducts(int page, int pageSize)
         {
-            return await _context.Products.Include(c => c.Category).ToPagedListAsync(page,  pageSize);
+            return await _context.Products.Include(c => c.Category).AsNoTracking().ToPagedListAsync(page,  pageSize);
         }
 
         public async Task<Product> GetProductById(int id)
         {
-            return await _context.Products.Include(c => c.Category).FirstOrDefaultAsync(m => m.Id == id);
+            return await _context.Products.Include(c => c.Category).AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
         }
 
         public async Task<bool> AnyProductAsync(int cateId, string name)
@@ -30,7 +30,7 @@ namespace WeddingRestaurant.Repositories
             return await _context.Products.AnyAsync(p => p.Name == name && p.CategoryId == cateId);
         }
 
-        public async Task<IEnumerable<ProductVM>> GetProductByMenuId(int menuId, List<int> productIds)
+        public async Task<IEnumerable<ProductVM>> GetProductByMenuId(int menuId, List<int> productIdsInCart)
 		{
 			return await(from mp in _context.MenuProducts 
 						 join p in _context.Products on mp.ProductId equals p.Id
@@ -40,7 +40,7 @@ namespace WeddingRestaurant.Repositories
 							 ProductId = p.Id,
 							 ProductName = p.Name,
 							 ProductPrice = p.Price,
-                             ProductIds = productIds
+                             ProductIds = productIdsInCart
                          }).ToListAsync();
         }
 

@@ -5,6 +5,6 @@ namespace WeddingRestaurant.Interfaces
 {
     public interface ICartRepository
     {
-        Task<Order> CreateOrderAsync(Order order, List<CartItem> cart, Event cartEvent);
+        Task CreateOrderAsync(Order order, List<CartItem> cart, Event cartEvent);
     }
 }

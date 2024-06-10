@@ -7,7 +7,7 @@ namespace WeddingRestaurant.Interfaces
     {
         Task<IEnumerable<Product>> GetAllProducts(int page, int pageSize);
         Task<Product> GetProductById(int id);
-        Task<IEnumerable<ProductVM>> GetProductByMenuId(int id, List<int> productIds);
+        Task<IEnumerable<ProductVM>> GetProductByMenuId(int id, List<int> productIdsInCart);
         Task<bool> GetProductByName(string name);
         Task<bool> AnyProductAsync(int cateId, string name);
     }

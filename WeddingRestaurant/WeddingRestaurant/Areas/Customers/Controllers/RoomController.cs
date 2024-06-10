@@ -66,28 +66,32 @@ namespace WeddingRestaurant.Areas.Customers.Controllers
 		[HttpPost]
         public async Task<IActionResult> CheckOut(CheckOutVM model, int id)
         {
+            ModelState.Remove("id");
             if (ModelState.IsValid)
             {
                 {
                     var room = await _unitOfWork.Rooms.GetByIdAsync(id);
                     var roomPrice = room?.Price;
 
-                    var events = new Event
+                    if(model != null)
                     {
-                        Name = model.Name,
-                        Time = model.Time,
-                        NumberTable = model.NumberTable,
-						RoomId= id,
-                        Note = model.Note,
-                    };
+                        var events = new Event
+                        {
+                            Name = model.Name,
+                            Time = model.Time,
+                            NumberTable = model.NumberTable,
+                            Room = room != null ? room : null,
+                            Note = model.Note,
+                        };
 
-                    HttpContext.Session.Set(Configuration.EVENT_KEY, events);
-
-                    return RedirectToAction("Index", "Cart", new { roomPrice = roomPrice });
+                        HttpContext.Session.Set(Configuration.EVENT_KEY, events);
+                    }
+                    
+                    return RedirectToAction("Index", "Cart", new { roomPrice = roomPrice, area = "Customers" });
                 }
             }
 
-            return View();
+            return View(model);
         }
 
         public async Task<IActionResult> AddToCartAsync(int id, string type = "Normal")

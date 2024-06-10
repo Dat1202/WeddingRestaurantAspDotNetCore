@@ -82,19 +82,20 @@ namespace WeddingRestaurant.Areas.Customers.Controllers
                     
                     await _unitOfWork.Carts.CreateOrderAsync(order, Cart, CartEvent);
 
-                    _unitOfWork.CommitTransaction();
-
                     TempData["SuccessMessage"] = "Bạn sẽ thanh toán ngay khi tiệc diễn ra!";
 
                     HttpContext.Session.Set<Event>(Configuration.EVENT_KEY, new Event());
                     HttpContext.Session.Set<List<CartItem>>(Configuration.CART_KEY, new List<CartItem>());
                     HttpContext.Session.Set<List<RoomVM>>(Configuration.ROOM_KEY, new List<RoomVM>());
+                    _unitOfWork.CommitTransaction();
 
                     return View("Index", Cart);
                 }
                 catch
                 {
                     _unitOfWork.RollbackTransaction();
+                    TempData["SuccessMessage"] = "Có lỗi xảy ra khi xử lý đơn hàng.";
+                    return View("Index", Cart);
                 }
             }   
             return View("Index", Cart);
@@ -150,19 +151,18 @@ namespace WeddingRestaurant.Areas.Customers.Controllers
 
                     await _unitOfWork.Carts.CreateOrderAsync(order, Cart, CartEvent);
 
-                    _unitOfWork.CommitTransaction();
-
-                    TempData["SuccessMessage"] = "Bạn sẽ thanh toán ngay khi tiệc diễn ra!";
-
                     HttpContext.Session.Set<Event>(Configuration.EVENT_KEY, new Event());
                     HttpContext.Session.Set<List<CartItem>>(Configuration.CART_KEY, new List<CartItem>());
                     HttpContext.Session.Set<List<RoomVM>>(Configuration.ROOM_KEY, new List<RoomVM>());
+                    _unitOfWork.CommitTransaction();
 
                     return View("Index", Cart);
                 }
                 catch
                 {
                     _unitOfWork.RollbackTransaction();
+                    TempData["SuccessMessage"] = "Có lỗi xảy ra khi xử lý đơn hàng.";
+                    return View("Index", Cart);
                 }
                 return Ok(response);
             }
@@ -199,19 +199,20 @@ namespace WeddingRestaurant.Areas.Customers.Controllers
 
                 await _unitOfWork.Carts.CreateOrderAsync(order, Cart, CartEvent);
 
-                _unitOfWork.CommitTransaction();
-
-                TempData["SuccessMessage"] = "Bạn sẽ thanh toán ngay khi tiệc diễn ra!";
+                TempData["SuccessMessage"] = "Thanh toán VNPay thành công";
 
                 HttpContext.Session.Set<Event>(Configuration.EVENT_KEY, new Event());
                 HttpContext.Session.Set<List<CartItem>>(Configuration.CART_KEY, new List<CartItem>());
                 HttpContext.Session.Set<List<RoomVM>>(Configuration.ROOM_KEY, new List<RoomVM>());
+                _unitOfWork.CommitTransaction();
 
                 return View("Index", Cart);
             }
             catch
             {
-                _unitOfWork.RollbackTransaction();
+                _unitOfWork.RollbackTransaction(); 
+                TempData["SuccessMessage"] = "Có lỗi xảy ra khi xử lý đơn hàng.";
+                return View("Index", Cart);
             }
 
             return View("Index", Cart);

@@ -33,7 +33,7 @@
                             @await Component.InvokeAsync("MenuItem", new
                                 {
                                     id = item.Id,
-                                    productIds = item.ProductIds
+                                    productIdsInCart = item.productIdsInCart
                                 })
 
                             <div class="after-menu">
@@ -118,7 +118,7 @@
             
             @foreach (var item in Model)
             {
-                foreach (var productId in item.ProductIds)
+                foreach (var productId in item.productIdsInCart)
                 {
                     int productIds = productId;
                     <text>
@@ -127,5 +127,6 @@
                 }
             }
         });
+
     </script>
 }
